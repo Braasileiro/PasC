@@ -30,11 +30,11 @@ Na gramática do PasC, os terminais de um lexema, bem como as palavras reservada
 
 Você deverá entregar nesta etapa:
 
-1.	Uma figura apresentando o Autômato Finito Determinístico para reconhecimento dos tokens, conforme visto em sala de aula (dê uma olhada na ferramenta JFLAP: http://www.jflap.org/);
+1. Uma figura apresentando o Autômato Finito Determinístico para reconhecimento dos tokens, conforme visto em sala de aula (dê uma olhada na ferramenta JFLAP: http://www.jflap.org/);
 
-2.	Todos os arquivos fonte;
+2. Todos os arquivos fonte;
 
-3.	Relatório técnico contendo explicações do propósito de todas as classes, métodos ou funções da implementação, assim como testes realizados com programas corretos e errados (no mínimo, 3 certos e 3 errados). Os programas testes deverão ser definidos de acordo com a gramática do PasC. Os resultados deverão apresentar a saída do Analisador Léxico (a sequência de tokens identificados e o local de sua ocorrência) e os símbolos instalados na Tabela de Símbolos, bem como os erros léxicos encontrados.
+3. Relatório técnico contendo explicações do propósito de todas as classes, métodos ou funções da implementação, assim como testes realizados com programas corretos e errados (no mínimo, 3 certos e 3 errados). Os programas testes deverão ser definidos de acordo com a gramática do PasC. Os resultados deverão apresentar a saída do Analisador Léxico (a sequência de tokens identificados e o local de sua ocorrência) e os símbolos instalados na Tabela de Símbolos, bem como os erros léxicos encontrados.
 
 #### 1.3 Regras
 
@@ -65,58 +65,58 @@ O trabalho vale 30 pontos no total. Ele deverá ser entregue por etapas, sendo a
 
 #### 4.2 Gramática da linguagem PasC
 ```
-prog	→ “program” “id” body
-body	→ decl-list “{“ stmt-list “}”
-decl-list	→ decl “;” decl-list | ε
-decl	→ type id-list
-type	→ “num” | “char”
-id-list	→ “id” | “id” “,” id-list
+prog      → “program” “id” body
+body      → decl-list “{“ stmt-list “}”
+decl-list → decl “;” decl-list | ε
+decl      → type id-list
+type      → “num” | “char”
+id-list   → “id” | “id” “,” id-list
 
-stmt-list	→ stmt “;” stmt-list | ε
-stmt	→ assign-stmt | if-stmt | while-stmt | read-stmt | write-stmt
-assign-stmt	→ “id” “=” simple_expr
-if-stmt	→ “if” “(“ condition “)” “{“ stmt-list “}” |
-	“if” “(“ condition “)” “{“ stmt-list “}” “else” “{“ stmt-list “}”
-condition	→ expression
-while-stmt	→ stmt-prefix “{“ stmt-list “}”
-stmt-prefix	→ “while” “(“ condition “)”
-read-stmt	→ “read” “id”
-write-stmt	→ “write” writable
-writable	→ simple-expr | “literal”
+stmt-list   → stmt “;” stmt-list | ε
+stmt        → assign-stmt | if-stmt | while-stmt | read-stmt | write-stmt
+assign-stmt → “id” “=” simple_expr
+if-stmt     → “if” “(“ condition “)” “{“ stmt-list “}” |
+    “if” “(“ condition “)” “{“ stmt-list “}” “else” “{“ stmt-list “}”
+condition   → expression
+while-stmt  → stmt-prefix “{“ stmt-list “}”
+stmt-prefix → “while” “(“ condition “)”
+read-stmt   → “read” “id”
+write-stmt  → “write” writable
+writable    → simple-expr | “literal”
 
-expression	→ simple-expr | simple-expr relop simple-expr
-simple-expr	→ term | simple-expr addop term
-term	→ factor-a | term mulop factor-a
-factor-a	→ factor | “not” factor
-factor	→ “id” | constant | “(“ expression “)”
-relop	→ “==” | “>” | “>=” | “<” | “<=” | “!=”
-addop	→ “+” | “-” | “or”
-mulop	→ “*” | “/” | “and”
-constant	→ “num_const” | “char_const”
+expression  → simple-expr | simple-expr relop simple-expr
+simple-expr → term | simple-expr addop term
+term        → factor-a | term mulop factor-a
+factor-a    → factor | “not” factor
+factor      → “id” | constant | “(“ expression “)”
+relop       → “==” | “>” | “>=” | “<” | “<=” | “!=”
+addop       → “+” | “-” | “or”
+mulop       → “*” | “/” | “and”
+constant    → “num_const” | “char_const”
 ```
 
 #### 4.3 Padrões para números, caracteres, literais e identificadores do PasC
 ```
-digit	= [0-9]
-letter	= [A-Z | a-z]
-id	= letter (letter | digit)*
-literal	= pelo menos um dos 256 caracteres do conjunto ASCII entre aspas duplas
-char_const	= um dos 256 caracteres do conjunto ASCII entre aspas simples
-num_const	= digit+ (“.” digit+)?
+digit      = [0-9]
+letter     = [A-Z | a-z]
+id         = letter (letter | digit)*
+literal    = pelo menos um dos 256 caracteres do conjunto ASCII entre aspas duplas
+char_const = um dos 256 caracteres do conjunto ASCII entre aspas simples
+num_const  = digit+ (“.” digit+)?
  ```
 
 #### 4.4 Nomes para os tokens
 ```
 Operadores:
-    OP_EQ: ==	OP_GE: >=	OP_MUL: *
-    OP_NE: !=	OP_LE: <=	OP_DIV: /
-    OP_GT: >	OP_AD: +	OP_ASS: =
-    OP_LT: <	OP_MIN: -	
-Símbolos:		
-    SMB_OBC: {	SMB_COM: ,	
-    SMB_CBC: }	SMB_SEM: ;	
-    SMB_OPA: (		
-    SMB_CPA: )		
+    OP_EQ: ==   OP_GE: >=   OP_MUL: *
+    OP_NE: !=   OP_LE: <=   OP_DIV: /
+    OP_GT: >    OP_AD: +    OP_ASS: =
+    OP_LT: <    OP_MIN: -   
+Símbolos:       
+    SMB_OBC: {  SMB_COM: ,  
+    SMB_CBC: }  SMB_SEM: ;  
+    SMB_OPA: (      
+    SMB_CPA: )      
 ```
 Palavras-chave: KW: program, if, else, while, write, read, num, char, not, or, and
 
