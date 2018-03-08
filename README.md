@@ -65,18 +65,18 @@ O trabalho vale 30 pontos no total. Ele deverá ser entregue por etapas, sendo a
 
 #### 4.2 Gramática da linguagem PasC
 ```
-prog      → “program” “id” body
-body      → decl-list “{“ stmt-list “}”
-decl-list → decl “;” decl-list | ε
-decl      → type id-list
-type      → “num” | “char”
-id-list   → “id” | “id” “,” id-list
+prog        → “program” “id” body
+body        → decl-list “{“ stmt-list “}”
+decl-list   → decl “;” decl-list | ε
+decl        → type id-list
+type        → “num” | “char”
+id-list     → “id” | “id” “,” id-list
 
 stmt-list   → stmt “;” stmt-list | ε
 stmt        → assign-stmt | if-stmt | while-stmt | read-stmt | write-stmt
 assign-stmt → “id” “=” simple_expr
 if-stmt     → “if” “(“ condition “)” “{“ stmt-list “}” |
-    “if” “(“ condition “)” “{“ stmt-list “}” “else” “{“ stmt-list “}”
+              “if” “(“ condition “)” “{“ stmt-list “}” “else” “{“ stmt-list “}”
 condition   → expression
 while-stmt  → stmt-prefix “{“ stmt-list “}”
 stmt-prefix → “while” “(“ condition “)”
