@@ -52,7 +52,7 @@ O trabalho vale 30 pontos no total. Ele deverá ser entregue por etapas, sendo a
 
 | Etapa                                  | Data de entrega | Valor     | Multa por atraso |
 | -------------------------------------- | --------------- | --------- | ---------------- |
-| Analisador Léxico e Tabela de Símbolos | 06/04/2017      | 10 pontos | 2pts/dia         |
+| Analisador Léxico e Tabela de Símbolos | 06/04/2018      | 10 pontos | 2pts/dia         |
 | Analisador Sintático                   | A definir       | 10 pontos | 2pts/dia         |
 | Analisador Semântico                   | A definir       | 10 pontos | 2pts/dia         |
 
