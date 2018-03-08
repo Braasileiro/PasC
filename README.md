@@ -98,7 +98,7 @@ char_const	= um dos 256 caracteres do conjunto ASCII entre aspas simples
 num_const	= digit+ (“.” digit+)?
  ```
 
-#### 4.4 Nomes para os tokens:
+#### 4.4 Nomes para os tokens
 ```
 Operadores:
     OP_EQ: ==	OP_GE: >=	OP_MUL: *
