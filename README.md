@@ -1,6 +1,13 @@
 # PasC
 Academic work to create a compiler that is based on the mixture of languages Pascal and C.
 
+```
+Centro Universitário de Belo Horizonte – Uni-BH
+Curso: Ciência da Computação
+Disciplina: Compiladores
+Professor: Gustavo Alves Fernandes
+```
+
 ## 1. Analisador Léxico
 
 #### 1.1 Descrição do trabalho
