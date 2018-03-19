@@ -21,7 +21,7 @@ namespace PasC
 			}
 			catch (IndexOutOfRangeException)
 			{
-				Console.WriteLine("pasc (Framework 4.7) 2018.1 ALPHA");
+				Console.WriteLine("pasc (Framework 4.7) 2018.1.1 ALPHA");
 				Console.WriteLine("Copyright (C) 2018 Lucas Cota, Carlos Alberto.\n");
 				Console.WriteLine("Usage: pasc [source.pasc]");
 			}
