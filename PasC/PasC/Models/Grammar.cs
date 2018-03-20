@@ -13,8 +13,11 @@ namespace PasC.Models
 		public static Regex LITERAL   = new Regex("[\"][\x00-\x7F]*[\"]");
 		public static Regex ID        = new Regex("[a-zA-Z]+[a-zA-Z 0-9]*");
 
+
+
+
 		// Symbol Table
-		public static Dictionary<string, string> SYMBOLS = new Dictionary<string, string>()
+		private static Dictionary<string, string> symbolTable = new Dictionary<string, string>()
 		{
 			// Keyword
 			{ "program", "KW" },
@@ -42,7 +45,7 @@ namespace PasC.Models
 			{ ">=", "OP_GE" },
 			{ "<=", "OP_LE" },
 
-			// Symbol
+			// Delimiters
 			{ "{", "SMB_OBC" },
 			{ "}", "SMB_CBC" },
 			{ "(", "SMB_OPA" },
@@ -60,5 +63,19 @@ namespace PasC.Models
 
 			// ...
 		};
+
+
+
+
+		// Getters and Setters
+		public static void Add(string key, string value)
+		{
+			symbolTable.Add(key, value);
+		}
+
+		public static string Get(string key)
+		{
+			return symbolTable[key];
+		}
 	}
 }
