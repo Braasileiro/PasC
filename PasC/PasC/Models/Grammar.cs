@@ -70,7 +70,10 @@ namespace PasC.Models
 		// Getters and Setters
 		public static void Add(string key, string value)
 		{
-			symbolTable.Add(key, value);
+			if (!symbolTable[key].Equals(value))
+			{
+				symbolTable.Add(key, value);
+			}
 		}
 
 		public static string Get(string key)
