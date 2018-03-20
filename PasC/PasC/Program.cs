@@ -21,18 +21,25 @@ namespace PasC
 			}
 			catch (IndexOutOfRangeException)
 			{
-				Console.WriteLine("pasc (Framework 4.7) 2018.1.1 ALPHA");
-				Console.WriteLine("Copyright (C) 2018 Lucas Cota, Carlos Alberto.\n");
+				ConsoleHeader();
 				Console.WriteLine("Usage: pasc [source.pasc]");
 			}
 			catch (FileNotFoundException)
 			{
+				ConsoleHeader();
 				Console.WriteLine("[Error]: Invalid source file.");
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				Console.WriteLine("[Error]: Fatal unhandled exception.");
+				ConsoleHeader();
+				Console.WriteLine("[Error]: Fatal unhandled exception: {0}", e);
 			}
+		}
+
+		private static void ConsoleHeader()
+		{
+			Console.WriteLine("pasc (Framework 4.7) 2018.1.1 ALPHA");
+			Console.WriteLine("Copyright (C) 2018 Lucas Cota, Carlos Alberto.\n");
 		}
 	}
 }
