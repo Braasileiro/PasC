@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using PasC.States;
 
 namespace PasC
 {
@@ -34,6 +35,8 @@ namespace PasC
 				ConsoleHeader();
 				Console.WriteLine("[Error]: Fatal unhandled exception: {0}", e);
 			}
+
+			Source.Set(args[0]);
 		}
 
 		private static void ConsoleHeader()
