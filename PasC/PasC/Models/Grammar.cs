@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace PasC.Models
@@ -17,68 +18,48 @@ namespace PasC.Models
 
 
 		// Symbol Table
-		private static Dictionary<string, string> symbolTable = new Dictionary<string, string>()
+		private static Dictionary<Token, Identifier> SYMBOL_TABLE = new Dictionary<Token, Identifier>()
 		{
-			// Keyword
-			{ "program", "KW" },
-			{ "if", "KW" },
-			{ "else", "KW" },
-			{ "while", "KW" },
-			{ "read", "KW" },
-			{ "write", "KW" },
-			{ "num", "KW" },
-			{ "char", "KW" },
-			{ "and", "KW" },
-			{ "or", "KW" },
-			{ "not", "KW" },
+			{ new Token(Tag.KW, "program", 0, 0), new Identifier() },
+			{ new Token(Tag.KW, "if",      0, 0), new Identifier() },
+			{ new Token(Tag.KW, "else",    0, 0), new Identifier() },
+			{ new Token(Tag.KW, "while",   0, 0), new Identifier() },
+			{ new Token(Tag.KW, "write",   0, 0), new Identifier() },
+			{ new Token(Tag.KW, "read",    0, 0), new Identifier() },
+			{ new Token(Tag.KW, "num",     0, 0), new Identifier() },
+			{ new Token(Tag.KW, "char",    0, 0), new Identifier() },
+			{ new Token(Tag.KW, "not",     0, 0), new Identifier() },
+			{ new Token(Tag.KW, "or",      0, 0), new Identifier() },
+			{ new Token(Tag.KW, "and",     0, 0), new Identifier() }
 
-			// Operator
-			{ ">", "OP_GT" },
-			{ "<", "OP_LT" },
-			{ "+", "OP_AD" },
-			{ "-", "OP_MIN" },
-			{ "*", "OP_MUL" },
-			{ "/", "OP_DIV" },
-			{ "=", "OP_ASS" },
-			{ "==", "OP_EQ" },
-			{ "!=", "OP_NE" },
-			{ ">=", "OP_GE" },
-			{ "<=", "OP_LE" },
-
-			// Delimiters
-			{ "{", "SMB_OBC" },
-			{ "}", "SMB_CBC" },
-			{ "(", "SMB_OPA" },
-			{ ")", "SMB_CPA" },
-			{ ",", "SMB_COM" },
-			{ ";", "SMB_SEM" },
-
-			/*
-			 * Dynamic Runtime Symbols
-			 * ID: ID
-			 * LIT: LITERAL
-			 * CON_NUM: NUMCONST
-			 * CON_CHAR: CHARCONST
-			 */
-
-			// ...
+			// Dynamic Runtime Symbols...
 		};
 
 
 
 
 		// Getters and Setters
-		public static void Add(string key, string value)
+		public static void Add(Token key, Identifier value)
 		{
-			if (!symbolTable[key].Equals(value))
-			{
-				symbolTable.Add(key, value);
-			}
+			SYMBOL_TABLE.Add(key, value);
 		}
 
-		public static string Get(string key)
+		public static Identifier GetID(Token key)
 		{
-			return symbolTable[key];
+			return SYMBOL_TABLE[key];
+		}
+
+		public static Token GetToken(String lexeme)
+		{
+			foreach (Token currentToken in SYMBOL_TABLE.Keys)
+			{
+				if (currentToken.Lexeme.Equals(lexeme))
+				{
+					return currentToken;
+				}
+			}
+
+			return null;
 		}
 	}
 }
