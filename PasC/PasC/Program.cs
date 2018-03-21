@@ -23,7 +23,7 @@ namespace PasC
 			catch (IndexOutOfRangeException)
 			{
 				ConsoleHeader();
-				Console.WriteLine("Usage: pasc [source.pasc]");
+				Console.WriteLine("Usage: pasc [source.pc]");
 			}
 			catch (FileNotFoundException)
 			{
@@ -36,7 +36,7 @@ namespace PasC
 				Console.WriteLine("[Error]: Fatal unhandled exception: {0}", e);
 			}
 
-			Source.Set(args[0]);
+			Lexer.Set(args[0]);
 		}
 
 		private static void ConsoleHeader()

@@ -7,7 +7,7 @@ namespace PasC.States
 	{
 		public static void Run()
 		{
-			string currentChar = Source.Get();
+			string currentChar = Lexer.Read();
 
 			// ->> 12
 			if (LETTER.IsMatch(currentChar) || DIGIT.IsMatch(currentChar))
