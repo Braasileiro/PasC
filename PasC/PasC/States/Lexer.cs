@@ -23,7 +23,7 @@ namespace PasC.States
 		{
 			sourceFile = new FileStream(source, FileMode.Open, FileAccess.Read);
 
-			State0.Run();
+			State00.Run();
 		}
 
 		public static void Read()

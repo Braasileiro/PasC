@@ -4,7 +4,7 @@ using static PasC.Models.Grammar;
 
 namespace PasC.States
 {
-	class State4
+	class State04
 	{
 		public static void Run()
 		{
@@ -13,11 +13,11 @@ namespace PasC.States
 			// ->> 4
 			if (DIGIT.IsMatch(CURRENT_CHAR))
 			{
-				State4.Run();
+				State04.Run();
 			}
 
 			// -> (5)
-			State5.Run();
+			State05.Run();
 		}
 	}
 }

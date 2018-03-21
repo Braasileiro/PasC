@@ -4,16 +4,16 @@ using static PasC.Models.Grammar;
 
 namespace PasC.States
 {
-	class State6
+	class State7
 	{
 		public static void Run()
 		{
 			Lexer.Read();
 
-			// -> 7
-			if (LETTER.IsMatch(CURRENT_CHAR) || DIGIT.IsMatch(CURRENT_CHAR))
+			// -> (8)
+			if (CURRENT_CHAR.Equals("'"))
 			{
-				State7.Run();
+				State08.Run();
 			}
 		}
 	}

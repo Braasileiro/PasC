@@ -3,7 +3,7 @@ using static PasC.Models.Grammar;
 
 namespace PasC.States
 {
-	class State8
+	class State08
 	{
 		public static void Run()
 		{
