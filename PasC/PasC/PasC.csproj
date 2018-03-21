@@ -49,8 +49,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States\Lexer.cs" />
-    <Compile Include="States\State0.cs" />
-    <Compile Include="States\State1.cs" />
+    <Compile Include="States\State00.cs" />
+    <Compile Include="States\State01.cs" />
     <Compile Include="States\State10.cs" />
     <Compile Include="States\State11.cs" />
     <Compile Include="States\State12.cs" />
@@ -61,7 +61,7 @@
     <Compile Include="States\State17.cs" />
     <Compile Include="States\State18.cs" />
     <Compile Include="States\State19.cs" />
-    <Compile Include="States\State2.cs" />
+    <Compile Include="States\State02.cs" />
     <Compile Include="States\State20.cs" />
     <Compile Include="States\State21.cs" />
     <Compile Include="States\State22.cs" />
@@ -72,15 +72,15 @@
     <Compile Include="States\State27.cs" />
     <Compile Include="States\State28.cs" />
     <Compile Include="States\State29.cs" />
-    <Compile Include="States\State3.cs" />
+    <Compile Include="States\State03.cs" />
     <Compile Include="States\State30.cs" />
     <Compile Include="States\State31.cs" />
-    <Compile Include="States\State4.cs" />
-    <Compile Include="States\State5.cs" />
-    <Compile Include="States\State6.cs" />
-    <Compile Include="States\State7 .cs" />
-    <Compile Include="States\State8.cs" />
-    <Compile Include="States\State9.cs" />
+    <Compile Include="States\State04.cs" />
+    <Compile Include="States\State05.cs" />
+    <Compile Include="States\State06.cs" />
+    <Compile Include="States\State07.cs" />
+    <Compile Include="States\State08.cs" />
+    <Compile Include="States\State09.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
