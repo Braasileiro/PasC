@@ -7,7 +7,7 @@ namespace PasC.States
 	{
 		// Control
 		public static int ROWS;
-		public static int COLUMNs;
+		public static int COLUMNS;
 		public static int LAST_CHAR = 0;
 		public static string CURRENT_CHAR;
 		public static readonly int EOF = -1;
@@ -22,6 +22,8 @@ namespace PasC.States
 		public static void Set(string source)
 		{
 			sourceFile = new FileStream(source, FileMode.Open, FileAccess.Read);
+
+			State0.Run();
 		}
 
 		public static void Read()

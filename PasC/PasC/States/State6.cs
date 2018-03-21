@@ -13,7 +13,7 @@ namespace PasC.States
 			// -> 7
 			if (LETTER.IsMatch(CURRENT_CHAR) || DIGIT.IsMatch(CURRENT_CHAR))
 			{
-				// State7.Run();
+				State7.Run();
 			}
 		}
 	}

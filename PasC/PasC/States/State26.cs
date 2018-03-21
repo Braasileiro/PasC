@@ -4,20 +4,23 @@ using static PasC.Models.Grammar;
 
 namespace PasC.States
 {
-	class State12
+	class State26
 	{
 		public static void Run()
 		{
 			Lexer.Read();
 
-			// ->> 12
+			// ->> 26
 			if (LETTER.IsMatch(CURRENT_CHAR) || DIGIT.IsMatch(CURRENT_CHAR))
 			{
-				State12.Run();
+				State26.Run();
 			}
 
-			// -> (13)
-			State13.Run();
+			// -> (27)
+			if (CURRENT_CHAR.Equals("\n"))
+			{
+				State27.Run();
+			}
 		}
 	}
 }

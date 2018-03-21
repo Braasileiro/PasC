@@ -43,9 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Grammar.cs" />
+    <Compile Include="Models\Identifier.cs" />
+    <Compile Include="Models\Token.cs" />
+    <Compile Include="Models\Tag.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="States\Source.cs" />
+    <Compile Include="States\Lexer.cs" />
     <Compile Include="States\State0.cs" />
     <Compile Include="States\State19.cs" />
     <Compile Include="States\State18.cs" />
