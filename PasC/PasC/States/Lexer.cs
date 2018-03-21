@@ -9,6 +9,7 @@ namespace PasC.States
 		public static int ROWS;
 		public static int COLUMNs;
 		public static int LAST_CHAR = 0;
+		public static string CURRENT_CHAR;
 		public static readonly int EOF = -1;
 
 
@@ -23,9 +24,9 @@ namespace PasC.States
 			sourceFile = new FileStream(source, FileMode.Open, FileAccess.Read);
 		}
 
-		public static char Read()
+		public static void Read()
 		{
-			char CURRENT_CHAR = '\u0000';
+			CURRENT_CHAR = null;
 
 			try
 			{
@@ -33,7 +34,7 @@ namespace PasC.States
 
 				if (LAST_CHAR != EOF)
 				{
-					CURRENT_CHAR = (char) LAST_CHAR;
+					CURRENT_CHAR = LAST_CHAR.ToString();
 				}
 			}
 			catch (IOException e)
@@ -41,8 +42,6 @@ namespace PasC.States
 				Console.WriteLine("[Error]: Failed to read the character '{0}'\n{1}", CURRENT_CHAR, e);
 				Environment.Exit(1);
 			}
-
-			return CURRENT_CHAR;
 		}
 
 		public static void Fallback()

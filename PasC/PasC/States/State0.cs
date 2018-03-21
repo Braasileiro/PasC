@@ -1,4 +1,5 @@
 ﻿using System;
+using static PasC.States.Lexer;
 using static PasC.Models.Grammar;
 
 namespace PasC.States
@@ -7,106 +8,106 @@ namespace PasC.States
 	{
 		public static void Run()
 		{
-			string currentChar = Lexer.Read();
+			Lexer.Read();
 
 			// -> 1
-			if (DIGIT.IsMatch(currentChar))
+			if (DIGIT.IsMatch(CURRENT_CHAR))
 			{
 				State1.Run();
 			}
 
 			// -> 6
-			if (currentChar.Equals("'"))
+			if (CURRENT_CHAR.Equals("'"))
 			{
 				State6.Run();
 			}
 
 			// -> 9
-			if (currentChar.Equals("\""))
+			if (CURRENT_CHAR.Equals("\""))
 			{
 				State9.Run();
 			}
 
 			// -> 12
-			if (LETTER.IsMatch(currentChar))
+			if (LETTER.IsMatch(CURRENT_CHAR))
 			{
 				// State12.Run();
 			}
 
 			// -> 14
-			if (currentChar.Equals("="))
+			if (CURRENT_CHAR.Equals("="))
 			{
 				// State14.Run();
 			}
 
 			// -> 17
-			if (currentChar.Equals(">"))
+			if (CURRENT_CHAR.Equals(">"))
 			{
 				// State17.Run();
 			}
 
 			// -> 20
-			if (currentChar.Equals("<"))
+			if (CURRENT_CHAR.Equals("<"))
 			{
 				// State20.Run();
 			}
 
 			// -> 23
-			if (currentChar.Equals("!"))
+			if (CURRENT_CHAR.Equals("!"))
 			{
 				// State23.Run();
 			}
 
 			// -> (32)
-			if (currentChar.Equals("*"))
+			if (CURRENT_CHAR.Equals("*"))
 			{
 				// State32.Run();
 			}
 
 			// -> (33)
-			if (currentChar.Equals("+"))
+			if (CURRENT_CHAR.Equals("+"))
 			{
 				// State33.Run();
 			}
 
 			// -> (34)
-			if (currentChar.Equals("-"))
+			if (CURRENT_CHAR.Equals("-"))
 			{
 				// State34.Run();
 			}
 
 			// -> (35)
-			if (currentChar.Equals("{"))
+			if (CURRENT_CHAR.Equals("{"))
 			{
 				// State35.Run();
 			}
 
 			// -> (36)
-			if (currentChar.Equals("}"))
+			if (CURRENT_CHAR.Equals("}"))
 			{
 				// State36.Run();
 			}
 
 			// -> (37)
-			if (currentChar.Equals("("))
+			if (CURRENT_CHAR.Equals("("))
 			{
 				// State37.Run();
 			}
 
 			// -> (38)
-			if (currentChar.Equals(")"))
+			if (CURRENT_CHAR.Equals(")"))
 			{
 				// State38.Run();
 			}
 
 			// -> (39)
-			if (currentChar.Equals(","))
+			if (CURRENT_CHAR.Equals(","))
 			{
 				// State39.Run();
 			}
 
 			// -> (40)
-			if (currentChar.Equals(";"))
+			if (CURRENT_CHAR.Equals(";"))
 			{
 				// State40.Run();
 			}
