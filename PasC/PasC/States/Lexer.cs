@@ -53,6 +53,8 @@ namespace PasC.States
 				if (LAST_CHAR != EOF)
 				{
 					sourceFile.Seek(sourceFile.Position - 1, SeekOrigin.Current);
+
+                    State00.Run(); // Reinicia o automato
 				}
 			}
 			catch (IOException e)
