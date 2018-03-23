@@ -7,14 +7,18 @@ namespace PasC.States
 {
 	class Lexer
 	{
-		// Control
+		// Source Pointers
 		public static int ROW;
 		public static int COLUMN;
-		public static int LAST_CHAR = 0;
 		public static char CURRENT_CHAR;
-		public static StringBuilder LEXEME;
+		private static StringBuilder LEXEME;
+
+		// File Pointers
+		public static int LAST_CHAR = 0;
 		public static readonly int EOF = -1;
 
+		// Check
+		public static bool FINAL_STATE;
 
 		// Source
 		private static FileStream sourceFile;
@@ -32,7 +36,12 @@ namespace PasC.States
 		public static void Read()
 		{
 			CURRENT_CHAR = '\u0000';
-			LEXEME = new StringBuilder();
+
+			if (FINAL_STATE)
+			{
+				FINAL_STATE = false;
+				     LEXEME = new StringBuilder();
+			}
 
 			try
 			{
@@ -41,6 +50,7 @@ namespace PasC.States
 				if (LAST_CHAR != EOF)
 				{
 					CURRENT_CHAR = (char) LAST_CHAR;
+					LEXEME.Append(CURRENT_CHAR);
 				}
 			}
 			catch (IOException e)
@@ -66,6 +76,16 @@ namespace PasC.States
 				Console.WriteLine("[Error]: Failed to read the source file.\n{0}", e);
 				Environment.Exit(2);
 			}
+		}
+
+		public static string GetLexeme()
+		{
+			return LEXEME.ToString();
+		}
+
+		public static void IsAFinalState()
+		{
+			FINAL_STATE = true;
 		}
 
 		public static bool IsASCII(char c)
