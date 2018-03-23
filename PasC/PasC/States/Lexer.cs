@@ -3,6 +3,8 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
+using PasC.Models;
+
 namespace PasC.States
 {
 	class Lexer
@@ -51,6 +53,10 @@ namespace PasC.States
 				{
 					CURRENT_CHAR = (char) LAST_CHAR;
 					LEXEME.Append(CURRENT_CHAR);
+				}
+				else
+				{
+					Grammar.Add(new Token(Tag.EOF, GetLexeme(), ROW, COLUMN), new Identifier());
 				}
 			}
 			catch (IOException e)
