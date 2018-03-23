@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using PasC.Models;
 using PasC.States;
 
 namespace PasC
@@ -36,7 +37,14 @@ namespace PasC
 				Console.WriteLine("[Error]: Fatal unhandled exception: {0}", e);
 			}
 
-			Lexer.Set(args[0]);
+			if (!File.Exists("pasc_test.pc"))
+			{
+				Lexer.Set("../../pasc_test.pc");
+			}
+			else
+			{
+				Lexer.Set("pasc_test.pc");
+			}
 		}
 
 		private static void ConsoleHeader()
