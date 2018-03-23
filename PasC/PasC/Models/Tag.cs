@@ -40,6 +40,9 @@ namespace PasC.Models
 
 		// Constant
 		CON_NUM,
-		CON_CHAR
+		CON_CHAR,
+
+		// End of File
+		EOF
 	}
 }
