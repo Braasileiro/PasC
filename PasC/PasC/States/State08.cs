@@ -12,7 +12,7 @@ namespace PasC.States
 			IsAFinalState();
 
 			// Adiciona token na tabela de símbolos
-			Add(new Token(Tag.CON_NUM, GetLexeme(), ROW, COLUMN), new Identifier());
+			Add(new Token(Tag.CON_CHAR, GetLexeme(), ROW, COLUMN), new Identifier());
 
 			// Volta um caractere
 			Lexer.Fallback();
