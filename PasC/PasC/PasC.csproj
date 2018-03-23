@@ -74,6 +74,14 @@
     <Compile Include="States\State29.cs" />
     <Compile Include="States\State03.cs" />
     <Compile Include="States\State30.cs" />
+    <Compile Include="States\State32.cs" />
+    <Compile Include="States\State33.cs" />
+    <Compile Include="States\State34.cs" />
+    <Compile Include="States\State35.cs" />
+    <Compile Include="States\State36.cs" />
+    <Compile Include="States\State38.cs" />
+    <Compile Include="States\State39.cs" />
+    <Compile Include="States\State37.cs" />
     <Compile Include="States\State31.cs" />
     <Compile Include="States\State04.cs" />
     <Compile Include="States\State05.cs" />

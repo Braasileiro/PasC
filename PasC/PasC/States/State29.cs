@@ -1,5 +1,6 @@
-﻿using System;
+﻿using PasC.Models;
 using static PasC.States.Lexer;
+using static PasC.Models.Grammar;
 
 namespace PasC.States
 {
@@ -7,13 +8,7 @@ namespace PasC.States
 	{
 		public static void Run()
 		{
-			Lexer.Read();
-
-			// -> (30)
-			if (CURRENT_CHAR.Equals("/"))
-			{
-				State30.Run();
-			}
+			// TODO: FINAL STATE!
 		}
 	}
 }

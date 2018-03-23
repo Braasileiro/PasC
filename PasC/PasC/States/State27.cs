@@ -1,5 +1,4 @@
-﻿using System;
-using static PasC.States.Lexer;
+﻿using static PasC.States.Lexer;
 
 namespace PasC.States
 {
@@ -7,7 +6,19 @@ namespace PasC.States
 	{
 		public static void Run()
 		{
-			// TODO: FINAL STATE!
+			Lexer.Read();
+
+			// ->> 27
+			if (Lexer.IsASCII(CURRENT_CHAR))
+			{
+				State27.Run();
+			}
+
+			// -> 28
+			if (CURRENT_CHAR == '*')
+			{
+				State28.Run();
+			}
 		}
 	}
 }

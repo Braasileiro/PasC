@@ -1,6 +1,5 @@
 ﻿using System;
 using static PasC.States.Lexer;
-using static PasC.Models.Grammar;
 
 namespace PasC.States
 {
@@ -11,7 +10,7 @@ namespace PasC.States
 			Lexer.Read();
 
 			// ->> 4
-			if (DIGIT.IsMatch(CURRENT_CHAR))
+			if (Char.IsDigit(CURRENT_CHAR))
 			{
 				State04.Run();
 			}
