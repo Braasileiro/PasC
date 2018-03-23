@@ -12,7 +12,7 @@ namespace PasC.States
 		public static int COLUMN;
 		public static int LAST_CHAR = 0;
 		public static char CURRENT_CHAR;
-		private static StringBuilder LEXEME;
+		public static StringBuilder LEXEME;
 		public static readonly int EOF = -1;
 
 
