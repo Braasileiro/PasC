@@ -8,10 +8,11 @@ namespace PasC.States
 	{
 		public static void Run()
 		{
-            // FINAL STATE!
+			// FINAL STATE!
+			IsAFinalState();
 
-            // Adiciona token na tabela de simbolos
-            Add(new Token(Tag.CON_NUM, "num_const", ROW, COLUMN), new Identifier());
+            // Adiciona token na tabela de símbolos
+            Add(new Token(Tag.CON_NUM, GetLexeme(), ROW, COLUMN), new Identifier());
 
             // Volta um caractere
             Lexer.Fallback();

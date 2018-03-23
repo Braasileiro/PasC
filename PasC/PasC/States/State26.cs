@@ -8,8 +8,6 @@ namespace PasC.States
 	{
 		public static void Run()
 		{
-			// TODO: FINAL STATE!
-
 			Lexer.Read();
 
 			// ->> 26
@@ -17,6 +15,15 @@ namespace PasC.States
 			{
 				State26.Run();
 			}
+
+			// FINAL STATE!
+			IsAFinalState();
+
+			// Adiciona token na tabela de símbolos
+			Add(new Token(Tag.COM_ONL, GetLexeme(), ROW, COLUMN), new Identifier());
+
+			// Volta um caractere
+			Lexer.Fallback();
 		}
 	}
 }
