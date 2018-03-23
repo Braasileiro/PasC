@@ -10,8 +10,8 @@ namespace PasC.Models
 		public static Regex DIGIT     = new Regex("[0-9]");
 		public static Regex LETTER    = new Regex("[a-zA-Z]");
 		public static Regex NUMCONST  = new Regex("[0-9]+(.[0-9]+)?");
-		public static Regex CHARCONST = new Regex("['][\x00-\x7F][']");
-		public static Regex LITERAL   = new Regex("[\"][\x00-\x7F]*[\"]");
+		public static Regex CHARCONST = new Regex("['][\x00-\xFF][']");
+		public static Regex LITERAL   = new Regex("[\"][\x00-\xFF]*[\"]");
 		public static Regex ID        = new Regex("[a-zA-Z]+[a-zA-Z 0-9]*");
 
 
