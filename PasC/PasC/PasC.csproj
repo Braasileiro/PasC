@@ -84,6 +84,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Documentation\Automata\PasC_Automata.jff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Documentation\Automata\PasC_Automata.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
