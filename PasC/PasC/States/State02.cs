@@ -11,7 +11,7 @@ namespace PasC.States
             // FINAL STATE!
 
             // Adiciona token na tabela de simbolos
-            Add(new Token(Tag.CON_NUM, "num_const", ROWS, COLUMNS), new Identifier());
+            Add(new Token(Tag.CON_NUM, "num_const", ROW, COLUMN), new Identifier());
 
             // Volta um caractere
             Lexer.Fallback();
