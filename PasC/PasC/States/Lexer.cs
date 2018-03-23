@@ -12,7 +12,7 @@ namespace PasC.States
 		public static int COLUMN;
 		public static int LAST_CHAR = 0;
 		public static char CURRENT_CHAR;
-		public static StringBuilder LEXEME;
+		private static StringBuilder LEXEME;
 		public static readonly int EOF = -1;
 
 
@@ -24,7 +24,6 @@ namespace PasC.States
 
 		public static void Set(string source)
 		{
-			LEXEME = new StringBuilder();
 			sourceFile = new FileStream(source, FileMode.Open, FileAccess.Read);
 
 			State00.Run();
@@ -33,6 +32,7 @@ namespace PasC.States
 		public static void Read()
 		{
 			CURRENT_CHAR = '\u0000';
+			LEXEME = new StringBuilder();
 
 			try
 			{
