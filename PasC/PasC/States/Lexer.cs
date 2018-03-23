@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace PasC.States
@@ -11,6 +12,7 @@ namespace PasC.States
 		public static int COLUMN;
 		public static int LAST_CHAR = 0;
 		public static char CURRENT_CHAR;
+		public static StringBuilder LEXEME;
 		public static readonly int EOF = -1;
 
 
@@ -22,6 +24,7 @@ namespace PasC.States
 
 		public static void Set(string source)
 		{
+			LEXEME = new StringBuilder();
 			sourceFile = new FileStream(source, FileMode.Open, FileAccess.Read);
 
 			State00.Run();
@@ -55,7 +58,7 @@ namespace PasC.States
 				{
 					sourceFile.Seek(sourceFile.Position - 1, SeekOrigin.Current);
 
-                    State00.Run(); // Reinicia o automato
+                    State00.Run(); // Reinicia o autômato
 				}
 			}
 			catch (IOException e)
