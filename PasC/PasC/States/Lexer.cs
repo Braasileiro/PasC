@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace PasC.States
 {
@@ -9,7 +10,7 @@ namespace PasC.States
 		public static int ROWS;
 		public static int COLUMNS;
 		public static int LAST_CHAR = 0;
-		public static string CURRENT_CHAR;
+		public static char CURRENT_CHAR;
 		public static readonly int EOF = -1;
 
 
@@ -28,7 +29,7 @@ namespace PasC.States
 
 		public static void Read()
 		{
-			CURRENT_CHAR = null;
+			CURRENT_CHAR = '\u0000';
 
 			try
 			{
@@ -36,7 +37,7 @@ namespace PasC.States
 
 				if (LAST_CHAR != EOF)
 				{
-					CURRENT_CHAR = LAST_CHAR.ToString();
+					CURRENT_CHAR = (char) LAST_CHAR;
 				}
 			}
 			catch (IOException e)
@@ -62,6 +63,11 @@ namespace PasC.States
 				Console.WriteLine("[Error]: Failed to read the source file.\n{0}", e);
 				Environment.Exit(2);
 			}
+		}
+
+		public static bool IsASCII(char c)
+		{
+			return Regex.IsMatch(c.ToString(), "[\x00-\xFF]");
 		}
 	}
 }
