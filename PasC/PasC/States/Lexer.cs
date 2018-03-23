@@ -30,6 +30,7 @@ namespace PasC.States
 
 		public static void Set(string source)
 		{
+			LEXEME = new StringBuilder();
 			sourceFile = new FileStream(source, FileMode.Open, FileAccess.Read);
 
 			State00.Run();
@@ -42,7 +43,7 @@ namespace PasC.States
 			if (FINAL_STATE)
 			{
 				FINAL_STATE = false;
-				     LEXEME = new StringBuilder();
+				LEXEME = new StringBuilder();
 			}
 
 			try
@@ -52,7 +53,22 @@ namespace PasC.States
 				if (LAST_CHAR != EOF)
 				{
 					CURRENT_CHAR = (char) LAST_CHAR;
-					LEXEME.Append(CURRENT_CHAR);
+
+					while (CURRENT_CHAR == ' ' || CURRENT_CHAR == '\n' || CURRENT_CHAR == '\r')
+					{
+						CURRENT_CHAR = (char) sourceFile.ReadByte();
+					}
+
+					if (CURRENT_CHAR == '\t')
+					{
+						LEXEME.Append(' ');
+						LEXEME.Append(' ');
+						LEXEME.Append(' ');
+					}
+					else
+					{
+						LEXEME.Append(CURRENT_CHAR);
+					}
 				}
 				else
 				{
