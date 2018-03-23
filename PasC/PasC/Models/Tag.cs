@@ -29,7 +29,6 @@ namespace PasC.Models
 		SMB_SEM,
 
 		// Comments
-		COM_OML,
 		COM_CML,
 		COM_ONL,
 
