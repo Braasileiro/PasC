@@ -63,58 +63,58 @@ namespace PasC.States
 				State25.Run();
 			}
 
-			// -> (32)
+			// -> (31)
 			if (CURRENT_CHAR == '*')
+			{
+				State31.Run();
+			}
+
+			// -> (32)
+			if (CURRENT_CHAR == '+')
 			{
 				State32.Run();
 			}
 
 			// -> (33)
-			if (CURRENT_CHAR == '+')
+			if (CURRENT_CHAR == '-')
 			{
 				State33.Run();
 			}
 
 			// -> (34)
-			if (CURRENT_CHAR == '-')
+			if (CURRENT_CHAR == '{')
 			{
 				State34.Run();
 			}
 
 			// -> (35)
-			if (CURRENT_CHAR == '{')
+			if (CURRENT_CHAR == '}')
 			{
 				State35.Run();
 			}
 
 			// -> (36)
-			if (CURRENT_CHAR == '}')
+			if (CURRENT_CHAR == '(')
 			{
 				State36.Run();
 			}
 
 			// -> (37)
-			if (CURRENT_CHAR == '(')
+			if (CURRENT_CHAR == ')')
 			{
 				State37.Run();
 			}
 
 			// -> (38)
-			if (CURRENT_CHAR == ')')
+			if (CURRENT_CHAR == ',')
 			{
 				State38.Run();
 			}
 
 			// -> (39)
-			if (CURRENT_CHAR == ',')
-			{
-				State39.Run();
-			}
-
-			// -> (40)
 			if (CURRENT_CHAR == ';')
 			{
-				State40.Run();
+				State39.Run();
 			}
 		}
 	}
