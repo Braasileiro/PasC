@@ -23,8 +23,8 @@ namespace PasC
 			}
 			catch (IndexOutOfRangeException)
 			{
-				ConsoleHeader();
-				Console.WriteLine("Usage: pasc [source.pc]");
+				//ConsoleHeader();
+				//Console.WriteLine("Usage: pasc [source.pc]");
 			}
 			catch (FileNotFoundException)
 			{
@@ -41,9 +41,13 @@ namespace PasC
 			{
 				Lexer.Set("../../pasc_test.pc");
 			}
-			else
+			else if (File.Exists("pasc_test.pc"))
 			{
 				Lexer.Set("pasc_test.pc");
+			}
+			else
+			{
+				Lexer.Set(args[0]);
 			}
 		}
 

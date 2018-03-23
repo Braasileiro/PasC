@@ -93,6 +93,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Documentation\Automata\PasC_Automata.jff" />
+    <None Include="pasc_test.pc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documentation\Automata\PasC_Automata.png" />
