@@ -7,8 +7,8 @@ namespace PasC.States
 	class Lexer
 	{
 		// Control
-		public static int ROWS;
-		public static int COLUMNS;
+		public static int ROW;
+		public static int COLUMN;
 		public static int LAST_CHAR = 0;
 		public static char CURRENT_CHAR;
 		public static readonly int EOF = -1;
