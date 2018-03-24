@@ -10,8 +10,8 @@ namespace PasC.States
 	class Lexer
 	{
 		// Source Pointers
-		public static int ROW;
-		public static int COLUMN;
+		public static int ROW = 1;
+		public static int COLUMN = 1;
 		public static char CURRENT_CHAR;
 		private static StringBuilder LEXEME;
         public static Token lastToken;
@@ -39,6 +39,7 @@ namespace PasC.States
             do
             {
                 // COLOCAR LOOP DA EXECUCAO
+                LEXEME.Clear();
                 token = NextToken();
 
                 if (token != null)
@@ -74,9 +75,10 @@ namespace PasC.States
 				if (LAST_CHAR != EOF)
 				{
 					CURRENT_CHAR = (char) LAST_CHAR;
+                    COLUMN++;
 
-					while (CURRENT_CHAR == ' ' || CURRENT_CHAR == '\n' || CURRENT_CHAR == '\r')
-					{
+					while (CURRENT_CHAR == '\t' || CURRENT_CHAR == '\n' || CURRENT_CHAR == '\r')
+                    {
 						CURRENT_CHAR = (char) sourceFile.ReadByte();
 					}
 
@@ -85,10 +87,6 @@ namespace PasC.States
 					//	LEXEME.Append(' ');
 					//	LEXEME.Append(' ');
 					//	LEXEME.Append(' ');
-					//}
-					//else
-					//{
-					//	LEXEME.Append(CURRENT_CHAR);
 					//}
 				}
 				else
@@ -109,7 +107,9 @@ namespace PasC.States
 			{
 				if (LAST_CHAR != EOF)
 				{
-					sourceFile.Seek(sourceFile.Position - 1, SeekOrigin.Current);
+                    sourceFile.Seek(sourceFile.Position - 1, SeekOrigin.Begin);
+                    COLUMN--;
+					
 				}
 			}
 			catch (IOException e)
@@ -150,19 +150,13 @@ namespace PasC.States
                 switch (state)
                 {
                     case 0:
-                        if (CURRENT_CHAR == ' ' || CURRENT_CHAR == '\n' || CURRENT_CHAR == '\r')
+                        if (CURRENT_CHAR == '\t')
                         {
-                            if(!GetLexeme().Equals(""))
-                            {
-                                if(Grammar.GetToken(GetLexeme()) == null && lastToken != null)
-                                {
-                                    Grammar.Add(lastToken, new Identifier());
-                                }
-                                else
-                                {
-                                    return Grammar.GetToken(GetLexeme());
-                                }
-                            }                            
+                            state = 0;
+                        }
+                        else if (Char.IsWhiteSpace(CURRENT_CHAR))
+                        {
+                            state = 0;
                         }
                         else if (Char.IsDigit(CURRENT_CHAR))
                         {
@@ -239,6 +233,10 @@ namespace PasC.States
                         else if (CURRENT_CHAR.Equals(';'))
                         {
                             state = 39;
+                        }
+                        else
+                        {
+                            Environment.Exit(0);
                         }
                         break;
                     case 1:
