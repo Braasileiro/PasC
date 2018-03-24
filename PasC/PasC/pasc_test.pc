@@ -1,1 +1,3 @@
-program teste int var1 56 58.56;
+program teste 
+int var1
+char var2

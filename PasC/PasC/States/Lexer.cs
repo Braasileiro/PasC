@@ -15,9 +15,10 @@ namespace PasC.States
 		public static char CURRENT_CHAR;
 		private static StringBuilder LEXEME;
         public static Token lastToken;
+        
 
-		// File Pointers
-		public static int LAST_CHAR = 0;
+        // File Pointers
+        public static int LAST_CHAR = 0;
 		public static readonly int EOF = -1;
 
 		// Check
@@ -77,10 +78,10 @@ namespace PasC.States
 					CURRENT_CHAR = (char) LAST_CHAR;
                     COLUMN++;
 
-					while (CURRENT_CHAR == '\t' || CURRENT_CHAR == '\n' || CURRENT_CHAR == '\r')
-                    {
-						CURRENT_CHAR = (char) sourceFile.ReadByte();
-					}
+					//while (CURRENT_CHAR == '\t' || CURRENT_CHAR == '\n' || CURRENT_CHAR == '\r')
+                    //{
+					//	CURRENT_CHAR = (char) sourceFile.ReadByte();
+					//}
 
 					//if (CURRENT_CHAR == '\t')
 					//{
@@ -142,7 +143,6 @@ namespace PasC.States
         public static Token NextToken()
         {
             int state = 0;
-
             while (true)
             {
                 Read();
@@ -150,13 +150,14 @@ namespace PasC.States
                 switch (state)
                 {
                     case 0:
-                        if (CURRENT_CHAR == '\t')
+                        if (Char.IsWhiteSpace(CURRENT_CHAR))
                         {
                             state = 0;
                         }
-                        else if (Char.IsWhiteSpace(CURRENT_CHAR))
+                        else if (CURRENT_CHAR == '\n' || CURRENT_CHAR == '\r')
                         {
                             state = 0;
+                            CURRENT_CHAR = (char)sourceFile.ReadByte();
                         }
                         else if (Char.IsDigit(CURRENT_CHAR))
                         {
