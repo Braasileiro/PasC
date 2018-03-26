@@ -289,7 +289,7 @@ namespace PasC.Modules
 					break;
 
 					
-					// State 2 [It's a fucking final state!]
+					// State 2 [FINAL STATE]
 					case 2:
 					{
 						Restart();
@@ -337,7 +337,7 @@ namespace PasC.Modules
 					break;
 
 					
-					// State 5 [It's a fucking final state!]
+					// State 5 [FINAL STATE]
 					case 5:
 					{
 						Restart();
@@ -386,7 +386,7 @@ namespace PasC.Modules
 					break;
 
 
-					// State 8 [It's a fucking final state!]
+					// State 8 [FINAL STATE]
 					case 8:
 					{
 						STATE = 0;
@@ -435,7 +435,7 @@ namespace PasC.Modules
 					break;
 
 
-					// State 11 [It's a fucking final state!]
+					// State 11 [FINAL STATE]
 					case 11:
 					{
 						STATE = 0;
@@ -469,7 +469,7 @@ namespace PasC.Modules
 
 
 
-					// State 13 [It's a fucking final state!]
+					// State 13 [FINAL STATE]
 					case 13:
 					{
 						Restart();
@@ -497,7 +497,7 @@ namespace PasC.Modules
 					break;
 
 
-					// State 15 [It's a fucking final state!]
+					// State 15 [FINAL STATE]
 					case 15:
 					{
 						STATE = 0;
@@ -506,7 +506,7 @@ namespace PasC.Modules
 					}
 
 
-					// State 16 [It's a fucking final state!]
+					// State 16 [FINAL STATE]
 					case 16:
 					{
 						Restart();
@@ -534,7 +534,7 @@ namespace PasC.Modules
 					break;
 
 
-					// State 18 [It's a fucking final state!]
+					// State 18 [FINAL STATE]
 					case 18:
 					{
 						STATE = 0;
@@ -543,7 +543,7 @@ namespace PasC.Modules
 					}
 
 
-					// State 19 [It's a fucking final state!]
+					// State 19 [FINAL STATE]
 					case 19:
 					{
 						Restart();
@@ -571,7 +571,7 @@ namespace PasC.Modules
 					break;
 
 
-					// State 21 [It's a fucking final state!]
+					// State 21 [FINAL STATE]
 					case 21:
 					{
 						STATE = 0;
@@ -580,7 +580,7 @@ namespace PasC.Modules
 					}
 
 
-					// State 22 [It's a fucking final state!]
+					// State 22 [FINAL STATE]
 					case 22:
 					{
 						Restart();
@@ -608,7 +608,7 @@ namespace PasC.Modules
 					break;
 
 
-					// State 24 [It's a fucking final state!]
+					// State 24 [FINAL STATE]
 					case 24:
 					{
 						STATE = 0;
@@ -643,7 +643,7 @@ namespace PasC.Modules
 					break;
 
 
-					// State 26 [It's a fucking final state!]
+					// State 26 [FINAL STATE]
 					case 26:
 					{
 						// ->> (26)
@@ -711,7 +711,7 @@ namespace PasC.Modules
 					break;
 
 
-					// State 29 [It's a fucking final state!]
+					// State 29 [FINAL STATE]
 					case 29:
 					{
 						STATE = 0;
@@ -720,7 +720,7 @@ namespace PasC.Modules
 					}
 
 
-					// State 30 [It's a fucking final state!]
+					// State 30 [FINAL STATE]
 					case 30:
 					{
 						Restart();
@@ -729,7 +729,7 @@ namespace PasC.Modules
 					}
 
 
-					// State 31 [It's a fucking final state!]
+					// State 31 [FINAL STATE]
 					case 31:
 					{
 						STATE = 0;
@@ -738,7 +738,7 @@ namespace PasC.Modules
 					}
 
 
-					// State 32 [It's a fucking final state!]
+					// State 32 [FINAL STATE]
 					case 32:
 					{
 						STATE = 0;
@@ -747,7 +747,7 @@ namespace PasC.Modules
 					}
 
 
-					// State 33 [It's a fucking final state!]
+					// State 33 [FINAL STATE]
 					case 33:
 					{
 						STATE = 0;
@@ -756,7 +756,7 @@ namespace PasC.Modules
 					}
 
 
-					// State 34 [It's a fucking final state!]
+					// State 34 [FINAL STATE]
 					case 34:
 					{
 						STATE = 0;
@@ -765,7 +765,7 @@ namespace PasC.Modules
 					}
 
 
-					// State 35 [It's a fucking final state!]
+					// State 35 [FINAL STATE]
 					case 35:
 					{
 						STATE = 0;
@@ -774,7 +774,7 @@ namespace PasC.Modules
 					}
 
 
-					// State 36 [It's a fucking final state!]
+					// State 36 [FINAL STATE]
 					case 36:
 					{
 						STATE = 0;
@@ -783,7 +783,7 @@ namespace PasC.Modules
 					}
 
 
-					// State 37 [It's a fucking final state!]
+					// State 37 [FINAL STATE]
 					case 37:
 					{
 						STATE = 0;
@@ -792,7 +792,7 @@ namespace PasC.Modules
 					}
 
 
-					// State 38 [It's a fucking final state!]
+					// State 38 [FINAL STATE]
 					case 38:
 					{
 						STATE = 0;
@@ -801,7 +801,7 @@ namespace PasC.Modules
 					}
 
 
-					// State 39 [It's a fucking final state!]
+					// State 39 [FINAL STATE]
 					case 39:
 					{
 						STATE = 0;
