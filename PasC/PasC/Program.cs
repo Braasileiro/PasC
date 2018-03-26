@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
-using PasC.Models;
-using PasC.States;
+using PasC.Modules;
 
 namespace PasC
 {
