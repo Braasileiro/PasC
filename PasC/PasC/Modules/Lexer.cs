@@ -399,7 +399,7 @@ namespace PasC.Modules
 						// -> 10
 						if (IsASCII(CURRENT_CHAR))
 						{
-							SetState(0, true);
+							SetState(10, true);
 						}
 
 						// -> 0 [Error]
@@ -416,16 +416,16 @@ namespace PasC.Modules
 					// State 10
 					case 10:
 					{
-						// ->> 10
-						if (IsASCII(CURRENT_CHAR))
-						{
-							SetState(10, true);
-						}
-
-						// -> (11)
-						else if (CURRENT_CHAR.Equals('\"'))
+                            // -> (11)
+					    if (CURRENT_CHAR.Equals('\"'))
 						{
 							SetState(11, true);
+						}
+
+						// ->> 10
+						else if (IsASCII(CURRENT_CHAR))
+						{
+							SetState(10, true);
 						}
 					}
 					break;
