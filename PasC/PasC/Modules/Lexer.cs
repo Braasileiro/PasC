@@ -113,7 +113,7 @@ namespace PasC.Modules
 
 		private static bool IsASCII(char c)
 		{
-			return Regex.IsMatch(c.ToString(), "[\x00-\xFF]");
+			return Regex.IsMatch(c.ToString(), @"[\x20-\xFF]");
 		}
 
 

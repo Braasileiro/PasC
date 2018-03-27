@@ -3,4 +3,9 @@ int var1 = 666;
 char var2 = 'c';
 {
 	string var3 = "carlos";
+	//comentario de uma linha
+	
+	/* comentario
+	varias
+	linhas */
 }
