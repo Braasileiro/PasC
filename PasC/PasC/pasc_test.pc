@@ -1,11 +1,14 @@
 program teste 
-int var1 = 666;
-char var2 = 'c';
+int var1 = 66a6;
+double var4 = 654.25;
+char var2 = 'ca';
+double var5 = 12.54;
 {
 	string var3 = "carlos";
 	//comentario de uma linha
 	
 	/* comentario
-	varias
-	linhas */
+	* varias
+	* linhas 
+	**casa**/
 }

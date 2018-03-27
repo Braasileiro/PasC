@@ -282,19 +282,12 @@ namespace PasC.Modules
 						// -> (2) [Other]
 						else
 						{
-							SetState(2, false);
+							Restart();
+
+						    return new Token(Tag.CON_NUM, GetLexeme(), ROW, COLUMN);
 						}
 					}
 					break;
-
-					
-					// State 2 [FINAL STATE]
-					case 2:
-					{
-						Restart();
-
-						return new Token(Tag.CON_NUM, GetLexeme(), ROW, COLUMN);
-					}
 
 					
 					// State 3
@@ -329,19 +322,12 @@ namespace PasC.Modules
 						// -> (5) [Other]
 						else
 						{
-							SetState(5, false);
+							Restart();
+
+						    return new Token(Tag.CON_NUM, GetLexeme(), ROW, COLUMN);
 						}
 					}
 					break;
-
-					
-					// State 5 [FINAL STATE]
-					case 5:
-					{
-						Restart();
-
-						return new Token(Tag.CON_NUM, GetLexeme(), ROW, COLUMN);
-					}
 					
 					
 					// State 6
@@ -370,8 +356,9 @@ namespace PasC.Modules
 						// -> (8)
 						if (CURRENT_CHAR.Equals('\''))
 						{
-							SetState(8, true);
-						}
+							SetState(0, true);
+                            return new Token(Tag.CON_CHAR, GetLexeme(), ROW, COLUMN);
+                        }
 
 						// -> 0 [Error]
 						else
@@ -382,15 +369,6 @@ namespace PasC.Modules
 						}
 					}
 					break;
-
-
-					// State 8 [FINAL STATE]
-					case 8:
-					{
-						SetState(0, false);
-
-						return new Token(Tag.CON_CHAR, GetLexeme(), ROW, COLUMN);
-					}
 					
 					
 					// State 9
@@ -419,8 +397,9 @@ namespace PasC.Modules
                             // -> (11)
 					    if (CURRENT_CHAR.Equals('\"'))
 						{
-							SetState(11, true);
-						}
+							SetState(0, true);
+                            return new Token(Tag.LIT, GetLexeme(), ROW, COLUMN);
+                        }
 
 						// ->> 10
 						else if (IsASCII(CURRENT_CHAR))
@@ -429,15 +408,6 @@ namespace PasC.Modules
 						}
 					}
 					break;
-
-
-					// State 11 [FINAL STATE]
-					case 11:
-					{
-						SetState(0, false);
-
-						return new Token(Tag.LIT, GetLexeme(), ROW, COLUMN);
-					}
 
 
 					// State 12
@@ -457,20 +427,12 @@ namespace PasC.Modules
 						// -> (13) [Other]
 						else
 						{
-							SetState(13, false);
-						}
+                            Restart();
+
+                            return new Token(Tag.ID, GetLexeme(), ROW, COLUMN);
+                        }
 					}
 					break;
-
-
-
-					// State 13 [FINAL STATE]
-					case 13:
-					{
-						Restart();
-
-						return new Token(Tag.ID, GetLexeme(), ROW, COLUMN);
-					}
 
 
 					// State 14
@@ -479,33 +441,17 @@ namespace PasC.Modules
 						// -> (15)
 						if (CURRENT_CHAR.Equals('='))
 						{
-							SetState(15, true);
-						}
+							SetState(0, true);
+                            return new Token(Tag.OP_EQ, GetLexeme(), ROW, COLUMN);
+                        }
 
 						// -> (16) [Other]
 						else
 						{
-							SetState(16, false);
-						}
-					}
-					break;
+                            Restart();
 
-
-					// State 15 [FINAL STATE]
-					case 15:
-					{
-						SetState(0, false);
-
-						return new Token(Tag.OP_EQ, GetLexeme(), ROW, COLUMN);
-					}
-
-
-					// State 16 [FINAL STATE]
-					case 16:
-					{
-						Restart();
-
-						return new Token(Tag.OP_ASS, GetLexeme(), ROW, COLUMN);
+                            return new Token(Tag.OP_ASS, GetLexeme(), ROW, COLUMN);
+                        }
 					}
 
 
@@ -515,33 +461,17 @@ namespace PasC.Modules
 						// -> (18)
 						if (CURRENT_CHAR.Equals('='))
 						{
-							SetState(18, true);
+							SetState(0, true);
+                            return new Token(Tag.OP_GE, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (19) [Other]
 						else
 						{
-							SetState(19, false);
+							Restart();
+
+						    return new Token(Tag.OP_GT, GetLexeme(), ROW, COLUMN);
 						}
-					}
-					break;
-
-
-					// State 18 [FINAL STATE]
-					case 18:
-					{
-						SetState(0, false);
-
-						return new Token(Tag.OP_GE, GetLexeme(), ROW, COLUMN);
-					}
-
-
-					// State 19 [FINAL STATE]
-					case 19:
-					{
-						Restart();
-
-						return new Token(Tag.OP_GT, GetLexeme(), ROW, COLUMN);
 					}
 					
 					
@@ -551,33 +481,17 @@ namespace PasC.Modules
 						// -> (21)
 						if (CURRENT_CHAR.Equals('='))
 						{
-							SetState(21, true);
+							SetState(0, true);
+                            return new Token(Tag.OP_LE, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (22) [Other]
 						else
 						{
-							SetState(22, false);
+							Restart();
+
+						    return new Token(Tag.OP_LT, GetLexeme(), ROW, COLUMN);
 						}
-					}
-					break;
-
-
-					// State 21 [FINAL STATE]
-					case 21:
-					{
-						SetState(0, false);
-
-						return new Token(Tag.OP_LE, GetLexeme(), ROW, COLUMN);
-					}
-
-
-					// State 22 [FINAL STATE]
-					case 22:
-					{
-						Restart();
-
-						return new Token(Tag.OP_LT, GetLexeme(), ROW, COLUMN);
 					}
 					
 					
@@ -587,7 +501,8 @@ namespace PasC.Modules
 						// -> (24)
 						if (CURRENT_CHAR.Equals('='))
 						{
-							SetState(24, true);
+							SetState(0, true);
+                            return new Token(Tag.OP_NE, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> 0 [Error]
@@ -599,15 +514,6 @@ namespace PasC.Modules
 						}
 					}
 					break;
-
-
-					// State 24 [FINAL STATE]
-					case 24:
-					{
-						SetState(0, false);
-
-						return new Token(Tag.OP_NE, GetLexeme(), ROW, COLUMN);
-					}
 
 
 					// State 25
@@ -628,7 +534,9 @@ namespace PasC.Modules
 						// -> (30) [Other]
 						else
 						{
-							SetState(30, false);
+							Restart();
+
+						    return new Token(Tag.OP_DIV, GetLexeme(), ROW, COLUMN);
 						}
 					}
 					break;
@@ -678,7 +586,8 @@ namespace PasC.Modules
 						// -> (29)
 						if (CURRENT_CHAR.Equals('/'))
 						{
-							SetState(29, true);
+							SetState(0, true);
+                            return new Token(Tag.COM_CML, GetLexeme(), ROW, COLUMN);
 						}
 
 						// ->> 28
@@ -694,24 +603,6 @@ namespace PasC.Modules
 						}
 					}
 					break;
-
-
-					// State 29 [FINAL STATE]
-					case 29:
-					{
-						SetState(0, false);
-
-						return new Token(Tag.COM_CML, GetLexeme(), ROW, COLUMN);
-					}
-
-
-					// State 30 [FINAL STATE]
-					case 30:
-					{
-						Restart();
-
-						return new Token(Tag.OP_DIV, GetLexeme(), ROW, COLUMN);
-					}
 
 
 					// State 31 [FINAL STATE]
