@@ -10,18 +10,18 @@ namespace PasC.Modules
 	class Lexer
 	{
 		// Source Pointers
-		public static int ROW = 1;
-		public static int COLUMN = 1;
-		public static Token LAST_TOKEN;
-		public static char CURRENT_CHAR;
+		private static int ROW = 1;
+		private static int COLUMN = 1;
+		private static Token LAST_TOKEN;
+		private static char CURRENT_CHAR;
 		private static StringBuilder LEXEME;
 
 		// File Pointers
-		public static int LAST_CHAR = 0;
-		public static readonly int EOF = -1;
+		private static int LAST_CHAR = 0;
+		private static readonly int EOF = -1;
 
 		// Check
-		public static int STATE;
+		private static int STATE;
 
 		// Source
 		private static FileStream sourceFile;
@@ -29,7 +29,7 @@ namespace PasC.Modules
 
 
 
-		// Methods
+		// Source Control
 		public static void Set(string source)
 		{
 			Token token;
@@ -58,7 +58,7 @@ namespace PasC.Modules
 			sourceFile.Close();
 		}
 
-		public static void Read()
+		private static void Read()
 		{
 			CURRENT_CHAR = '\u0000';
 
@@ -83,7 +83,7 @@ namespace PasC.Modules
 			}
 		}
 
-		public static void Restart()
+		private static void Restart()
 		{
 			STATE = 0;
 
@@ -93,7 +93,6 @@ namespace PasC.Modules
 				{
 					sourceFile.Seek(sourceFile.Position - 1, SeekOrigin.Begin);
 					COLUMN--;
-
 				}
 			}
 			catch (IOException e)
@@ -103,20 +102,25 @@ namespace PasC.Modules
 			}
 		}
 
-		public static void LexicalError(String message)
+
+
+
+		// Support
+		private static void LexicalError(String message)
 		{
 			Console.WriteLine("[Lexical Error]: " + message + "\n");
 		}
 
-		public static bool IsASCII(char c)
+		private static bool IsASCII(char c)
 		{
 			return Regex.IsMatch(c.ToString(), "[\x00-\xFF]");
 		}
-		
 
 
 
-		public static Token NextToken()
+
+		// Pasc:Automata
+		private static Token NextToken()
 		{
 			STATE = 0;
 
@@ -132,126 +136,123 @@ namespace PasC.Modules
 						// ->> 0
 						if (Char.IsWhiteSpace(CURRENT_CHAR))
 						{
-							STATE = 0;
+							SetState(0, false);
 						}
 
 						// ->> 0
 						else if (CURRENT_CHAR == '\n' || CURRENT_CHAR == '\r')
 						{
-							STATE = 0;
+							SetState(0, false);
+
 							CURRENT_CHAR = (char) sourceFile.ReadByte();
 						}
 
 						// -> 1
 						else if (Char.IsDigit(CURRENT_CHAR))
 						{
-							STATE = 1;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(1, true);
 						}
 
 						// -> 6
 						else if (CURRENT_CHAR.Equals('\''))
 						{
-							STATE = 6;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(6, true);
 						}
 
 						// -> 9
 						else if (CURRENT_CHAR.Equals('\"'))
 						{
-							STATE = 9;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(9, true);
 						}
 
 						// -> 12
 						else if (Char.IsLetter(CURRENT_CHAR))
 						{
-							STATE = 12;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(12, true);
 						}
 
 						// -> 14
 						else if (CURRENT_CHAR.Equals('='))
 						{
-							STATE = 14;
+							SetState(14, true);
 						}
 
 						// -> 17
 						else if (CURRENT_CHAR.Equals('>'))
 						{
-							STATE = 17;
+							SetState(17, true);
 						}
 
 						// -> 20
 						else if (CURRENT_CHAR.Equals('<'))
 						{
-							STATE = 20;
+							SetState(20, true);
 						}
 
 						// -> 23
 						else if (CURRENT_CHAR.Equals('!'))
 						{
-							STATE = 23;
+							SetState(23, true);
 						}
 
 						// -> 25
 						else if (CURRENT_CHAR.Equals('/'))
 						{
-							STATE = 25;
+							SetState(25, true);
 						}
 
 						// -> (31)
 						else if (CURRENT_CHAR.Equals('*'))
 						{
-							STATE = 31;
+							SetState(31, true);
 						}
 
 						// -> (32)
 						else if (CURRENT_CHAR.Equals('+'))
 						{
-							STATE = 32;
+							SetState(32, true);
 						}
 
 						// -> (33)
 						else if (CURRENT_CHAR.Equals('-'))
 						{
-							STATE = 33;
+							SetState(33, true);
 						}
 
 						// -> (34)
 						else if (CURRENT_CHAR.Equals('{'))
 						{
-							STATE = 34;
+							SetState(34, true);
 						}
 
 						// -> (35)
 						else if (CURRENT_CHAR.Equals('}'))
 						{
-							STATE = 35;
+							SetState(35, true);
 						}
 
 						// -> (36)
 						else if (CURRENT_CHAR.Equals('('))
 						{
-							STATE = 36;
+							SetState(36, true);
 						}
 
 						// -> (37)
 						else if (CURRENT_CHAR.Equals(')'))
 						{
-							STATE = 37;
+							SetState(37, true);
 						}
 
 						// -> (38)
 						else if (CURRENT_CHAR.Equals(','))
 						{
-							STATE = 38;
+							SetState(38, true);
 						}
 
 						// -> (39)
 						else if (CURRENT_CHAR.Equals(';'))
 						{
-							STATE = 39;
+							SetState(39, true);
 						}
 
 						// NONE
@@ -269,21 +270,19 @@ namespace PasC.Modules
 						// ->> 1
 						if (Char.IsDigit(CURRENT_CHAR))
 						{
-							STATE = 1;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(1, true);
 						}
 
 						// -> 3
 						else if (CURRENT_CHAR.Equals('.'))
 						{
-							STATE = 3;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(3, true);
 						}
 
 						// -> (2) [Other]
 						else
 						{
-							STATE = 2;
+							SetState(2, false);
 						}
 					}
 					break;
@@ -304,14 +303,14 @@ namespace PasC.Modules
 						// -> 4
 						if (Char.IsDigit(CURRENT_CHAR))
 						{
-							STATE = 4;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(4, true);
 						}
 
 						// -> 0 [Error]
 						else
 						{
-							STATE = 0;
+							SetState(0, false);
+
 							LexicalError("Invalid character " + CURRENT_CHAR + " on line " + ROW + " and column " + COLUMN);
 						}
 					}
@@ -324,14 +323,13 @@ namespace PasC.Modules
 						// ->> 4
 						if (Char.IsDigit(CURRENT_CHAR))
 						{
-							STATE = 4;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(4, true);
 						}
 
 						// -> (5) [Other]
 						else
 						{
-							STATE = 5;
+							SetState(5, false);
 						}
 					}
 					break;
@@ -352,14 +350,14 @@ namespace PasC.Modules
 						// -> 7
 						if (IsASCII(CURRENT_CHAR))
 						{
-							STATE = 7;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(7, true);
 						}
 						
 						// -> 0 [Error]
 						else
 						{
-							STATE = 0;
+							SetState(0, false);
+
 							LexicalError("Invalid character " + CURRENT_CHAR + " on line " + ROW + " and column " + COLUMN);
 						}
 					}
@@ -372,14 +370,14 @@ namespace PasC.Modules
 						// -> (8)
 						if (CURRENT_CHAR.Equals('\''))
 						{
-							STATE = 8;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(8, true);
 						}
 
 						// -> 0 [Error]
 						else
 						{
-							STATE = 0;
+							SetState(0, false);
+
 							LexicalError("Invalid character " + CURRENT_CHAR + " on line " + ROW + " and column " + COLUMN);
 						}
 					}
@@ -389,7 +387,7 @@ namespace PasC.Modules
 					// State 8 [FINAL STATE]
 					case 8:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.CON_CHAR, GetLexeme(), ROW, COLUMN);
 					}
@@ -401,14 +399,14 @@ namespace PasC.Modules
 						// -> 10
 						if (IsASCII(CURRENT_CHAR))
 						{
-							STATE = 10;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(0, true);
 						}
 
 						// -> 0 [Error]
 						else
 						{
-							STATE = 0;
+							SetState(0, false);
+
 							LexicalError("Invalid character " + CURRENT_CHAR + " on line " + ROW + " and column " + COLUMN);
 						}
 					}
@@ -421,15 +419,13 @@ namespace PasC.Modules
 						// ->> 10
 						if (IsASCII(CURRENT_CHAR))
 						{
-							STATE = 10;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(10, true);
 						}
 
 						// -> (11)
 						else if (CURRENT_CHAR.Equals('\"'))
 						{
-							STATE = 11;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(11, true);
 						}
 					}
 					break;
@@ -438,7 +434,7 @@ namespace PasC.Modules
 					// State 11 [FINAL STATE]
 					case 11:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.LIT, GetLexeme(), ROW, COLUMN);
 					}
@@ -450,8 +446,7 @@ namespace PasC.Modules
 						// ->> 12
 						if (Char.IsLetter(CURRENT_CHAR) || Char.IsDigit(CURRENT_CHAR))
 						{
-							STATE = 12;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(12, true);
 
 							if (Grammar.GetToken(GetLexeme()) != null)
 							{
@@ -462,7 +457,7 @@ namespace PasC.Modules
 						// -> (13) [Other]
 						else
 						{
-							STATE = 13;
+							SetState(13, false);
 						}
 					}
 					break;
@@ -484,14 +479,13 @@ namespace PasC.Modules
 						// -> (15)
 						if (CURRENT_CHAR.Equals('='))
 						{
-							STATE = 15;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(15, true);
 						}
 
-						// -> (16)
+						// -> (16) [Other]
 						else
 						{
-							STATE = 16;
+							SetState(16, false);
 						}
 					}
 					break;
@@ -500,7 +494,7 @@ namespace PasC.Modules
 					// State 15 [FINAL STATE]
 					case 15:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.OP_EQ, GetLexeme(), ROW, COLUMN);
 					}
@@ -521,14 +515,13 @@ namespace PasC.Modules
 						// -> (18)
 						if (CURRENT_CHAR.Equals('='))
 						{
-							STATE = 18;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(18, true);
 						}
 
-						// -> (19)
+						// -> (19) [Other]
 						else
 						{
-							STATE = 19;
+							SetState(19, false);
 						}
 					}
 					break;
@@ -537,7 +530,7 @@ namespace PasC.Modules
 					// State 18 [FINAL STATE]
 					case 18:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.OP_GE, GetLexeme(), ROW, COLUMN);
 					}
@@ -558,14 +551,13 @@ namespace PasC.Modules
 						// -> (21)
 						if (CURRENT_CHAR.Equals('='))
 						{
-							STATE = 21;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(21, true);
 						}
 
-						// -> (22)
+						// -> (22) [Other]
 						else
 						{
-							STATE = 22;
+							SetState(22, false);
 						}
 					}
 					break;
@@ -574,7 +566,7 @@ namespace PasC.Modules
 					// State 21 [FINAL STATE]
 					case 21:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.OP_LE, GetLexeme(), ROW, COLUMN);
 					}
@@ -595,13 +587,14 @@ namespace PasC.Modules
 						// -> (24)
 						if (CURRENT_CHAR.Equals('='))
 						{
-							STATE = 24;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(24, true);
 						}
 
-						// [Error]
+						// -> 0 [Error]
 						else
 						{
+							SetState(0, false);
+
 							LexicalError("Incomplete token for the symbol ! " + CURRENT_CHAR + " on line " + ROW + " and column " + COLUMN);
 						}
 					}
@@ -611,7 +604,7 @@ namespace PasC.Modules
 					// State 24 [FINAL STATE]
 					case 24:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.OP_NE, GetLexeme(), ROW, COLUMN);
 					}
@@ -623,21 +616,19 @@ namespace PasC.Modules
 						// -> 27
 						if (CURRENT_CHAR.Equals('*'))
 						{
-							STATE = 27;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(27, true);
 						}
 
 						// -> (26)
 						else if (CURRENT_CHAR.Equals('/'))
 						{
-							STATE = 26;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(26, true);
 						}
 
 						// -> (30) [Other]
 						else
 						{
-							STATE = 30;
+							SetState(30, false);
 						}
 					}
 					break;
@@ -649,14 +640,13 @@ namespace PasC.Modules
 						// ->> (26)
 						if (IsASCII(CURRENT_CHAR))
 						{
-							STATE = 26;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(26, true);
 						}
 
 						// -> 0
 						else
 						{
-							STATE = 0;
+							SetState(0, false);
 
 							return new Token(Tag.COM_ONL, GetLexeme(), ROW, COLUMN);
 						}
@@ -670,15 +660,13 @@ namespace PasC.Modules
 						// -> 28
 						if (CURRENT_CHAR.Equals('*'))
 						{
-							STATE = 28;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(28, true);
 						}
 
 						// ->> 27
 						else if (IsASCII(CURRENT_CHAR))
 						{
-							STATE = 27;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(27, true);
 						}
 					}
 					break;
@@ -690,22 +678,19 @@ namespace PasC.Modules
 						// -> (29)
 						if (CURRENT_CHAR.Equals('/'))
 						{
-							STATE = 29;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(29, true);
 						}
 
 						// ->> 28
 						else if (CURRENT_CHAR.Equals('*'))
 						{
-							STATE = 28;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(28, true);
 						}
 
 						// -> 27
 						else if (IsASCII(CURRENT_CHAR))
 						{
-							STATE = 27;
-							LEXEME.Append(CURRENT_CHAR);
+							SetState(27, true);
 						}
 					}
 					break;
@@ -714,7 +699,7 @@ namespace PasC.Modules
 					// State 29 [FINAL STATE]
 					case 29:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.COM_CML, GetLexeme(), ROW, COLUMN);
 					}
@@ -732,7 +717,7 @@ namespace PasC.Modules
 					// State 31 [FINAL STATE]
 					case 31:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.OP_MUL, GetLexeme(), ROW, COLUMN);
 					}
@@ -741,7 +726,7 @@ namespace PasC.Modules
 					// State 32 [FINAL STATE]
 					case 32:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.OP_AD, GetLexeme(), ROW, COLUMN);
 					}
@@ -750,7 +735,7 @@ namespace PasC.Modules
 					// State 33 [FINAL STATE]
 					case 33:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.OP_MIN, GetLexeme(), ROW, COLUMN);
 					}
@@ -759,7 +744,7 @@ namespace PasC.Modules
 					// State 34 [FINAL STATE]
 					case 34:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.SMB_OBC, GetLexeme(), ROW, COLUMN);
 					}
@@ -768,7 +753,7 @@ namespace PasC.Modules
 					// State 35 [FINAL STATE]
 					case 35:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.SMB_CBC, GetLexeme(), ROW, COLUMN);
 					}
@@ -777,7 +762,7 @@ namespace PasC.Modules
 					// State 36 [FINAL STATE]
 					case 36:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.SMB_OPA, GetLexeme(), ROW, COLUMN);
 					}
@@ -786,7 +771,7 @@ namespace PasC.Modules
 					// State 37 [FINAL STATE]
 					case 37:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.SMB_CPA, GetLexeme(), ROW, COLUMN);
 					}
@@ -795,7 +780,7 @@ namespace PasC.Modules
 					// State 38 [FINAL STATE]
 					case 38:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.SMB_COM, GetLexeme(), ROW, COLUMN);
 					}
@@ -804,7 +789,7 @@ namespace PasC.Modules
 					// State 39 [FINAL STATE]
 					case 39:
 					{
-						STATE = 0;
+						SetState(0, false);
 
 						return new Token(Tag.SMB_SEM, GetLexeme(), ROW, COLUMN);
 					}
@@ -816,6 +801,16 @@ namespace PasC.Modules
 
 
 		// Getters and Setters
+		private static void SetState(int currentState, bool appendLexeme)
+		{
+			STATE = currentState;
+
+			if (appendLexeme)
+			{
+				LEXEME.Append(CURRENT_CHAR);
+			}
+		}
+
 		public static string GetLexeme()
 		{
 			return LEXEME.ToString();
