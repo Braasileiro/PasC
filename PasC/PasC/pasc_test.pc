@@ -1,3 +1,6 @@
 program teste 
-int var1
-char var2
+int var1 = 666;
+char var2 = 'c';
+{
+	
+}
