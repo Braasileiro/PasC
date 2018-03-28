@@ -155,8 +155,6 @@ namespace PasC.Modules
 						else if (CURRENT_CHAR == '\n' || CURRENT_CHAR == '\r')
 						{
 							SetState(0, false);
-
-							CURRENT_CHAR = (char) sourceFile.ReadByte();
 						}
 
 						// -> 1
