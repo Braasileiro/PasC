@@ -12,7 +12,6 @@ namespace PasC.Modules
 		// Source Pointers
 		private static int ROW = 1;
 		private static int COLUMN = 1;
-		private static Token LAST_TOKEN;
 		private static char CURRENT_CHAR;
 		private static StringBuilder LEXEME;
 
@@ -46,11 +45,9 @@ namespace PasC.Modules
 					Console.WriteLine("Token: {0}\t Line: {1}\t Column: {2}", token.ToString(), ROW, COLUMN);
 				}
 
-				LAST_TOKEN = token;
-
-				if (Grammar.GetToken(GetLexeme()) == null && LAST_TOKEN != null)
+				if (Grammar.GetToken(GetLexeme()) == null && token != null)
 				{
-					Grammar.Add(LAST_TOKEN, new Identifier());
+					Grammar.Add(token, new Identifier());
 				}
 
 			} while (!token.Lexeme.Equals(Tag.EOF) && token != null);
