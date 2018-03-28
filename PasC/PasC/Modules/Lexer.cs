@@ -9,13 +9,13 @@ namespace PasC.Modules
 {
 	class Lexer
 	{
-		// Source Pointers
-		private static int ROW = 1;
-		private static int COLUMN = 1;
+		// Lexeme
 		private static char CURRENT_CHAR;
 		private static StringBuilder LEXEME;
 
 		// File Pointers
+		private static int ROW = 1;
+		private static int COLUMN = 1;
 		private static int LAST_CHAR = 0;
 		private static readonly int EOF = -1;
 
@@ -23,7 +23,7 @@ namespace PasC.Modules
 		private static int STATE;
 
 		// Source
-		private static FileStream sourceFile;
+		private static FileStream SOURCE;
 
 
 
@@ -31,28 +31,28 @@ namespace PasC.Modules
 		// Source Control
 		public static void Set(string source)
 		{
-			Token token;
+			Token TOKEN;
 			LEXEME = new StringBuilder();
-			sourceFile = new FileStream(source, FileMode.Open, FileAccess.Read);
+			SOURCE = new FileStream(source, FileMode.Open, FileAccess.Read);
 
 			do
 			{
 				LEXEME.Clear();
-				token = NextToken();
+				TOKEN = NextToken();
 
-				if (token != null)
+				if (TOKEN != null)
 				{
-					Console.WriteLine("Token: {0}\t Line: {1}\t Column: {2}", token.ToString(), ROW, COLUMN);
+					Console.WriteLine("Token: {0}\t Line: {1}\t Column: {2}", TOKEN.ToString(), ROW, COLUMN);
 				}
 
-				if (Grammar.GetToken(GetLexeme()) == null && token != null)
+				if (Grammar.GetToken(GetLexeme()) == null && TOKEN != null)
 				{
-					Grammar.Add(token, new Identifier());
+					Grammar.Add(TOKEN, new Identifier());
 				}
 
-			} while (!token.Lexeme.Equals(Tag.EOF) && token != null);
+			} while (!TOKEN.Lexeme.Equals(Tag.EOF) && TOKEN != null);
 
-			sourceFile.Close();
+			SOURCE.Close();
 		}
 
 		private static void Read()
@@ -61,7 +61,7 @@ namespace PasC.Modules
 
 			try
 			{
-				LAST_CHAR = sourceFile.ReadByte();
+				LAST_CHAR = SOURCE.ReadByte();
 
 				if (LAST_CHAR != EOF)
 				{
@@ -88,7 +88,7 @@ namespace PasC.Modules
 			{
 				if (LAST_CHAR != EOF)
 				{
-					sourceFile.Seek(sourceFile.Position - 1, SeekOrigin.Begin);
+					SOURCE.Seek(SOURCE.Position - 1, SeekOrigin.Begin);
 					COLUMN--;
 				}
 			}
