@@ -43,7 +43,7 @@ namespace PasC.Modules
 
 				if (token != null)
 				{
-					Console.WriteLine("Token: " + token.ToString() + "\t Line: " + ROW + "\t Column: " + COLUMN);
+					Console.WriteLine("Token: {0}\t Line: {1}\t Column: {2}", token.ToString(), ROW, COLUMN);
 				}
 
 				LAST_TOKEN = token;
@@ -105,15 +105,22 @@ namespace PasC.Modules
 
 
 
-		// Support
-		private static void LexicalError(String message)
-		{
-			Console.WriteLine("[Lexical Error]: " + message + "\n");
-		}
-
+		// Check
 		private static bool IsASCII(char c)
 		{
 			return Regex.IsMatch(c.ToString(), @"[\x20-\xFF]");
+		}
+
+
+
+
+		// Errors
+		private static void LexicalError(String message)
+		{
+			if (CURRENT_CHAR != '\n' && CURRENT_CHAR != '\r' && CURRENT_CHAR != '\t')
+			{
+				Console.WriteLine("\n[LEXICAL ERROR]: " + message + "\n");
+			}
 		}
 
 
@@ -304,7 +311,7 @@ namespace PasC.Modules
 						{
 							SetState(0, false);
 
-							LexicalError("Invalid character " + CURRENT_CHAR + " on line " + ROW + " and column " + COLUMN);
+							LexicalError(String.Format("Invalid character '{0}' on line {1} and column {2}.", CURRENT_CHAR, ROW, COLUMN));
 						}
 					}
 					break;
@@ -344,7 +351,7 @@ namespace PasC.Modules
 						{
 							SetState(0, false);
 
-							LexicalError("Invalid character " + CURRENT_CHAR + " on line " + ROW + " and column " + COLUMN);
+							LexicalError(String.Format("Invalid character '{0}' on line {1} and column {2}.", CURRENT_CHAR, ROW, COLUMN));
 						}
 					}
 					break;
@@ -357,6 +364,7 @@ namespace PasC.Modules
 						if (CURRENT_CHAR.Equals('\''))
 						{
 							SetState(0, true);
+
                             return new Token(Tag.CON_CHAR, GetLexeme(), ROW, COLUMN);
                         }
 
@@ -365,7 +373,7 @@ namespace PasC.Modules
 						{
 							SetState(0, false);
 
-							LexicalError("Invalid character " + CURRENT_CHAR + " on line " + ROW + " and column " + COLUMN);
+							LexicalError(String.Format("Invalid character '{0}' on line {1} and column {2}.", CURRENT_CHAR, ROW, COLUMN));
 						}
 					}
 					break;
@@ -385,7 +393,7 @@ namespace PasC.Modules
 						{
 							SetState(0, false);
 
-							LexicalError("Invalid character " + CURRENT_CHAR + " on line " + ROW + " and column " + COLUMN);
+							LexicalError(String.Format("Invalid character '{0}' on line {1} and column {2}.", CURRENT_CHAR, ROW, COLUMN));
 						}
 					}
 					break;
@@ -398,6 +406,7 @@ namespace PasC.Modules
 					    if (CURRENT_CHAR.Equals('\"'))
 						{
 							SetState(0, true);
+
                             return new Token(Tag.LIT, GetLexeme(), ROW, COLUMN);
                         }
 
@@ -442,6 +451,7 @@ namespace PasC.Modules
 						if (CURRENT_CHAR.Equals('='))
 						{
 							SetState(0, true);
+
                             return new Token(Tag.OP_EQ, GetLexeme(), ROW, COLUMN);
                         }
 
@@ -462,6 +472,7 @@ namespace PasC.Modules
 						if (CURRENT_CHAR.Equals('='))
 						{
 							SetState(0, true);
+
                             return new Token(Tag.OP_GE, GetLexeme(), ROW, COLUMN);
 						}
 
@@ -482,6 +493,7 @@ namespace PasC.Modules
 						if (CURRENT_CHAR.Equals('='))
 						{
 							SetState(0, true);
+
                             return new Token(Tag.OP_LE, GetLexeme(), ROW, COLUMN);
 						}
 
@@ -502,6 +514,7 @@ namespace PasC.Modules
 						if (CURRENT_CHAR.Equals('='))
 						{
 							SetState(0, true);
+
                             return new Token(Tag.OP_NE, GetLexeme(), ROW, COLUMN);
 						}
 
@@ -509,8 +522,8 @@ namespace PasC.Modules
 						else
 						{
 							SetState(0, false);
-
-							LexicalError("Incomplete token for the symbol ! " + CURRENT_CHAR + " on line " + ROW + " and column " + COLUMN);
+							
+							LexicalError(String.Format("Incomplete token for the symbol '!{0}' on line {1} and column {2}.", CURRENT_CHAR, ROW, COLUMN));
 						}
 					}
 					break;
@@ -587,6 +600,7 @@ namespace PasC.Modules
 						if (CURRENT_CHAR.Equals('/'))
 						{
 							SetState(0, true);
+
                             return new Token(Tag.COM_CML, GetLexeme(), ROW, COLUMN);
 						}
 
