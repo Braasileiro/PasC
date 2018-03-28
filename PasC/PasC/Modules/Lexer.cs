@@ -81,7 +81,7 @@ namespace PasC.Modules
                     {
                         COLUMN += 3;
                     }
-                    else
+                    else if(CURRENT_CHAR != '\r' && CURRENT_CHAR != '\n')
                     {
                         COLUMN++;
                     }
