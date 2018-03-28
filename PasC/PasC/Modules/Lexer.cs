@@ -111,13 +111,18 @@ namespace PasC.Modules
 			return Regex.IsMatch(c.ToString(), @"[\x20-\xFF]");
 		}
 
+		private static bool IsNotSpecialChar()
+		{
+			return (CURRENT_CHAR != '\n' && CURRENT_CHAR != '\r' && CURRENT_CHAR != '\t');
+		}
+
 
 
 
 		// Errors
 		private static void LexicalError(String message)
 		{
-			if (CURRENT_CHAR != '\n' && CURRENT_CHAR != '\r' && CURRENT_CHAR != '\t')
+			if (IsNotSpecialChar())
 			{
 				Console.WriteLine("\n[LEXICAL ERROR]: " + message + "\n");
 			}
