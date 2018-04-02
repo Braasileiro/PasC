@@ -7,7 +7,7 @@
     <ProjectGuid>{02101211-382D-4776-9ED6-DAC3F7A823BA}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>PasC</RootNamespace>
-    <AssemblyName>PasC</AssemblyName>
+    <AssemblyName>pasc</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
