@@ -1,0 +1,82 @@
+SOURCE
+
+program Lexer02
+int var1 = 1;
+int var2 = 2;
+int var3 = 3.50;
+char var4 = 'a';
+string lexer02 = "Lexer02"
+{
+	
+}
+
+//Lexer02
+
+
+
+
+OUTPUT
+
+pasc (Framework 4.7) 2018.1.1 ALPHA
+Copyright (C) 2018 Lucas Cota, Carlos Alberto.
+
+Token: <KW,"program">    Line: 1         Column: 8
+Token: <ID,"Lexer02">    Line: 1         Column: 15
+Token: <ID,"int">        Line: 2         Column: 4
+Token: <ID,"var1">       Line: 2         Column: 9
+Token: <OP_ASS,"=">      Line: 2         Column: 11
+Token: <CON_NUM,"1">     Line: 2         Column: 13
+Token: <SMB_SEM,";">     Line: 2         Column: 14
+Token: <ID,"int">        Line: 3         Column: 4
+Token: <ID,"var2">       Line: 3         Column: 9
+Token: <OP_ASS,"=">      Line: 3         Column: 11
+Token: <CON_NUM,"2">     Line: 3         Column: 13
+Token: <SMB_SEM,";">     Line: 3         Column: 14
+Token: <ID,"int">        Line: 4         Column: 4
+Token: <ID,"var3">       Line: 4         Column: 9
+Token: <OP_ASS,"=">      Line: 4         Column: 11
+Token: <CON_NUM,"3.50">  Line: 4         Column: 16
+Token: <SMB_SEM,";">     Line: 4         Column: 17
+Token: <KW,"char">       Line: 5         Column: 5
+Token: <ID,"var4">       Line: 5         Column: 10
+Token: <OP_ASS,"=">      Line: 5         Column: 12
+Token: <CON_CHAR,"'a'">  Line: 5         Column: 16
+Token: <SMB_SEM,";">     Line: 5         Column: 17
+Token: <ID,"string">     Line: 6         Column: 7
+Token: <ID,"lexer02">    Line: 6         Column: 15
+Token: <OP_ASS,"=">      Line: 6         Column: 17
+Token: <LIT,""Lexer02"">         Line: 6         Column: 27
+Token: <SMB_OBC,"{">     Line: 7         Column: 2
+Token: <SMB_CBC,"}">     Line: 9        Column: 2
+Token: <COM_ONL,"//Lexer02">     Line: 11        Column: 10
+
+Symbol: [<KW,"program">]
+Symbol: [<KW,"if">]
+Symbol: [<KW,"else">]
+Symbol: [<KW,"while">]
+Symbol: [<KW,"write">]
+Symbol: [<KW,"read">]
+Symbol: [<KW,"num">]
+Symbol: [<KW,"char">]
+Symbol: [<KW,"not">]
+Symbol: [<KW,"or">]
+Symbol: [<KW,"and">]
+Symbol: [<ID,"Lexer02">]
+Symbol: [<ID,"int">]
+Symbol: [<ID,"var1">]
+Symbol: [<OP_ASS,"=">]
+Symbol: [<CON_NUM,"1">]
+Symbol: [<SMB_SEM,";">]
+Symbol: [<ID,"var2">]
+Symbol: [<CON_NUM,"2">]
+Symbol: [<ID,"var3">]
+Symbol: [<CON_NUM,"3.50">]
+Symbol: [<ID,"var4">]
+Symbol: [<CON_CHAR,"'a'">]
+Symbol: [<ID,"string">]
+Symbol: [<ID,"lexer02">]
+Symbol: [<LIT,""Lexer02"">]
+Symbol: [<SMB_OBC,"{">]
+Symbol: [<SMB_CBC,"}">]
+Symbol: [<COM_ONL,"//Lexer02">]
+Symbol: [<EOF,"$">]

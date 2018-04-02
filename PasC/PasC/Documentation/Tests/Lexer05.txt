@@ -1,0 +1,85 @@
+SOURCE
+
+program Lexer05
+int var1 = 1;
+int var2 = 2;
+int var3 = 3.50;
+char var4 = 'ab';
+string lexer05 =# "Lexer05"
+{
+	
+}
+
+//Lexer05
+
+
+
+
+OUTPUT
+
+pasc (Framework 4.7) 2018.1.1 ALPHA
+Copyright (C) 2018 Lucas Cota, Carlos Alberto.
+
+Token: <KW,"program">    Line: 1         Column: 8
+Token: <ID,"Lexer05">    Line: 1         Column: 15
+Token: <ID,"int">        Line: 2         Column: 4
+Token: <ID,"var1">       Line: 2         Column: 9
+Token: <OP_ASS,"=">      Line: 2         Column: 11
+Token: <CON_NUM,"1">     Line: 2         Column: 13
+Token: <SMB_SEM,";">     Line: 2         Column: 14
+Token: <ID,"int">        Line: 3         Column: 4
+Token: <ID,"var2">       Line: 3         Column: 9
+Token: <OP_ASS,"=">      Line: 3         Column: 11
+Token: <CON_NUM,"2">     Line: 3         Column: 13
+Token: <SMB_SEM,";">     Line: 3         Column: 14
+Token: <ID,"int">        Line: 4         Column: 4
+Token: <ID,"var3">       Line: 4         Column: 9
+Token: <OP_ASS,"=">      Line: 4         Column: 11
+Token: <CON_NUM,"3.50">  Line: 4         Column: 16
+Token: <SMB_SEM,";">     Line: 4         Column: 17
+Token: <KW,"char">       Line: 5         Column: 5
+Token: <ID,"var4">       Line: 5         Column: 10
+Token: <OP_ASS,"=">      Line: 5         Column: 12
+
+[LEXICAL ERROR]: Invalid character 'b' on line 5 and column 16.
+
+Token: <ID,"'a';string">         Line: 6         Column: 7
+Token: <ID,"lexer05">    Line: 6         Column: 15
+Token: <OP_ASS,"=">      Line: 6         Column: 17
+
+[LEXICAL ERROR]: Invalid character '#' on line 6 and column 18.
+
+Token: <LIT,""Lexer05"">         Line: 6         Column: 28
+Token: <SMB_OBC,"{">     Line: 7         Column: 2
+Token: <SMB_CBC,"}">     Line: 9        Column: 2
+Token: <COM_ONL,"//Lexer05">     Line: 12        Column: 10
+
+Symbol: [<KW,"program">]
+Symbol: [<KW,"if">]
+Symbol: [<KW,"else">]
+Symbol: [<KW,"while">]
+Symbol: [<KW,"write">]
+Symbol: [<KW,"read">]
+Symbol: [<KW,"num">]
+Symbol: [<KW,"char">]
+Symbol: [<KW,"not">]
+Symbol: [<KW,"or">]
+Symbol: [<KW,"and">]
+Symbol: [<ID,"Lexer05">]
+Symbol: [<ID,"int">]
+Symbol: [<ID,"var1">]
+Symbol: [<OP_ASS,"=">]
+Symbol: [<CON_NUM,"1">]
+Symbol: [<SMB_SEM,";">]
+Symbol: [<ID,"var2">]
+Symbol: [<CON_NUM,"2">]
+Symbol: [<ID,"var3">]
+Symbol: [<CON_NUM,"3.50">]
+Symbol: [<ID,"var4">]
+Symbol: [<ID,"'a';string">]
+Symbol: [<ID,"lexer05">]
+Symbol: [<LIT,""Lexer05"">]
+Symbol: [<SMB_OBC,"{">]
+Symbol: [<SMB_CBC,"}">]
+Symbol: [<COM_ONL,"//Lexer05">]
+Symbol: [<EOF,"$">]
