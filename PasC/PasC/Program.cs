@@ -36,6 +36,8 @@ namespace PasC
 				Console.WriteLine("[Error]: Fatal unhandled exception: {0}", e);
 			}
 
+			ConsoleHeader();
+
 			if (!File.Exists("pasc_test.pc"))
 			{
 				Lexer.Set("../../pasc_test.pc");
@@ -52,7 +54,7 @@ namespace PasC
 
 		private static void ConsoleHeader()
 		{
-			Console.WriteLine("pasc (Framework 4.7) 2018.1.1 ALPHA");
+			Console.WriteLine("\npasc (Framework 4.7) 2018.1.1 ALPHA");
 			Console.WriteLine("Copyright (C) 2018 Lucas Cota, Carlos Alberto.\n");
 		}
 	}
