@@ -5,7 +5,7 @@ int var3 = 3.#50;
 char var4 = 'ab';
 string lexer06 = "Lexer06"
 {
-	if ( var1 == var2)
+	if (var1 == var2)
 	{
 		/*
 		 * Multiline comment

@@ -237,49 +237,65 @@ namespace PasC.Modules
 						// -> (32)
 						else if (CURRENT_CHAR.Equals('+'))
 						{
-							SetState(32, true);
+							SetState(0, true);
+
+						    return new Token(Tag.OP_AD, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (33)
 						else if (CURRENT_CHAR.Equals('-'))
 						{
-							SetState(33, true);
+							SetState(0, true);
+
+						    return new Token(Tag.OP_MIN, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (34)
 						else if (CURRENT_CHAR.Equals('{'))
 						{
-							SetState(34, true);
+							SetState(0, true);
+
+						    return new Token(Tag.SMB_OBC, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (35)
 						else if (CURRENT_CHAR.Equals('}'))
 						{
-							SetState(35, true);
+							SetState(0, true);
+
+						    return new Token(Tag.SMB_CBC, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (36)
 						else if (CURRENT_CHAR.Equals('('))
 						{
-							SetState(36, true);
+							SetState(0, true);
+
+						    return new Token(Tag.SMB_OPA, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (37)
 						else if (CURRENT_CHAR.Equals(')'))
 						{
-							SetState(37, true);
+							SetState(0, true);
+
+						    return new Token(Tag.SMB_CPA, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (38)
 						else if (CURRENT_CHAR.Equals(','))
 						{
-							SetState(38, true);
+							SetState(0, true);
+
+						    return new Token(Tag.SMB_COM, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (39)
 						else if (CURRENT_CHAR.Equals(';'))
 						{
-							SetState(39, true);
+							SetState(0, true);
+
+						    return new Token(Tag.SMB_SEM, GetLexeme(), ROW, COLUMN);
 						}
 
 						// NONE
@@ -649,7 +665,7 @@ namespace PasC.Modules
 
 
 					// State 32 [FINAL STATE]
-					case 32:
+					/*case 32:
 					{
 						SetState(0, false);
 
@@ -717,7 +733,7 @@ namespace PasC.Modules
 						SetState(0, false);
 
 						return new Token(Tag.SMB_SEM, GetLexeme(), ROW, COLUMN);
-					}
+					}*/
 				}
 			}
 		}
