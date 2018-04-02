@@ -35,6 +35,16 @@ namespace PasC.Models
 			// Dynamic Runtime Symbols...
 		};
 
+		public static void Show()
+		{
+			Console.WriteLine();
+
+			foreach (var currentSymbol in SYMBOL_TABLE)
+			{
+				Console.WriteLine("Symbol: [{0}]", currentSymbol.Key);
+			}
+		}
+
 
 
 
