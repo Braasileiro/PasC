@@ -1,19 +1,19 @@
-@program _Lexer06
+program Lexer03
 int var1 = 1;
 int var2 = 2;
-int var3 = 3.#50;
-char var4 = 'ab';
-string lexer06 = "Lexer06"
+int var3 = 3.50;
+char var4 = 'a';
+string lexer03 = "Lexer03"
 {
 	if ( var1 == var2)
 	{
-		*/*
+		/*
 		 * Multiline comment
 		 */
 	}
 }
 
-//Lexer06
+//Lexer03
 
 
 
@@ -60,7 +60,7 @@ Token: <SMB_OBC,"{">     Line: 9        Column: 5
 Token: <COM_CML,"/* * Multiline comment */">     Line: 12        Column: 10
 Token: <SMB_CBC,"}">     Line: 13        Column: 5
 Token: <SMB_CBC,"}">     Line: 14        Column: 2
-Token: <COM_ONL,"//Lexer03">     Line: 15        Column: 10
+Token: <COM_ONL,"//Lexer03">     Line: 17        Column: 10
 
 Symbol: [<KW,"program">]
 Symbol: [<KW,"if">]
@@ -95,4 +95,4 @@ Symbol: [<SMB_CPA,")">]
 Symbol: [<COM_CML,"/* * Multiline comment */">]
 Symbol: [<SMB_CBC,"}">]
 Symbol: [<COM_ONL,"//Lexer03">]
-Symbol: [<EOF,"$">]
+Symbol: [<EOF,"">]
