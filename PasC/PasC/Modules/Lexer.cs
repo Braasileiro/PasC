@@ -284,7 +284,7 @@ namespace PasC.Modules
 						// NONE
 						else
 						{
-							
+							LexicalError(String.Format("Invalid character '{0}' on line {1} and column {2}.", CURRENT_CHAR, ROW, COLUMN));
 						}
 					}
 					break;
