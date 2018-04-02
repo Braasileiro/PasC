@@ -22,34 +22,28 @@ namespace PasC
 			}
 			catch (IndexOutOfRangeException)
 			{
-				//ConsoleHeader();
-				//Console.WriteLine("Usage: pasc [source.pc]");
+				ConsoleHeader();
+				Console.WriteLine("Uso: pasc.exe [arquivo_fonte.pc] (sem os colchetes)\n");
+
+				Console.WriteLine("Pressione qualquer tecla para fechar...");
+				Console.ReadKey();
+				Environment.Exit(-1);
 			}
 			catch (FileNotFoundException)
 			{
 				ConsoleHeader();
 				Console.WriteLine("[Error]: Invalid source file.");
+				Environment.Exit(-1);
 			}
 			catch (Exception e)
 			{
 				ConsoleHeader();
 				Console.WriteLine("[Error]: Fatal unhandled exception: {0}", e);
+				Environment.Exit(-1);
 			}
 
 			ConsoleHeader();
-
-			if (!File.Exists("pasc_test.pc"))
-			{
-				Lexer.Set("../../pasc_test.pc");
-			}
-			else if (File.Exists("pasc_test.pc"))
-			{
-				Lexer.Set("pasc_test.pc");
-			}
-			else
-			{
-				Lexer.Set(args[0]);
-			}
+			Lexer.Set(args[0]);
 		}
 
 		private static void ConsoleHeader()
