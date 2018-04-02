@@ -87,7 +87,7 @@ namespace PasC.Modules
 				}
 				else
 				{
-					Grammar.Add(new Token(Tag.EOF, GetLexeme(), ROW, COLUMN), new Identifier());
+					Grammar.Add(new Token(Tag.EOF, "$", ROW, COLUMN), new Identifier());
 					Grammar.Show();
 					Environment.Exit(0);
 				}
