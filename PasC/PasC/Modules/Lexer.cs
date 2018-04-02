@@ -65,7 +65,8 @@ namespace PasC.Modules
 				LAST_CHAR = SOURCE.ReadByte();
 
                 // contador de linha e coluna
-                if ((LAST_CHAR_CHECK == '\r' || LAST_CHAR_CHECK == '\n') && ((char)LAST_CHAR == '\r' || (char)LAST_CHAR == '\n'))
+                if (((LAST_CHAR_CHECK == '\r' || LAST_CHAR_CHECK == '\n') && ((char)LAST_CHAR == '\r' || (char)LAST_CHAR == '\n')) &&
+                    LAST_CHAR_CHECK != LAST_CHAR)
                 {
                     ROW++;
                     COLUMN = 1;
