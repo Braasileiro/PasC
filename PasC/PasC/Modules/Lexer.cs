@@ -65,8 +65,7 @@ namespace PasC.Modules
 				LAST_CHAR = SOURCE.ReadByte();
 
                 // contador de linha e coluna
-                if ((LAST_CHAR_CHECK == '\r' || LAST_CHAR_CHECK == '\n') && 
-                    ((char)LAST_CHAR == '\r' || (char)LAST_CHAR == '\n'))
+                if ((LAST_CHAR_CHECK == '\r' || LAST_CHAR_CHECK == '\n') && ((char)LAST_CHAR == '\r' || (char)LAST_CHAR == '\n'))
                 {
                     ROW++;
                     COLUMN = 1;
@@ -89,6 +88,8 @@ namespace PasC.Modules
 				else
 				{
 					Grammar.Add(new Token(Tag.EOF, GetLexeme(), ROW, COLUMN), new Identifier());
+					Grammar.Show();
+					Environment.Exit(0);
 				}
 			}
 			catch (IOException e)
@@ -283,7 +284,7 @@ namespace PasC.Modules
 						// NONE
 						else
 						{
-							Environment.Exit(0);
+							
 						}
 					}
 					break;
