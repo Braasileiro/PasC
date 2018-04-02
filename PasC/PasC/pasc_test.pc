@@ -7,7 +7,7 @@ string lexer06 = "Lexer06"
 {
 	if ( var1 == var2)
 	{
-		*/*
+		/*
 		 * Multiline comment
 		 */
 	}
