@@ -43,7 +43,6 @@ Token: <OP_ASS,"=">      Line: 5         Column: 12
 
 [LEXICAL ERROR]: Invalid character 'b' on line 5 and column 16.
 
-Token: <ID,"'a';string">         Line: 6         Column: 7
 Token: <ID,"lexer05">    Line: 6         Column: 15
 Token: <OP_ASS,"=">      Line: 6         Column: 17
 
