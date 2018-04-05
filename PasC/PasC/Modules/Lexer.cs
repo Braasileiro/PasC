@@ -230,7 +230,9 @@ namespace PasC.Modules
 						// -> (31)
 						else if (CURRENT_CHAR.Equals('*'))
 						{
-							SetState(31, true);
+							SetState(0, true);
+
+							return new Token(Tag.OP_MUL, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (32)
@@ -646,15 +648,6 @@ namespace PasC.Modules
 						}
 					}
 					break;
-
-
-					// State 31 [FINAL STATE]
-					case 31:
-					{
-						SetState(0, false);
-
-						return new Token(Tag.OP_MUL, GetLexeme(), ROW, COLUMN);
-					}
 				}
 			}
 		}
