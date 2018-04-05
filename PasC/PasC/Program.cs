@@ -42,6 +42,7 @@ namespace PasC
 				Environment.Exit(-1);
 			}
 
+			Console.Clear();
 			ConsoleHeader();
 			Lexer.Set(args[0]);
 		}
