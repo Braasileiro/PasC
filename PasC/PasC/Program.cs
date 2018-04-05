@@ -8,10 +8,10 @@ namespace PasC
 	{
 		static void Main(string[] args)
 		{
-			Console.Clear();
-
 			try
 			{
+				Console.Clear();
+
 				if (args.Length < 1)
 				{
 					throw new IndexOutOfRangeException();
