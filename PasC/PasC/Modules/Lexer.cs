@@ -64,9 +64,8 @@ namespace PasC.Modules
 			{
 				LAST_CHAR = SOURCE.ReadByte();
 
-                // contador de linha e coluna
-                if (((LAST_CHAR_CHECK == '\r' || LAST_CHAR_CHECK == '\n') && ((char)LAST_CHAR == '\r' || (char)LAST_CHAR == '\n')) &&
-                    LAST_CHAR_CHECK != LAST_CHAR)
+                // Contador de linha e coluna
+                if (((LAST_CHAR_CHECK == '\r' || LAST_CHAR_CHECK == '\n') && ((char)LAST_CHAR == '\r' || (char)LAST_CHAR == '\n')) && LAST_CHAR_CHECK != LAST_CHAR)
                 {
                     ROW++;
                     COLUMN = 1;
@@ -345,8 +344,6 @@ namespace PasC.Modules
 						// -> 0 [Error]
 						else
 						{
-							SetState(0, false);
-
 							LexicalError(String.Format("Invalid character '{0}' on line {1} and column {2}.", CURRENT_CHAR, ROW, COLUMN));
 						}
 					}
