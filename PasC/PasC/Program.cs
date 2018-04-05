@@ -8,6 +8,8 @@ namespace PasC
 	{
 		static void Main(string[] args)
 		{
+			Console.Clear();
+
 			try
 			{
 				if (args.Length < 1)
@@ -42,7 +44,6 @@ namespace PasC
 				Environment.Exit(-1);
 			}
 
-			Console.Clear();
 			ConsoleHeader();
 			Lexer.Set(args[0]);
 		}
