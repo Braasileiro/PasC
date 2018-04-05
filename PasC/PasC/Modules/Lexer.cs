@@ -341,7 +341,7 @@ namespace PasC.Modules
 							SetState(4, true);
 						}
 
-						// -> 0 [Error]
+						// -> [Error]
 						else
 						{
 							LexicalError(String.Format("Invalid character '{0}' on line {1} and column {2}.", CURRENT_CHAR, ROW, COLUMN));
@@ -379,11 +379,9 @@ namespace PasC.Modules
 							SetState(7, true);
 						}
 						
-						// -> 0 [Error]
+						// -> [Error]
 						else
 						{
-							SetState(0, false);
-
 							LexicalError(String.Format("Invalid character '{0}' on line {1} and column {2}.", CURRENT_CHAR, ROW, COLUMN));
 						}
 					}
@@ -401,11 +399,9 @@ namespace PasC.Modules
                             return new Token(Tag.CON_CHAR, GetLexeme(), ROW, COLUMN);
                         }
 
-						// -> 0 [Error]
+						// -> [Error]
 						else
 						{
-							SetState(7, false);
-
 							LexicalError(String.Format("Invalid character '{0}' on line {1} and column {2}.", CURRENT_CHAR, ROW, COLUMN));
 						}
 					}
