@@ -25,7 +25,7 @@ namespace PasC
 			catch (IndexOutOfRangeException)
 			{
 				ConsoleHeader();
-				Console.WriteLine("Uso: pasc.exe [arquivo_fonte.pc] (sem os colchetes)\n");
+				Console.WriteLine("Uso: pasc.exe [caminho/arquivo_fonte.pc] (sem os colchetes)\n");
 
 				Console.WriteLine("Pressione qualquer tecla para fechar...");
 				Console.ReadKey();
