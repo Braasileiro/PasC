@@ -17,7 +17,6 @@ namespace PasC.Modules
 		private static int ROW = 1;
 		private static int COLUMN = 1;
 		private static int LAST_CHAR = 0;
-		private static char LAST_CHAR_CHECK;
 		private static readonly int EOF = -1;
 
 		// Check
@@ -63,21 +62,19 @@ namespace PasC.Modules
 
 			try
 			{
-				LAST_CHAR_CHECK = (char)LAST_CHAR;
 				LAST_CHAR = SOURCE.ReadByte();
-
-				// Contador de linha e coluna
-				if (((LAST_CHAR_CHECK == '\r' || LAST_CHAR_CHECK == '\n') && ((char)LAST_CHAR == '\r' || (char)LAST_CHAR == '\n')) && LAST_CHAR_CHECK != LAST_CHAR)
-				{
-					ROW++;
-					COLUMN = 1;
-				}
 
 				if (LAST_CHAR != EOF)
 				{
 					CURRENT_CHAR = (char)LAST_CHAR;
 
-					if (CURRENT_CHAR == '\t')
+					if (CURRENT_CHAR == '\n')
+					{
+						ROW++;
+						COLUMN = 1;
+					}
+
+					else if (CURRENT_CHAR == '\t')
 					{
 						COLUMN += 3;
 					}
