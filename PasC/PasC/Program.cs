@@ -8,7 +8,7 @@ namespace PasC
 	{
 		static void Main(string[] args)
 		{
-			try
+			/*try
 			{
 				Console.Clear();
 
@@ -42,11 +42,24 @@ namespace PasC
 				ConsoleHeader();
 				Console.WriteLine("[Error]: Fatal unhandled exception: {0}", e);
 				Environment.Exit(-1);
-			}
+			}*/
 
 			ConsoleHeader();
-			Lexer.Set(args[0]);
-		}
+			//Lexer.Set(args[0]);
+
+            if (!File.Exists("pasc_test.pc"))
+            {
+                Lexer.Set("../../pasc_test.pc");
+            }
+            else if (File.Exists("pasc_test.pc"))
+            {
+                Lexer.Set("pasc_test.pc");
+            }
+            else
+            {
+                Lexer.Set(args[0]);
+            }
+        }
 
 		private static void ConsoleHeader()
 		{

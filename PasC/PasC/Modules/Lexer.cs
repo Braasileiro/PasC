@@ -26,7 +26,7 @@ namespace PasC.Modules
 		// Source
 		private static FileStream SOURCE;
 
-
+        private static bool erroAspas = false; // verifica se deu erro das aspas
 
 
 		// Source Control
@@ -62,6 +62,7 @@ namespace PasC.Modules
 
 			try
 			{
+                LAST_CHAR_CHECK = (char)LAST_CHAR;
 				LAST_CHAR = SOURCE.ReadByte();
 
                 // Contador de linha e coluna
@@ -74,7 +75,6 @@ namespace PasC.Modules
 				if (LAST_CHAR != EOF)
 				{
 					CURRENT_CHAR = (char)LAST_CHAR;
-                    LAST_CHAR_CHECK = CURRENT_CHAR;
 
                     if (CURRENT_CHAR == '\t')
                     {
@@ -87,6 +87,7 @@ namespace PasC.Modules
 				}
 				else
 				{
+                    CURRENT_CHAR = (char)LAST_CHAR;
 					Grammar.Add(new Token(Tag.EOF, "$", ROW, COLUMN), new Identifier());
 					Grammar.Show();
 					Environment.Exit(0);
@@ -438,13 +439,31 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
+                            erroAspas = false;
+
                             return new Token(Tag.LIT, GetLexeme(), ROW, COLUMN);
+                        }
+
+                        else if ((((LAST_CHAR_CHECK == '\r' || LAST_CHAR_CHECK == '\n') && 
+                                ((char)LAST_CHAR == '\r' || (char)LAST_CHAR == '\n')) 
+                                && LAST_CHAR_CHECK != LAST_CHAR) && !erroAspas)
+                            {
+                            SetState(10, false);
+                            Console.WriteLine("\n\nFaltou fechar aspas na linha {0}.\n\n", ROW-1);
+                            erroAspas = true;                           
                         }
 
 						// ->> 10
 						else if (IsASCII(CURRENT_CHAR))
 						{
-							SetState(10, true);
+                            if (!erroAspas)
+                            {
+                                SetState(10, true);
+                            }
+                            else
+                            {
+                                Console.WriteLine("\n\nCaractere invalido {0} na linha {1} e coluna {2}.\n\n", CURRENT_CHAR, ROW, COLUMN);
+                            }
 						}
 					}
 					break;

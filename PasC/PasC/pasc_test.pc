@@ -3,14 +3,14 @@ int var1 = 1;
 int var2 = 2;
 int var3 = 3.#50;
 char var4 = 'ab';
-string lexer06 = "Lexer06"
+string lexer06 = "Lexer06
 {
 	if (var1 == var2)
 	{
 		/*
 		 * Multiline comment
-		 */
+		*/
 	}
-}
+}"
 
 //Lexer06
