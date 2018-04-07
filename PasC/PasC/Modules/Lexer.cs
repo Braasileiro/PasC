@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -34,7 +35,19 @@ namespace PasC.Modules
 		{
 			Token TOKEN;
 			LEXEME = new StringBuilder();
-			SOURCE = new FileStream(source, FileMode.Open, FileAccess.Read);
+
+			/* 
+			 * Adiciona uma nova linha no arquivo como forma de segurança
+			 * caso a última linha do arquivo não seja uma linha em branco.
+			 * Isso evita o último token/caracter do arquivo de não ser reconhecido.
+			*/
+			if (!String.IsNullOrWhiteSpace(File.ReadAllLines(source).Last()))
+			{
+				File.AppendAllText(source, Environment.NewLine);
+			}
+
+			SOURCE = new FileStream(source, FileMode.Open, FileAccess.ReadWrite);
+
 
 			do
 			{
