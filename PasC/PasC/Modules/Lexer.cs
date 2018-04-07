@@ -68,7 +68,7 @@ namespace PasC.Modules
 				{
 					CURRENT_CHAR = (char)LAST_CHAR;
 
-					if (CURRENT_CHAR == '\n')
+					if (IsNewLine())
 					{
 						ROW++;
 						COLUMN = 1;
@@ -78,7 +78,7 @@ namespace PasC.Modules
 					{
 						COLUMN += 3;
 					}
-					else if (CURRENT_CHAR != '\r' && CURRENT_CHAR != '\n')
+					else if (!IsNewLine())
 					{
 						COLUMN++;
 					}
@@ -127,6 +127,26 @@ namespace PasC.Modules
 			return Regex.IsMatch(c.ToString(), @"[\x20-\xFF]");
 		}
 
+		private static bool IsNewLine()
+		{
+			switch (Environment.OSVersion.Platform)
+			{
+				// Windows, Unix
+				case PlatformID.Win32NT: case PlatformID.Win32S: case PlatformID.Win32Windows: case PlatformID.WinCE: case PlatformID.Unix:
+				{
+					return (CURRENT_CHAR == '\n');
+				}
+				
+				// Mac OSX
+				case PlatformID.MacOSX:
+				{
+					return (CURRENT_CHAR == '\r');
+				}
+			}
+
+			return true;
+		}
+
 
 
 
@@ -168,7 +188,7 @@ namespace PasC.Modules
 						}
 
 						// ->> 0
-						else if (CURRENT_CHAR == '\n' || CURRENT_CHAR == '\r')
+						else if (IsNewLine())
 						{
 							SetState(0, false);
 						}
@@ -442,7 +462,7 @@ namespace PasC.Modules
 							return new Token(Tag.LIT, GetLexeme(), ROW, COLUMN);
 						}
 
-						else if ((((LAST_CHAR_CHECK == '\r' || LAST_CHAR_CHECK == '\n') && ((char)LAST_CHAR == '\r' || (char)LAST_CHAR == '\n')) && LAST_CHAR_CHECK != LAST_CHAR) && !QUOTES_ERROR)
+						else if (IsNewLine() && !QUOTES_ERROR)
 						{
 							SetState(10, false);
 							QUOTES_ERROR = true;
