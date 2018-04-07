@@ -1,18 +1,22 @@
 @program _Lexer06
-int var1 = 1;
-int var2 = 2;
-int var3 = 3.#50;
-char var4 = 'ab';
-string lexer06 = "Lexer06"
+num var1 = 1;
+num var2 = 2;
+num var3 = 3.#abcd50;
+char var4 = 'abcd';
+lexer06 = "Lexer06";
 {
-	if ( var1 == var2)
+	if (var1 == var2)
 	{
-		*/*
+		/*
 		 * Multiline comment
 		 */
 	}
 }
-
+"Lexer06
+char var5 = 'a';
+"
+/*
+ * Multiline comment
 //Lexer06
 
 
@@ -30,51 +34,120 @@ Token: <KW,"program">    Line: 1         Column: 9
 
 [LEXICAL ERROR]: Invalid character '_' on line 1 and column 11.
 
-Token: <ID,"Lexer06">    Line: 1         Column: 17
-Token: <ID,"int">        Line: 2         Column: 4
+Token: <ID,"Lexer06">    Line: 1         Column: 18
+Token: <KW,"num">        Line: 2         Column: 4
 Token: <ID,"var1">       Line: 2         Column: 9
 Token: <OP_ASS,"=">      Line: 2         Column: 11
 Token: <CON_NUM,"1">     Line: 2         Column: 13
 Token: <SMB_SEM,";">     Line: 2         Column: 14
-Token: <ID,"int">        Line: 3         Column: 4
+Token: <KW,"num">        Line: 3         Column: 4
 Token: <ID,"var2">       Line: 3         Column: 9
 Token: <OP_ASS,"=">      Line: 3         Column: 11
 Token: <CON_NUM,"2">     Line: 3         Column: 13
 Token: <SMB_SEM,";">     Line: 3         Column: 14
-Token: <ID,"int">        Line: 4         Column: 4
+Token: <KW,"num">        Line: 4         Column: 4
 Token: <ID,"var3">       Line: 4         Column: 9
 Token: <OP_ASS,"=">      Line: 4         Column: 11
 
 [LEXICAL ERROR]: Invalid character '#' on line 4 and column 15.
 
-Token: <CON_NUM,"3.50">  Line: 4         Column: 17
-Token: <SMB_SEM,";">     Line: 4         Column: 18
+
+[LEXICAL ERROR]: Invalid character 'a' on line 4 and column 16.
+
+
+[LEXICAL ERROR]: Invalid character 'b' on line 4 and column 17.
+
+
+[LEXICAL ERROR]: Invalid character 'c' on line 4 and column 18.
+
+
+[LEXICAL ERROR]: Invalid character 'd' on line 4 and column 19.
+
+Token: <CON_NUM,"3.50">  Line: 4         Column: 21
+Token: <SMB_SEM,";">     Line: 4         Column: 22
 Token: <KW,"char">       Line: 5         Column: 5
 Token: <ID,"var4">       Line: 5         Column: 10
 Token: <OP_ASS,"=">      Line: 5         Column: 12
 
 [LEXICAL ERROR]: Invalid character 'b' on line 5 and column 16.
 
-Token: <ID,"lexer06">    Line: 6         Column: 15
-Token: <OP_ASS,"=">      Line: 6         Column: 17
-Token: <LIT,""Lexer06"">         Line: 6         Column: 27
+
+[LEXICAL ERROR]: Invalid character 'c' on line 5 and column 17.
+
+
+[LEXICAL ERROR]: Invalid character 'd' on line 5 and column 18.
+
+Token: <CON_CHAR,"'a'">  Line: 5         Column: 19
+Token: <SMB_SEM,";">     Line: 5         Column: 20
+Token: <ID,"lexer06">    Line: 6         Column: 8
+Token: <OP_ASS,"=">      Line: 6         Column: 10
+Token: <LIT,""Lexer06"">         Line: 6         Column: 20
+Token: <SMB_SEM,";">     Line: 6         Column: 21
 Token: <SMB_OBC,"{">     Line: 7         Column: 2
 Token: <KW,"if">         Line: 8         Column: 6
-Token: <SMB_OPA,"(">     Line: 8         Column: 9
-Token: <ID,"var1">       Line: 8         Column: 13
-Token: <OP_EQ,"==">      Line: 8         Column: 16
-Token: <ID,"var2">       Line: 8         Column: 21
-Token: <SMB_CPA,")">     Line: 8         Column: 22
-Token: <SMB_OBC,"{">     Line: 9        Column: 5
-Token: <OP_MUL,"*">      Line: 10        Column: 9
-Token: <OP_MUL,"*">      Line: 10        Column: 10
-Token: <OP_MUL,"*">      Line: 11        Column: 10
-Token: <ID,"Multiline">  Line: 11        Column: 19
-Token: <ID,"comment">    Line: 11        Column: 26
-Token: <OP_MUL,"*">      Line: 13        Column: 10
-Token: <SMB_CBC,"}">     Line: 14        Column: 5
-Token: <SMB_CBC,"}">     Line: 15        Column: 2
-Token: <COM_ONL,"//Lexer06">     Line: 18        Column: 10
+Token: <SMB_OPA,"(">     Line: 8         Column: 8
+Token: <ID,"var1">       Line: 8         Column: 12
+Token: <OP_EQ,"==">      Line: 8         Column: 15
+Token: <ID,"var2">       Line: 8         Column: 20
+Token: <SMB_CPA,")">     Line: 8         Column: 21
+Token: <SMB_OBC,"{">     Line: 9         Column: 5
+Token: <COM_CML,"/* * Multiline comment */">     Line: 12        Column: 10
+Token: <SMB_CBC,"}">     Line: 13        Column: 5
+Token: <SMB_CBC,"}">     Line: 14        Column: 2
+
+[LEXICAL ERROR]: Missed closing quotes on line 15.
+
+
+[LEXICAL ERROR]: Invalid character 'c' on line 16 and column 2.
+
+
+[LEXICAL ERROR]: Invalid character 'h' on line 16 and column 3.
+
+
+[LEXICAL ERROR]: Invalid character 'a' on line 16 and column 4.
+
+
+[LEXICAL ERROR]: Invalid character 'r' on line 16 and column 5.
+
+
+[LEXICAL ERROR]: Invalid character ' ' on line 16 and column 6.
+
+
+[LEXICAL ERROR]: Invalid character 'v' on line 16 and column 7.
+
+
+[LEXICAL ERROR]: Invalid character 'a' on line 16 and column 8.
+
+
+[LEXICAL ERROR]: Invalid character 'r' on line 16 and column 9.
+
+
+[LEXICAL ERROR]: Invalid character '5' on line 16 and column 10.
+
+
+[LEXICAL ERROR]: Invalid character ' ' on line 16 and column 11.
+
+
+[LEXICAL ERROR]: Invalid character '=' on line 16 and column 12.
+
+
+[LEXICAL ERROR]: Invalid character ' ' on line 16 and column 13.
+
+
+[LEXICAL ERROR]: Invalid character ''' on line 16 and column 14.
+
+
+[LEXICAL ERROR]: Invalid character 'a' on line 16 and column 15.
+
+
+[LEXICAL ERROR]: Invalid character ''' on line 16 and column 16.
+
+
+[LEXICAL ERROR]: Invalid character ';' on line 16 and column 17.
+
+Token: <LIT,""Lexer06"">         Line: 17        Column: 2
+
+[LEXICAL ERROR]: Multiline comment not closed on line 20.
 
 Symbol: [<KW,"program">]
 Symbol: [<KW,"if">]
@@ -88,7 +161,6 @@ Symbol: [<KW,"not">]
 Symbol: [<KW,"or">]
 Symbol: [<KW,"and">]
 Symbol: [<ID,"Lexer06">]
-Symbol: [<ID,"int">]
 Symbol: [<ID,"var1">]
 Symbol: [<OP_ASS,"=">]
 Symbol: [<CON_NUM,"1">]
@@ -98,16 +170,13 @@ Symbol: [<CON_NUM,"2">]
 Symbol: [<ID,"var3">]
 Symbol: [<CON_NUM,"3.50">]
 Symbol: [<ID,"var4">]
-Symbol: [<ID,"'a';string">]
+Symbol: [<CON_CHAR,"'a'">]
 Symbol: [<ID,"lexer06">]
 Symbol: [<LIT,""Lexer06"">]
 Symbol: [<SMB_OBC,"{">]
 Symbol: [<SMB_OPA,"(">]
 Symbol: [<OP_EQ,"==">]
 Symbol: [<SMB_CPA,")">]
-Symbol: [<OP_MUL,"*">]
-Symbol: [<ID,"Multiline">]
-Symbol: [<ID,"comment">]
+Symbol: [<COM_CML,"/* * Multiline comment */">]
 Symbol: [<SMB_CBC,"}">]
-Symbol: [<COM_ONL,"//Lexer06">]
 Symbol: [<EOF,"$">]

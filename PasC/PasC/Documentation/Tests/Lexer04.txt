@@ -1,9 +1,9 @@
 SOURCE
 
-program Lexer04
-int var1 = 1;
-int var2 = 2;
-int var3 = 3;
+@program Lexer04
+num var1 = 1;
+num var2 = 2;
+num var3 = 3;
 //Lexer04
 
 
@@ -11,29 +11,26 @@ int var3 = 3;
 
 OUTPUT
 
-pasc (Framework 4.7) 2018.1.1 ALPHA
-Copyright (C) 2018 Lucas Cota, Carlos Alberto.
+[LEXICAL ERROR]: Invalid character '@' on line 1 and column 2.
 
-Token: <KW,"program">    Line: 1         Column: 8
-Token: <ID,"Lexer01">    Line: 1         Column: 15
-Token: <ID,"int">        Line: 2         Column: 4
+Token: <KW,"program">    Line: 1         Column: 9
+Token: <ID,"Lexer04">    Line: 1         Column: 17
+Token: <KW,"num">        Line: 2         Column: 4
 Token: <ID,"var1">       Line: 2         Column: 9
 Token: <OP_ASS,"=">      Line: 2         Column: 11
 Token: <CON_NUM,"1">     Line: 2         Column: 13
 Token: <SMB_SEM,";">     Line: 2         Column: 14
-Token: <ID,"int">        Line: 3         Column: 4
+Token: <KW,"num">        Line: 3         Column: 4
 Token: <ID,"var2">       Line: 3         Column: 9
 Token: <OP_ASS,"=">      Line: 3         Column: 11
 Token: <CON_NUM,"2">     Line: 3         Column: 13
 Token: <SMB_SEM,";">     Line: 3         Column: 14
-Token: <ID,"int">        Line: 4         Column: 4
+Token: <KW,"num">        Line: 4         Column: 4
 Token: <ID,"var3">       Line: 4         Column: 9
 Token: <OP_ASS,"=">      Line: 4         Column: 11
-
-[LEXICAL ERROR]: Invalid character 'a' on line 5 and column 15.
-
-Token: <SMB_SEM,"3.;">   Line: 4         Column: 16
-Token: <COM_ONL,"//Lexer04">     Line: 5         Column: 10
+Token: <CON_NUM,"3">     Line: 4         Column: 13
+Token: <SMB_SEM,";">     Line: 4         Column: 14
+Token: <COM_ONL,"//Lexer04">     Line: 5         Column: 11
 
 Symbol: [<KW,"program">]
 Symbol: [<KW,"if">]
@@ -46,8 +43,7 @@ Symbol: [<KW,"char">]
 Symbol: [<KW,"not">]
 Symbol: [<KW,"or">]
 Symbol: [<KW,"and">]
-Symbol: [<ID,"Lexer01">]
-Symbol: [<ID,"int">]
+Symbol: [<ID,"Lexer04">]
 Symbol: [<ID,"var1">]
 Symbol: [<OP_ASS,"=">]
 Symbol: [<CON_NUM,"1">]
@@ -55,6 +51,6 @@ Symbol: [<SMB_SEM,";">]
 Symbol: [<ID,"var2">]
 Symbol: [<CON_NUM,"2">]
 Symbol: [<ID,"var3">]
-Symbol: [<SMB_SEM,"3.;">]
-Symbol: [<COM_ONL,"//Lexer01">]
+Symbol: [<CON_NUM,"3">]
+Symbol: [<COM_ONL,"//Lexer04">]
 Symbol: [<EOF,"$">]
