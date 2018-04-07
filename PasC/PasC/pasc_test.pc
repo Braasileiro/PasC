@@ -12,5 +12,4 @@ char var4 = 'a';
 		*/
 	}
 }
-//Lexer06
-abcd;
+//Lexer
