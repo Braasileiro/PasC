@@ -53,10 +53,19 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Documentation\Automata\PasC_Automata.jff" />
+    <None Include="Documentation\Reports\Report.docx" />
+    <None Include="Documentation\Reports\Report_Lexer_2018-03-31.pdf" />
     <None Include="pasc_test.pc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documentation\Automata\PasC_Automata.png" />
+    <Content Include="Documentation\Tests\Lexer01.txt" />
+    <Content Include="Documentation\Tests\Lexer02.txt" />
+    <Content Include="Documentation\Tests\Lexer03.txt" />
+    <Content Include="Documentation\Tests\Lexer04.txt" />
+    <Content Include="Documentation\Tests\Lexer05.txt" />
+    <Content Include="Documentation\Tests\Lexer06.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
