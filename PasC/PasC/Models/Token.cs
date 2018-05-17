@@ -17,6 +17,11 @@ namespace PasC.Models
 			this.Lexeme = Lexeme;
 		}
 
+        public Tag GetTag()
+        {
+            return this.TTag;
+        }
+
 		public override string ToString()
 		{
 			return String.Format("<{0},\"{1}\">", TTag, Lexeme);
