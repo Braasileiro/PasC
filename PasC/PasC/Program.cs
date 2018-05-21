@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+
 using PasC.Modules;
+using PasC.Modules.Internal;
 
 namespace PasC
 {
@@ -47,7 +49,7 @@ namespace PasC
 			ConsoleHeader();
 
 			Global.SetEnvironment(args[0]);
-        }
+		}
 
 		private static void ConsoleHeader()
 		{
