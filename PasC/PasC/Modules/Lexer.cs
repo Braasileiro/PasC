@@ -78,12 +78,14 @@ namespace PasC.Modules
 				if (LAST_CHAR != EOF)
 				{
 					Global.SOURCE.Seek(Global.SOURCE.Position - 1, SeekOrigin.Begin);
+
 					COLUMN--;
 				}
 			}
 			catch (IOException e)
 			{
 				Console.WriteLine("[Error]: Failed to read the source file.\n{0}", e);
+
 				Environment.Exit(2);
 			}
 		}
