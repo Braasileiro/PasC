@@ -17,29 +17,7 @@ namespace PasC.Modules
 		{
 			Advance();
 
-			// program...
-			if (TOKEN.Lexeme == "program")
-			{
-				Eat(Tag.KW);
-
-				// program <id>...
-				if (!Eat(Tag.ID))
-				{
-					SyntacticError(String.Format("Expected \"<ID>\" but received \"{0}\".", TOKEN.Lexeme));
-				}
-
-				// program <id> <body>
-				else
-				{
-					Body();
-				}
-			}
-			else
-			{
-				SyntacticError(String.Format("Expected \"program\" but received \"{0}\".", TOKEN.Lexeme));
-
-				Environment.Exit(1);
-			}
+			Prog();
 		}
 
 
@@ -79,11 +57,32 @@ namespace PasC.Modules
 
 
 
-		// Classes
 		// Todas as decisoes sao baseadas na tabela preditiva
 		private static void Prog()
 		{
+			// program...
+			if (TOKEN.Lexeme == "program")
+			{
+				Eat(Tag.KW);
 
+				// program <id>...
+				if (!Eat(Tag.ID))
+				{
+					SyntacticError(String.Format("Expected \"<ID>\" but received \"{0}\".", TOKEN.Lexeme));
+				}
+
+				// program <id> <body>
+				else
+				{
+					Body();
+				}
+			}
+			else
+			{
+				SyntacticError(String.Format("Expected \"program\" but received \"{0}\".", TOKEN.Lexeme));
+
+				Environment.Exit(1);
+			}
 		}
 
 		private static void Body()
