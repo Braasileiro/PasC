@@ -4,209 +4,209 @@ using PasC.Models;
 
 namespace PasC.Modules
 {
-    class Parser
-    {
-		// Lexer
-        private Lexer lexer;
-        private Token token;
+	class Parser
+	{
+		// Lexer Resources
+		private static Token TOKEN;
 
 
 
 
-		// Lexer<->Parser
-        public Parser(Lexer lexer)
-        {
+		// Parser Control
+		public static void Set()
+		{
 
-        }
+		}
+
+
 
 
 		// Errors
-        public void SyntacticError(String message)
-        {
-            Console.WriteLine("\n[SYNTACTIC ERROR]: " + message);
-        }
+		private static void SyntacticError(String message)
+		{
+			Console.WriteLine("\n[SYNTACTIC ERROR]: " + message);
+		}
 
 
 
 
 		// Token Handlers
-        public void Advance()
-        {
-            //token = lexer.getToken();
-            Console.WriteLine("[DEBUG]" + token.ToString());
-        }
+		private static void Advance()
+		{
+			//token = lexer.getToken();
+			Console.WriteLine("[DEBUG]" + TOKEN.ToString());
+		}
 
-        // Verificação de token esperado
-        public bool Eat(Tag tag)
-        {
-            if (token.GetTag() == tag)
-            {
-                Advance();
+		private static bool Eat(Tag tag)
+		{
+			if (TOKEN.GetTag() == tag)
+			{
+				Advance();
 
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 
 
 
 
-        // Classes
-        // Todas as decisoes sao baseadas na tabela preditiva
-        public void Prog()
-        {
+		// Classes
+		// Todas as decisoes sao baseadas na tabela preditiva
+		private static void Prog()
+		{
 
-        }
+		}
 
-        public void Body()
-        {
+		public void Body()
+		{
 
-        }
+		}
 
-        public void Decl_List()
-        {
+		public void Decl_List()
+		{
 
-        }
+		}
 
-        public void Decl()
-        {
+		public void Decl()
+		{
 
-        }
+		}
 
-        public void Type()
-        {
+		public void Type()
+		{
 
-        }
+		}
 
-        public void Id_List()
-        {
+		public void Id_List()
+		{
 
-        }
+		}
 
-        // id-list'
-        public void Id_List2()
-        {
+		// id-list'
+		public void Id_List2()
+		{
 
-        }
+		}
 
-        public void Stmt_List()
-        {
+		public void Stmt_List()
+		{
 
-        }
+		}
 
-        public void Stmt()
-        {
+		public void Stmt()
+		{
 
-        }
+		}
 
-        public void Assign_Stmt()
-        {
+		public void Assign_Stmt()
+		{
 
-        }
+		}
 
-        public void If_Stmt()
-        {
+		public void If_Stmt()
+		{
 
-        }
+		}
 
-        // if-stmt'
-        public void If_Stmt2()
-        {
+		// if-stmt'
+		public void If_Stmt2()
+		{
 
-        }
+		}
 
-        public void Condition()
-        {
+		public void Condition()
+		{
 
-        }
+		}
 
-        public void While_Stmt()
-        {
+		public void While_Stmt()
+		{
 
-        }
+		}
 
-        public void Stmt_Prefix()
-        {
+		public void Stmt_Prefix()
+		{
 
-        }
+		}
 
-        public void Read_Stmt()
-        {
+		public void Read_Stmt()
+		{
 
-        }
+		}
 
-        public void Write_Stmt()
-        {
+		public void Write_Stmt()
+		{
 
-        }
+		}
 
-        public void Writable()
-        {
+		public void Writable()
+		{
 
-        }
+		}
 
-        public void Expression()
-        {
+		public void Expression()
+		{
 
-        }
+		}
 
-        // expression'
-        public void Expression2()
-        {
+		// expression'
+		public void Expression2()
+		{
 
-        }
+		}
 
-        public void Simple_Expr()
-        {
+		public void Simple_Expr()
+		{
 
-        }
+		}
 
-        public void Simple_Expr2()
-        {
+		public void Simple_Expr2()
+		{
 
-        }
+		}
 
-        public void Term()
-        {
+		public void Term()
+		{
 
-        }
+		}
 
-        public void Term2()
-        {
+		public void Term2()
+		{
 
-        }
+		}
 
-        public void Factor_A()
-        {
+		public void Factor_A()
+		{
 
-        }
+		}
 
-        public void Factor()
-        {
+		public void Factor()
+		{
 
-        }
+		}
 
-        public void RelOp()
-        {
+		public void RelOp()
+		{
 
-        }
+		}
 
-        public void AddOp()
-        {
+		public void AddOp()
+		{
 
-        }
+		}
 
-        public void MulOp()
-        {
+		public void MulOp()
+		{
 
-        }
+		}
 
-        public void Constant()
-        {
+		public void Constant()
+		{
 
-        }
-    }
+		}
+	}
 }
