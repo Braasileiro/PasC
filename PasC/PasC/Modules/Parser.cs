@@ -71,11 +71,8 @@ namespace PasC.Modules
 					SyntacticError(String.Format("Expected \"<ID>\" but received \"{0}\".", TOKEN.Lexeme));
 				}
 
-				// program <id> <body>
-				else
-				{
-					Body();
-				}
+				// program <id> <body>...
+				Body();
 			}
 			else
 			{
@@ -87,7 +84,23 @@ namespace PasC.Modules
 
 		private static void Body()
 		{
+			Decl_List();
 
+			if (!Eat(Tag.SMB_OBC))
+			{
+				SyntacticError(String.Format("Expected \"{{\" but received \"{0}\".", TOKEN.Lexeme));
+
+				Environment.Exit(1);
+			}
+
+			Stmt_List();
+
+			if (!Eat(Tag.SMB_CBC))
+			{
+				SyntacticError(String.Format("Expected \"}\" but received \"{0}\".", TOKEN.Lexeme));
+
+				Environment.Exit(1);
+			}
 		}
 
 		private static void Decl_List()
