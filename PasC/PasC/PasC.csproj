@@ -44,9 +44,11 @@
   <ItemGroup>
     <Compile Include="Models\Grammar.cs" />
     <Compile Include="Models\Identifier.cs" />
-    <Compile Include="Models\Parser.cs" />
+    <Compile Include="Modules\Internal\_Lexer.cs" />
+    <Compile Include="Modules\Parser.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\Tag.cs" />
+    <Compile Include="Modules\Global.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\Lexer.cs" />
