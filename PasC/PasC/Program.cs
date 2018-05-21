@@ -50,6 +50,9 @@ namespace PasC
 
 			// NÃO ALTERE ESSA LINHA SE VOCÊ POSSUI AMOR À SUA VIDA!
 			Global.SetEnvironment(args[0]);
+
+			// Parser
+			Parser.Set();
 		}
 
 		private static void ConsoleHeader()

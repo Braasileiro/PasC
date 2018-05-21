@@ -15,7 +15,23 @@ namespace PasC.Modules
 		// Parser Control
 		public static void Set()
 		{
+			Advance();
 
+			if (TOKEN.Lexeme == "program")
+			{
+				Eat(Tag.KW);
+
+				if (!Eat(Tag.ID))
+				{
+					SyntacticError(String.Format("Expected \"<ID>\" but received \"{0}\".", TOKEN.Lexeme));
+				}
+			}
+			else
+			{
+				SyntacticError(String.Format("Expected \"program\" but received \"{0}\".", TOKEN.Lexeme));
+
+				Environment.Exit(1);
+			}
 		}
 
 
@@ -33,7 +49,8 @@ namespace PasC.Modules
 		// Token Handlers
 		private static void Advance()
 		{
-			//token = lexer.getToken();
+			TOKEN = Lexer.NextToken();
+
 			Console.WriteLine("[DEBUG]" + TOKEN.ToString());
 		}
 
