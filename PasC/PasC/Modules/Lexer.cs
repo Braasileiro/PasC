@@ -23,15 +23,12 @@ namespace PasC.Modules
 		// Check
 		private static int STATE;
 		private static bool QUOTES_ERROR = false;
-
-		// Source
 		
 
 
 
-
 		// Source Control
-		public static void Set(string source)
+		public static void Set()
 		{
 			Token TOKEN;
 			LEXEME = new StringBuilder();
@@ -41,9 +38,9 @@ namespace PasC.Modules
 			 * caso a última linha do arquivo não seja uma linha em branco.
 			 * Isso evita o último token/caracter do arquivo de não ser reconhecido.
 			*/
-			if (!String.IsNullOrWhiteSpace(File.ReadAllLines(source).Last()))
+			if (!String.IsNullOrWhiteSpace(File.ReadAllLines(Global.SOURCE.Name).Last()))
 			{
-				File.AppendAllText(source, Environment.NewLine);
+				File.AppendAllText(Global.SOURCE.Name, Environment.NewLine);
 			}
 
 
