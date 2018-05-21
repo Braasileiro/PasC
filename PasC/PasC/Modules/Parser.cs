@@ -78,150 +78,150 @@ namespace PasC.Modules
 
 		}
 
-		public void Body()
+		private static void Body()
 		{
 
 		}
 
-		public void Decl_List()
+		private static void Decl_List()
 		{
 
 		}
 
-		public void Decl()
+		private static void Decl()
 		{
 
 		}
 
-		public void Type()
+		private static void Type()
 		{
 
 		}
 
-		public void Id_List()
+		private static void Id_List()
 		{
 
 		}
 
 		// id-list'
-		public void Id_List2()
+		private static void Id_List2()
 		{
 
 		}
 
-		public void Stmt_List()
+		private static void Stmt_List()
 		{
 
 		}
 
-		public void Stmt()
+		private static void Stmt()
 		{
 
 		}
 
-		public void Assign_Stmt()
+		private static void Assign_Stmt()
 		{
 
 		}
 
-		public void If_Stmt()
+		private static void If_Stmt()
 		{
 
 		}
 
 		// if-stmt'
-		public void If_Stmt2()
+		private static void If_Stmt2()
 		{
 
 		}
 
-		public void Condition()
+		private static void Condition()
 		{
 
 		}
 
-		public void While_Stmt()
+		private static void While_Stmt()
 		{
 
 		}
 
-		public void Stmt_Prefix()
+		private static void Stmt_Prefix()
 		{
 
 		}
 
-		public void Read_Stmt()
+		private static void Read_Stmt()
 		{
 
 		}
 
-		public void Write_Stmt()
+		private static void Write_Stmt()
 		{
 
 		}
 
-		public void Writable()
+		private static void Writable()
 		{
 
 		}
 
-		public void Expression()
+		private static void Expression()
 		{
 
 		}
 
 		// expression'
-		public void Expression2()
+		private static void Expression2()
 		{
 
 		}
 
-		public void Simple_Expr()
+		private static void Simple_Expr()
 		{
 
 		}
 
-		public void Simple_Expr2()
+		private static void Simple_Expr2()
 		{
 
 		}
 
-		public void Term()
+		private static void Term()
 		{
 
 		}
 
-		public void Term2()
+		private static void Term2()
 		{
 
 		}
 
-		public void Factor_A()
+		private static void Factor_A()
 		{
 
 		}
 
-		public void Factor()
+		private static void Factor()
 		{
 
 		}
 
-		public void RelOp()
+		private static void RelOp()
 		{
 
 		}
 
-		public void AddOp()
+		private static void AddOp()
 		{
 
 		}
 
-		public void MulOp()
+		private static void MulOp()
 		{
 
 		}
 
-		public void Constant()
+		private static void Constant()
 		{
 
 		}
