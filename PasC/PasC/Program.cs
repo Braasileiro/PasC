@@ -14,6 +14,7 @@ namespace PasC
 			{
 				Console.Clear();
 
+				/*
 				if (args.Length < 1)
 				{
 					throw new IndexOutOfRangeException();
@@ -23,6 +24,7 @@ namespace PasC
 				{
 					throw new FileNotFoundException();
 				}
+				*/
 			}
 			catch (IndexOutOfRangeException)
 			{
@@ -53,6 +55,8 @@ namespace PasC
 
 			// Parser
 			Parser.Set();
+
+			Console.ReadKey();
 		}
 
 		private static void ConsoleHeader()
