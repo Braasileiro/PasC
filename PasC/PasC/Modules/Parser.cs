@@ -1,40 +1,48 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-using PasC.Modules;
+using PasC.Models;
 
-namespace PasC.Models
+namespace PasC.Modules
 {
     class Parser
     {
+		// Lexer
         private Lexer lexer;
         private Token token;
 
+
+
+
+		// Lexer<->Parser
         public Parser(Lexer lexer)
         {
 
         }
 
+
+		// Errors
         public void SyntacticError(String message)
         {
             Console.WriteLine("\n[SYNTACTIC ERROR]: " + message);
         }
 
+
+
+
+		// Token Handlers
         public void Advance()
         {
             //token = lexer.getToken();
             Console.WriteLine("[DEBUG]" + token.ToString());
         }
 
-        // Verificacao de token esperado
+        // Verificação de token esperado
         public bool Eat(Tag tag)
         {
-            if(token.GetTag() == tag)
+            if (token.GetTag() == tag)
             {
                 Advance();
+
                 return true;
             }
             else
@@ -43,10 +51,11 @@ namespace PasC.Models
             }
         }
 
+
+
+
         // Classes
-        /// <summary>
-        /// Todas as decisoes sao baseadas na tabela preditiva
-        /// </summary>
+        // Todas as decisoes sao baseadas na tabela preditiva
         public void Prog()
         {
 
@@ -57,7 +66,7 @@ namespace PasC.Models
 
         }
 
-        public void Decl_list()
+        public void Decl_List()
         {
 
         }
@@ -180,17 +189,17 @@ namespace PasC.Models
 
         }
 
-        public void Relop()
+        public void RelOp()
         {
 
         }
 
-        public void Addop()
+        public void AddOp()
         {
 
         }
 
-        public void Mulop()
+        public void MulOp()
         {
 
         }
@@ -199,8 +208,5 @@ namespace PasC.Models
         {
 
         }
-
-
-
     }
 }
