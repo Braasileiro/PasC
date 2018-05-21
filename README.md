@@ -7,10 +7,6 @@ Curso: Ciência da Computação
 Disciplina: Compiladores
 Professor: Gustavo Alves Fernandes
 ```
-
-
-
-
 ## 1. Analisador Léxico
 
 
