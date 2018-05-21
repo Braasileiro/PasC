@@ -17,13 +17,21 @@ namespace PasC.Modules
 		{
 			Advance();
 
+			// program...
 			if (TOKEN.Lexeme == "program")
 			{
 				Eat(Tag.KW);
 
+				// program <id>...
 				if (!Eat(Tag.ID))
 				{
 					SyntacticError(String.Format("Expected \"<ID>\" but received \"{0}\".", TOKEN.Lexeme));
+				}
+
+				// program <id> <body>
+				else
+				{
+					Body();
 				}
 			}
 			else
