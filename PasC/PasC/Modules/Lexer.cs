@@ -123,7 +123,7 @@ namespace PasC.Modules
 
 
 		// PasC:Automata
-		private static Token NextToken()
+		public static Token NextToken()
 		{
 			STATE = 0;
 
