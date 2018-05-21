@@ -43,10 +43,12 @@ namespace PasC.Modules
 			 * caso a última linha do arquivo não seja uma linha em branco.
 			 * Isso evita o último token/caracter do arquivo de não ser reconhecido.
 			*/
+			/*
 			if (!String.IsNullOrWhiteSpace(File.ReadAllLines(SOURCE.Name).Last()))
 			{
 				File.AppendAllText(SOURCE.Name, Environment.NewLine);
 			}
+			*/
 		}
 	}
 }
