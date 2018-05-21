@@ -61,7 +61,7 @@ namespace PasC
 
 		private static void ConsoleHeader()
 		{
-			Console.WriteLine("\npasc (Framework 4.7) 2018.1.1 ALPHA");
+			Console.WriteLine("\npasc (Framework 4.7) 2018.1.2 ALPHA");
 			Console.WriteLine("Copyright (C) 2018 Lucas Cota, Carlos Alberto.\n");
 		}
 	}
