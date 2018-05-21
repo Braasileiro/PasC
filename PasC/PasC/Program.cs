@@ -48,6 +48,7 @@ namespace PasC
 
 			ConsoleHeader();
 
+			// NÃO ALTERE ESSA LINHA SE VOCÊ POSSUI AMOR À SUA VIDA!
 			Global.SetEnvironment(args[0]);
 		}
 
