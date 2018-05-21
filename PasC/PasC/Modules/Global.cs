@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace PasC.Modules
 {
@@ -36,6 +37,16 @@ namespace PasC.Modules
 
 			// Source File
 			SOURCE = new FileStream(sourceFile, FileMode.Open, FileAccess.ReadWrite);
+
+			/* 
+			 * Adiciona uma nova linha no arquivo como forma de segurança
+			 * caso a última linha do arquivo não seja uma linha em branco.
+			 * Isso evita o último token/caracter do arquivo de não ser reconhecido.
+			*/
+			if (!String.IsNullOrWhiteSpace(File.ReadAllLines(SOURCE.Name).Last()))
+			{
+				File.AppendAllText(SOURCE.Name, Environment.NewLine);
+			}
 		}
 	}
 }
