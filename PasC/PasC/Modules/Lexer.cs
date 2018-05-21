@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -27,43 +26,7 @@ namespace PasC.Modules
 
 
 
-		// Source Control
-		public static void Set()
-		{
-			Token TOKEN;
-			LEXEME = new StringBuilder();
-
-			/* 
-			 * Adiciona uma nova linha no arquivo como forma de segurança
-			 * caso a última linha do arquivo não seja uma linha em branco.
-			 * Isso evita o último token/caracter do arquivo de não ser reconhecido.
-			*/
-			if (!String.IsNullOrWhiteSpace(File.ReadAllLines(Global.SOURCE.Name).Last()))
-			{
-				File.AppendAllText(Global.SOURCE.Name, Environment.NewLine);
-			}
-
-
-			do
-			{
-				LEXEME.Clear();
-				TOKEN = NextToken();
-
-				if (TOKEN != null)
-				{
-					Console.WriteLine("Token: {0}\t Line: {1}\t Column: {2}", TOKEN.ToString(), ROW, COLUMN);
-				}
-
-				if (Grammar.GetToken(GetLexeme()) == null && TOKEN != null)
-				{
-					Grammar.Add(TOKEN, new Identifier());
-				}
-
-			} while (!TOKEN.Lexeme.Equals(Tag.EOF) && TOKEN != null);
-
-			Global.SOURCE.Close();
-		}
-
+		// Lexer Control
 		private static void Read()
 		{
 			CURRENT_CHAR = '\u0000';
@@ -95,14 +58,13 @@ namespace PasC.Modules
 				{
 					MultilineCommentErrorCheck();
 
-					Grammar.Add(new Token(Tag.EOF, "$", ROW, COLUMN), new Identifier());
-					Grammar.Show();
-					Environment.Exit(0);
+					Global.SOURCE.Close();
 				}
 			}
 			catch (IOException e)
 			{
 				Console.WriteLine("[Error]: Failed to read the character '{0}'\n{1}", CURRENT_CHAR, e);
+
 				Environment.Exit(1);
 			}
 		}
@@ -164,6 +126,8 @@ namespace PasC.Modules
 		private static Token NextToken()
 		{
 			STATE = 0;
+
+			LEXEME = new StringBuilder();
 
 			while (true)
 			{
@@ -450,6 +414,7 @@ namespace PasC.Modules
 						if (CURRENT_CHAR.Equals('\"'))
 						{
 							SetState(0, true);
+
 							QUOTES_ERROR = false;
 
 							return new Token(Tag.LIT, GetLexeme(), ROW, COLUMN);
@@ -458,9 +423,10 @@ namespace PasC.Modules
 						else if (IsNewLine() && !QUOTES_ERROR)
 						{
 							SetState(10, false);
+
 							QUOTES_ERROR = true;
 
-							LexicalError(String.Format("Missed closing quotes on line {0}.", ROW - 1));
+							LexicalError(String.Format("Missed closing quotes on line {0} and column {1}.", ROW - 1, COLUMN));
 						}
 
 						// ->> 10
@@ -583,7 +549,7 @@ namespace PasC.Modules
 						{
 							SetState(0, false);
 							
-							LexicalError(String.Format("Incomplete token for the symbol '!{0}' on line {1} and column {2}.", CURRENT_CHAR, ROW, COLUMN));
+							LexicalError(String.Format("Incomplete token for the symbol '{0}' on line {1} and column {2}.", CURRENT_CHAR, ROW, COLUMN));
 						}
 					}
 					break;
