@@ -25,7 +25,7 @@ namespace PasC.Modules
 		private static bool QUOTES_ERROR = false;
 
 		// Source
-		private static FileStream SOURCE;
+		
 
 
 
@@ -46,8 +46,6 @@ namespace PasC.Modules
 				File.AppendAllText(source, Environment.NewLine);
 			}
 
-			SOURCE = new FileStream(source, FileMode.Open, FileAccess.ReadWrite);
-
 
 			do
 			{
@@ -66,7 +64,7 @@ namespace PasC.Modules
 
 			} while (!TOKEN.Lexeme.Equals(Tag.EOF) && TOKEN != null);
 
-			SOURCE.Close();
+			Global.SOURCE.Close();
 		}
 
 		private static void Read()
@@ -75,7 +73,7 @@ namespace PasC.Modules
 
 			try
 			{
-				LAST_CHAR = SOURCE.ReadByte();
+				LAST_CHAR = Global.SOURCE.ReadByte();
 
 				if (LAST_CHAR != EOF)
 				{
@@ -120,7 +118,7 @@ namespace PasC.Modules
 			{
 				if (LAST_CHAR != EOF)
 				{
-					SOURCE.Seek(SOURCE.Position - 1, SeekOrigin.Begin);
+					Global.SOURCE.Seek(Global.SOURCE.Position - 1, SeekOrigin.Begin);
 					COLUMN--;
 				}
 			}
@@ -142,7 +140,7 @@ namespace PasC.Modules
 
 		private static bool IsNewLine()
 		{
-			return CURRENT_CHAR == Global.NewLine;
+			return CURRENT_CHAR == Global.NEW_LINE;
 		}
 
 

@@ -46,9 +46,7 @@ namespace PasC
 
 			ConsoleHeader();
 
-			Global.SetEnvironment();
-
-			Lexer.Set(args[0]);
+			Global.SetEnvironment(args[0]);
         }
 
 		private static void ConsoleHeader()
