@@ -142,22 +142,7 @@ namespace PasC.Modules
 
 		private static bool IsNewLine()
 		{
-			switch (Environment.OSVersion.Platform)
-			{
-				// Windows, Unix
-				case PlatformID.Win32NT: case PlatformID.Win32S: case PlatformID.Win32Windows: case PlatformID.WinCE: case PlatformID.Unix:
-				{
-					return (CURRENT_CHAR == '\n');
-				}
-				
-				// Mac OSX
-				case PlatformID.MacOSX:
-				{
-					return (CURRENT_CHAR == '\r');
-				}
-			}
-
-			return true;
+			return CURRENT_CHAR == Global.NewLine;
 		}
 
 
