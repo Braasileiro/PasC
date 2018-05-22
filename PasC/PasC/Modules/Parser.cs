@@ -6,6 +6,10 @@ namespace PasC.Modules
 {
 	class Parser
 	{
+		// Resources
+		private static int ERROR_COUNT;
+
+
 		// Lexer Resources
 		private static Token TOKEN;
 		private static Tag CURRENT_TAG;
@@ -27,7 +31,16 @@ namespace PasC.Modules
 		// Errors
 		private static void SyntacticError(String message)
 		{
+			ERROR_COUNT++;
+
 			Console.WriteLine("\n[SYNTACTIC ERROR]: " + message);
+
+			if (ERROR_COUNT == 4)
+			{
+				Console.WriteLine("\n[SYNTACTIC ERROR]: Many syntactic errors in sequence, aborting execution.");
+
+				Environment.Exit(1);
+			}
 		}
 
 
@@ -78,8 +91,6 @@ namespace PasC.Modules
 			else
 			{
 				SyntacticError(String.Format("Expected \"program\" but received \"{0}\".", TOKEN.Lexeme));
-
-				Environment.Exit(1);
 			}
 		}
 
@@ -90,8 +101,6 @@ namespace PasC.Modules
 			if (!Eat(Tag.SMB_OBC))
 			{
 				SyntacticError(String.Format("Expected \"{{\" but received \"{0}\".", TOKEN.Lexeme));
-
-				Environment.Exit(1);
 			}
 
 			Stmt_List();
@@ -99,8 +108,6 @@ namespace PasC.Modules
 			if (!Eat(Tag.SMB_CBC))
 			{
 				SyntacticError(String.Format("Expected \"}\" but received \"{0}\".", TOKEN.Lexeme));
-
-				Environment.Exit(1);
 			}
 		}
 
@@ -111,8 +118,6 @@ namespace PasC.Modules
 			if (!Eat(Tag.SMB_SEM))
 			{
 				SyntacticError(String.Format("Expected \";\" but received \"{0}\".", TOKEN.Lexeme));
-
-				Environment.Exit(1);
 			}
 
 			Decl_List();
@@ -138,8 +143,6 @@ namespace PasC.Modules
 				{
 					SyntacticError(String.Format("Expected \"char\" but received \"{0}\".", TOKEN.Lexeme));
 				}
-
-				Environment.Exit(1);
 			}
 		}
 
@@ -161,8 +164,6 @@ namespace PasC.Modules
 			if (!Eat(Tag.SMB_SEM))
 			{
 				SyntacticError(String.Format("Expected \";\" but received \"{0}\".", TOKEN.Lexeme));
-
-				Environment.Exit(1);
 			}
 		}
 
