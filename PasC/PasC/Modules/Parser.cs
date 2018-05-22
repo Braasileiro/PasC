@@ -105,18 +105,14 @@ namespace PasC.Modules
 				Decl_List();
 			}
 
-			else if (GetTag() == Tag.SMB_OBC)
+			else if (Eat(Tag.SMB_OBC))
 			{
 				Stmt_List();
 
 				if (!Eat(Tag.SMB_CBC))
 				{
-					SyntacticError(String.Format("Expected \"}\" but received \"{0}\".", TOKEN.Lexeme));
+					SyntacticError(String.Format("Expected \"}}\" but received \"{0}\".", TOKEN.Lexeme));
 				}
-			}
-			else
-			{
-				SyntacticError(String.Format("Expected \"{{\" but received \"{0}\".", TOKEN.Lexeme));
 			}
 		}
 
