@@ -35,9 +35,11 @@ namespace PasC.Modules
 
 			Console.WriteLine("\n[SYNTACTIC ERROR]: " + message);
 
-			if (ERROR_COUNT == 4)
+			if (ERROR_COUNT == 5)
 			{
-				Console.WriteLine("\n[SYNTACTIC ERROR]: Many syntactic errors in sequence, aborting execution.");
+				Console.WriteLine("\n[SYNTACTIC ERROR]: Many syntactic errors, aborting execution.");
+
+				Console.ReadKey();
 
 				Environment.Exit(1);
 			}
@@ -165,6 +167,8 @@ namespace PasC.Modules
 			{
 				SyntacticError(String.Format("Expected \";\" but received \"{0}\".", TOKEN.Lexeme));
 			}
+
+			Stmt_List();
 		}
 
 		private static void Stmt()
