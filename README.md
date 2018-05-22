@@ -144,6 +144,44 @@ mulop       → “*” | “/” | “and”
 constant    → “num_const” | “char_const”
 ```
 
+#### 4.2.1 Gramática da linguagem PasC (Corrigida)
+```
+prog         → “program” “id” body
+body         → decl-list “{“ stmt-list “}”
+decl-list    → decl “;” decl-list | ε
+decl         → type id-list
+type         → “num” | “char”
+id-list      → “id” id-list'
+id-list'     → “,” id-list | ε
+
+stmt-list    → stmt “;” stmt-list | ε
+stmt         → assign-stmt | if-stmt | while-stmt | read-stmt | write-stmt
+assign-stmt  → “id” “=” simple_expr
+if-stmt      → “if” “(“ condition ”)” “{“ stmt-list ”}” if-stmt'
+if-stmt'     → “else” “{” stmt-list “}” | ε
+
+condition    → expression
+while-stmt   → stmt-prefix “{“ stmt-list “}”
+stmt-prefix  → “while” “(“ condition “)”
+read-stmt    → “read” “id”
+write-stmt   → “write” writable
+writable     → simple-expr | “literal”
+
+
+expression   → simple-expr expression'
+expression'  → relop simple-expr | ε
+simple-expr  → term simple-expr'
+simple-expr' → addop term simple-expr' | ε
+term         → factor-a term'
+term'        → mulop factor-a term' | ε
+factor-a     → factor | “not” factor
+factor       → “id” | constant | “(“ expression “)”
+relop        → “==” | “>” | “>=” | “<” | “<=” | “!=”
+addop        → “+” | “-” | “or”
+mulop        → “*” | “/” | “and”
+constant     → “num_const” | “char_const”
+```
+
 #### 4.3 Padrões para números, caracteres, literais e identificadores do PasC
 ```
 digit      = [0-9]
