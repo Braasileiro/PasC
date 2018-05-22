@@ -28,11 +28,11 @@ namespace PasC.Modules
 
 
 		// Errors
-		private static void SyntacticError(String message)
+		private static void SyntacticError(String lexeme)
 		{
 			ERROR_COUNT++;
 
-			Console.WriteLine("\n[SYNTACTIC ERROR]: " + message);
+			Console.WriteLine("\n[SYNTACTIC ERROR]: Expected {0} but received \"{1}\".", lexeme, TOKEN.Lexeme);
 
 			if (ERROR_COUNT == 5)
 			{
@@ -86,67 +86,137 @@ namespace PasC.Modules
 			{
 				if (!Eat(Tag.ID))
 				{
-					SyntacticError(String.Format("Expected \"<ID>\" but received \"{0}\".", TOKEN.Lexeme));
+					SyntacticError("\"<ID>\"");
 				}
 
 				Body();
 			}
 			else
 			{
-				SyntacticError(String.Format("Expected \"program\" but received \"{0}\".", TOKEN.Lexeme));
+				SyntacticError("\"program\"");
 			}
 		}
+
 
 		//body -> decl-list "{" stmt-list "}"
 		private static void Body()
 		{
-			if (GetTag() == Tag.KW_NUM || GetTag() == Tag.KW_CHAR)
-			{
-				Decl_List();
-			}
+			Decl_List();
 
-			else if (Eat(Tag.SMB_OBC))
+			if (Eat(Tag.SMB_OBC))
 			{
 				Stmt_List();
 
 				if (!Eat(Tag.SMB_CBC))
 				{
-					SyntacticError(String.Format("Expected \"}}\" but received \"{0}\".", TOKEN.Lexeme));
+					SyntacticError("\"}}\"");
 				}
 			}
 		}
 
+
+		// decl-list -> decl ";" decl-list | ε
 		private static void Decl_List()
 		{
-			
+			// ε -> "{"
+			if (Eat(Tag.SMB_OBC))
+			{
+				return;
+			}
+
+			// decl ";" decl-list
+			else
+			{
+				Decl();
+
+				if (!Eat(Tag.SMB_SEM))
+				{
+					SyntacticError("\";\"");
+				}
+
+				Decl_List();
+			}
 		}
 
+
+		// decl -> type id-list
 		private static void Decl()
 		{
+			Type();
 
+			Id_List();
 		}
 
+
+		// type -> "num" "char"
 		private static void Type()
 		{
-
+			if (!Eat(Tag.KW_NUM) && !Eat(Tag.KW_CHAR))
+			{
+				SyntacticError("\"num\", \"char\"");
+			}
 		}
 
+
+		// id-list -> "id" id-list'
 		private static void Id_List()
 		{
+			if (!Eat(Tag.ID))
+			{
+				SyntacticError("\"<ID>\"");
+			}
 
+			Id_List2();
 		}
 
-		// id-list'
+
+		// id-list' -> "," id-list | ε
 		private static void Id_List2()
 		{
+			// ε -> ";"
+			if (Eat(Tag.SMB_SEM))
+			{
+				return;
+			}
 
+			// "," id-list
+			else
+			{
+				if (!Eat(Tag.SMB_COM))
+				{
+					SyntacticError("\",\"");
+				}
+
+				Id_List();
+			}
 		}
 
+
+		// stmt-list -> stmt ";" stmt-list | ε
 		private static void Stmt_List()
 		{
+			// ε -> "}"
+			if (Eat(Tag.SMB_CBC))
+			{
+				return;
+			}
 
+			// stmt ";" stmt-list
+			else
+			{
+				Stmt();
+
+				if (!Eat(Tag.SMB_SEM))
+				{
+					SyntacticError("\";\"");
+				}
+
+				Stmt_List();
+			}
 		}
 
+
+		// stmt -> assign-stmt | if-stmt | while-stmt | read-stmt | write-stmt
 		private static void Stmt()
 		{
 
