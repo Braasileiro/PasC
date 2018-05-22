@@ -597,7 +597,7 @@ namespace PasC.Modules
 						{
 							SetState(0, false);
 
-							return new Token(Tag.COM_ONL, GetLexeme(), ROW, COLUMN);
+							// return new Token(Tag.COM_ONL, GetLexeme(), ROW, COLUMN);
 						}
 					}
 					break;
@@ -629,7 +629,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							return new Token(Tag.COM_CML, GetLexeme(), ROW, COLUMN);
+							// return new Token(Tag.COM_CML, GetLexeme(), ROW, COLUMN);
 						}
 
 						// ->> 28
