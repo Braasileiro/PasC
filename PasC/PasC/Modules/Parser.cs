@@ -12,7 +12,6 @@ namespace PasC.Modules
 
 		// Lexer Resources
 		private static Token TOKEN;
-		private static Tag CURRENT_TAG;
 
 
 
@@ -49,6 +48,11 @@ namespace PasC.Modules
 
 
 		// Token Handlers
+		private static Tag GetTag()
+		{
+			return TOKEN.GetTag();
+		}
+
 		private static void Advance()
 		{
 			TOKEN = Lexer.NextToken();
@@ -58,9 +62,7 @@ namespace PasC.Modules
 
 		private static bool Eat(Tag tag)
 		{
-			CURRENT_TAG = tag;
-
-			if (TOKEN.GetTag() == tag)
+			if (GetTag() == tag)
 			{
 				Advance();
 
@@ -96,6 +98,7 @@ namespace PasC.Modules
 			}
 		}
 
+		//body -> decl-list "{" stmt-list "}"
 		private static void Body()
 		{
 			Decl_List();
@@ -136,12 +139,12 @@ namespace PasC.Modules
 		{
 			if (!Eat(Tag.KW_NUM) || !Eat(Tag.KW_CHAR))
 			{
-				if (CURRENT_TAG == Tag.KW_NUM)
+				if (GetTag() == Tag.KW_NUM)
 				{
 					SyntacticError(String.Format("Expected \"num\" but received \"{0}\".", TOKEN.Lexeme));
 				}
 
-				if (CURRENT_TAG == Tag.KW_CHAR)
+				if (GetTag() == Tag.KW_CHAR)
 				{
 					SyntacticError(String.Format("Expected \"char\" but received \"{0}\".", TOKEN.Lexeme));
 				}
