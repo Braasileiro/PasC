@@ -78,18 +78,18 @@ namespace PasC.Modules
 
 
 		// Todas as decisoes sao baseadas na tabela preditiva
+
+		// prog -> "program" "id" body
 		private static void Prog()
 		{
 			// program...
 			if (Eat(Tag.KW_PROGRAM))
 			{
-				// program <id>...
 				if (!Eat(Tag.ID))
 				{
 					SyntacticError(String.Format("Expected \"<ID>\" but received \"{0}\".", TOKEN.Lexeme));
 				}
 
-				// program <id> <body>...
 				Body();
 			}
 			else
