@@ -219,43 +219,183 @@ namespace PasC.Modules
 		// stmt -> assign-stmt | if-stmt | while-stmt | read-stmt | write-stmt
 		private static void Stmt()
 		{
+			// assign-stmt
+			if (GetTag() == Tag.ID)
+			{
+				Assign_Stmt();
+			}
 
+			// if-stmt 
+			if (GetTag() == Tag.KW_IF)
+			{
+				If_Stmt();
+			}
+
+			// while-stmt
+			if (GetTag() == Tag.KW_WHILE)
+			{
+				While_Stmt();
+			}
+
+			// read-stmt
+			if (GetTag() == Tag.KW_READ)
+			{
+				Read_Stmt();
+			}
+
+			// write-stmt
+			if (GetTag() == Tag.KW_WRITE)
+			{
+				Write_Stmt();
+			}
 		}
 
+
+		// assign-stmt -> "id" "=" simple_expr
 		private static void Assign_Stmt()
 		{
+			if (!Eat(Tag.ID))
+			{
+				SyntacticError("\"<ID>\"");
+			}
 
+			if (!Eat(Tag.OP_ASS))
+			{
+				SyntacticError("\"=\"");
+			}
+
+			Simple_Expr();
 		}
 
+
+		// if-stmt -> "if" "(" condition ")" "{" stmt-list "}" if-stmt'
 		private static void If_Stmt()
 		{
+			if (!Eat(Tag.KW_IF))
+			{
+				SyntacticError("\"if\"");
+			}
 
+			if (!Eat(Tag.SMB_OPA))
+			{
+				SyntacticError("\"(\"");
+			}
+
+			Condition();
+
+			if (!Eat(Tag.SMB_CPA))
+			{
+				SyntacticError("\")\"");
+			}
+
+			if (!Eat(Tag.SMB_OBC))
+			{
+				SyntacticError("\"{\"");
+			}
+
+			Stmt_List();
+
+			if (!Eat(Tag.SMB_CBC))
+			{
+				SyntacticError("\"}\"");
+			}
+
+			If_Stmt2();
 		}
 
-		// if-stmt'
+
+		// if-stmt' -> "else" "{" stmt-list "}" | ε
 		private static void If_Stmt2()
 		{
+			// ε -> ";"
+			if (Eat(Tag.SMB_SEM))
+			{
+				return;
+			}
 
+			// "else" "{" stmt-list "}"
+			else
+			{
+				if (!Eat(Tag.KW_ELSE))
+				{
+					SyntacticError("\"else\"");
+				}
+
+				if (!Eat(Tag.SMB_OBC))
+				{
+					SyntacticError("\"{\"");
+				}
+
+				Stmt_List();
+
+				if (!Eat(Tag.SMB_CBC))
+				{
+					SyntacticError("\"}\"");
+				}
+			}
 		}
 
+
+		// condition -> expression
 		private static void Condition()
 		{
-
+			Expression();
 		}
 
+
+		// while-stmt -> stmt-prefix "{" stmt-list "}"
 		private static void While_Stmt()
 		{
+			Stmt_Prefix();
 
+			if (!Eat(Tag.SMB_OBC))
+			{
+				SyntacticError("\"{\"");
+			}
+
+			Stmt_List();
+
+			if (!Eat(Tag.SMB_CBC))
+			{
+				SyntacticError("\"}\"");
+			}
 		}
 
+
+		// stmt-prefix -> "while" "(" condition ")"
 		private static void Stmt_Prefix()
 		{
+			if (!Eat(Tag.KW_WHILE))
+			{
+				SyntacticError("\"while\"");
+			}
 
+			if (!Eat(Tag.SMB_OPA))
+			{
+				SyntacticError("\"(\"");
+			}
+
+			Condition();
+
+			if (!Eat(Tag.SMB_CPA))
+			{
+				SyntacticError("\")\"");
+			}
 		}
 
+
+		// read-stmt -> "read" "id"
 		private static void Read_Stmt()
 		{
+			if (!Eat(Tag.KW_READ))
+			{
+				SyntacticError("\"read\"");
+			}
 
+			if (!Eat(Tag.ID))
+			{
+				SyntacticError("\"<ID>\"");
+			}
 		}
 
 		private static void Write_Stmt()
