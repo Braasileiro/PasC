@@ -5,7 +5,17 @@ namespace PasC.Models
 	public enum Tag
 	{
 		// Keyword
-		KW,
+		KW_PROGRAM,
+		KW_IF,
+		KW_ELSE,
+		KW_WHILE,
+		KW_WRITE,
+		KW_READ,
+		KW_NUM,
+		KW_CHAR,
+		KW_NOT,
+		KW_OR,
+		KW_AND,
 
 		// Operator
 		OP_EQ,
