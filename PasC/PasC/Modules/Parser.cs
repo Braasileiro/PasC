@@ -82,7 +82,6 @@ namespace PasC.Modules
 		// prog -> "program" "id" body
 		private static void Prog()
 		{
-			// program...
 			if (Eat(Tag.KW_PROGRAM))
 			{
 				if (!Eat(Tag.ID))
@@ -101,54 +100,39 @@ namespace PasC.Modules
 		//body -> decl-list "{" stmt-list "}"
 		private static void Body()
 		{
-			Decl_List();
-
-			if (!Eat(Tag.SMB_OBC))
+			if (GetTag() == Tag.KW_NUM || GetTag() == Tag.KW_CHAR)
 			{
-				SyntacticError(String.Format("Expected \"{{\" but received \"{0}\".", TOKEN.Lexeme));
+				Decl_List();
 			}
 
-			Stmt_List();
-
-			if (!Eat(Tag.SMB_CBC))
+			else if (GetTag() == Tag.SMB_OBC)
 			{
-				SyntacticError(String.Format("Expected \"}\" but received \"{0}\".", TOKEN.Lexeme));
+				Stmt_List();
+
+				if (!Eat(Tag.SMB_CBC))
+				{
+					SyntacticError(String.Format("Expected \"}\" but received \"{0}\".", TOKEN.Lexeme));
+				}
+			}
+			else
+			{
+				SyntacticError(String.Format("Expected \"{{\" but received \"{0}\".", TOKEN.Lexeme));
 			}
 		}
 
 		private static void Decl_List()
 		{
-			Decl();
-
-			if (!Eat(Tag.SMB_SEM))
-			{
-				SyntacticError(String.Format("Expected \";\" but received \"{0}\".", TOKEN.Lexeme));
-			}
-
-			Decl_List();
+			
 		}
 
 		private static void Decl()
 		{
-			Type();
 
-			Id_List();
 		}
 
 		private static void Type()
 		{
-			if (!Eat(Tag.KW_NUM) || !Eat(Tag.KW_CHAR))
-			{
-				if (GetTag() == Tag.KW_NUM)
-				{
-					SyntacticError(String.Format("Expected \"num\" but received \"{0}\".", TOKEN.Lexeme));
-				}
 
-				if (GetTag() == Tag.KW_CHAR)
-				{
-					SyntacticError(String.Format("Expected \"char\" but received \"{0}\".", TOKEN.Lexeme));
-				}
-			}
 		}
 
 		private static void Id_List()
@@ -164,14 +148,7 @@ namespace PasC.Modules
 
 		private static void Stmt_List()
 		{
-			Stmt();
 
-			if (!Eat(Tag.SMB_SEM))
-			{
-				SyntacticError(String.Format("Expected \";\" but received \"{0}\".", TOKEN.Lexeme));
-			}
-
-			Stmt_List();
 		}
 
 		private static void Stmt()
