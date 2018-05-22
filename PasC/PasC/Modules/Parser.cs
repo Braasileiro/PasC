@@ -8,6 +8,7 @@ namespace PasC.Modules
 	{
 		// Lexer Resources
 		private static Token TOKEN;
+		private static Tag CURRENT_TAG;
 
 
 
@@ -42,6 +43,8 @@ namespace PasC.Modules
 
 		private static bool Eat(Tag tag)
 		{
+			CURRENT_TAG = tag;
+
 			if (TOKEN.GetTag() == tag)
 			{
 				Advance();
@@ -61,10 +64,8 @@ namespace PasC.Modules
 		private static void Prog()
 		{
 			// program...
-			if (TOKEN.Lexeme == "program")
+			if (Eat(Tag.KW_PROGRAM))
 			{
-				Eat(Tag.KW);
-
 				// program <id>...
 				if (!Eat(Tag.ID))
 				{
@@ -105,17 +106,41 @@ namespace PasC.Modules
 
 		private static void Decl_List()
 		{
+			Decl();
 
+			if (!Eat(Tag.SMB_SEM))
+			{
+				SyntacticError(String.Format("Expected \";\" but received \"{0}\".", TOKEN.Lexeme));
+
+				Environment.Exit(1);
+			}
+
+			Decl_List();
 		}
 
 		private static void Decl()
 		{
+			Type();
 
+			Id_List();
 		}
 
 		private static void Type()
 		{
+			if (!Eat(Tag.KW_NUM) || !Eat(Tag.KW_CHAR))
+			{
+				if (CURRENT_TAG == Tag.KW_NUM)
+				{
+					SyntacticError(String.Format("Expected \"num\" but received \"{0}\".", TOKEN.Lexeme));
+				}
 
+				if (CURRENT_TAG == Tag.KW_CHAR)
+				{
+					SyntacticError(String.Format("Expected \"char\" but received \"{0}\".", TOKEN.Lexeme));
+				}
+
+				Environment.Exit(1);
+			}
 		}
 
 		private static void Id_List()
@@ -131,7 +156,14 @@ namespace PasC.Modules
 
 		private static void Stmt_List()
 		{
+			Stmt();
 
+			if (!Eat(Tag.SMB_SEM))
+			{
+				SyntacticError(String.Format("Expected \";\" but received \"{0}\".", TOKEN.Lexeme));
+
+				Environment.Exit(1);
+			}
 		}
 
 		private static void Stmt()
