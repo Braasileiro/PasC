@@ -398,75 +398,220 @@ namespace PasC.Modules
 			}
 		}
 
+
+		// write-stmt -> "write" writable
 		private static void Write_Stmt()
 		{
+			if (!Eat(Tag.KW_WRITE))
+			{
+				SyntacticError("\"write\"");
+			}
 
+			Writable();
 		}
 
+
+		// writable -> simple-expr | "literal"
 		private static void Writable()
 		{
+			// simple-expr
+			if (GetTag() == Tag.ID || GetTag() == Tag.CON_NUM || GetTag() == Tag.CON_CHAR || GetTag() == Tag.SMB_OPA || GetTag() == Tag.KW_NOT)
+			{
+				Simple_Expr();
+			}
 
+			// "literal"
+			else if (!Eat(Tag.LIT))
+			{
+				SyntacticError("\"<LITERAL>\"");
+			}
 		}
 
+
+		// expression -> simple-expr expression'
 		private static void Expression()
 		{
+			Simple_Expr();
 
+			Expression2();
 		}
 
-		// expression'
+
+		// expression -> relop simple-expr | ε
 		private static void Expression2()
 		{
+			// ε -> ")"
+			if (Eat(Tag.SMB_CPA))
+			{
+				return;
+			}
 
+			// relop simple-expr
+			else
+			{
+				RelOp();
+
+				Simple_Expr();
+			}
 		}
 
+
+		// simple-expr -> term simple-expr'
 		private static void Simple_Expr()
 		{
+			Term();
 
+			Simple_Expr2();
 		}
 
+
+		// simple-expr' -> addop term simple-expr' | ε
 		private static void Simple_Expr2()
 		{
+			// ε -> ";"
+			if (Eat(Tag.SMB_SEM))
+			{
+				return;
+			}
 
+			// addop term simple-expr'
+			else
+			{
+				AddOp();
+
+				Term();
+
+				Simple_Expr2();
+			}
 		}
 
+
+		// Term -> factor-a term'
 		private static void Term()
 		{
+			Factor_A();
 
+			Term2();
 		}
 
+
+		// term' -> mulop factor-a term' | ε
 		private static void Term2()
 		{
+			// ε -> ";"
+			if (Eat(Tag.SMB_SEM))
+			{
+				return;
+			}
 
+			// mulop factor-a term'
+			else
+			{
+				MulOp();
+
+				Factor_A();
+
+				Term2();
+			}
 		}
 
+
+		// factor-a -> factor | "not" factor
 		private static void Factor_A()
 		{
+			// factor
+			if (GetTag() == Tag.ID || GetTag() == Tag.CON_NUM || GetTag() == Tag.CON_CHAR || GetTag() == Tag.SMB_OPA)
+			{
+				Factor();
 
+				return;
+			}
+
+			// "not" factor
+			if (Eat(Tag.KW_NOT))
+			{
+				Factor();
+			}
+			else
+			{
+				SyntacticError("\"not\"");
+			}
 		}
 
+
+		// factor -> "id" | constant | "(" expression ")"
 		private static void Factor()
 		{
+			// "id"
+			if (GetTag() == Tag.ID)
+			{
+				Eat(Tag.ID);
 
+				return;
+			}
+
+			// constant
+			if (GetTag() == Tag.CON_NUM || GetTag() == Tag.CON_CHAR)
+			{
+				Constant();
+
+				return;
+			}
+
+			// "(" expression ")"
+			if (Eat(Tag.SMB_OPA))
+			{
+				Expression();
+
+				if (!Eat(Tag.SMB_CPA))
+				{
+					SyntacticError("\")\"");
+				}
+			}
+			else
+			{
+				SyntacticError("\"(\"");
+			}
 		}
 
+
+		// relop -> "==" | ">" | ">=" | "<" | "<=" | "!="
 		private static void RelOp()
 		{
-
+			if (!Eat(Tag.OP_EQ) && !Eat(Tag.OP_GT) && !Eat(Tag.OP_GE) && !Eat(Tag.OP_LT) && !Eat(Tag.OP_LE) && !Eat(Tag.OP_NE))
+			{
+				SyntacticError("\"==\", \">\", \">=\", \"<\", \"<=\", \"!=\"");
+			}
 		}
 
+
+		// addop -> "+" | "-" | "or"
 		private static void AddOp()
 		{
-
+			if (!Eat(Tag.OP_AD) && !Eat(Tag.OP_MIN) && !Eat(Tag.KW_OR))
+			{
+				SyntacticError("\"+\", \"-\", \"or\"");
+			}
 		}
 
+
+		// mulop -> "*" | "/" | "and"
 		private static void MulOp()
 		{
-
+			if (!Eat(Tag.OP_MUL) && !Eat(Tag.OP_DIV) && !Eat(Tag.KW_AND))
+			{
+				SyntacticError("\"*\", \"/\", \"and\"");
+			}
 		}
 
+
+		// constant -> "num_const" | "char_const"
 		private static void Constant()
 		{
-
+			if (!Eat(Tag.CON_NUM) && !Eat(Tag.CON_CHAR))
+			{
+				SyntacticError("\"<CON_NUM>\", \"<CON_CHAR>\"");
+			}
 		}
 	}
 }
