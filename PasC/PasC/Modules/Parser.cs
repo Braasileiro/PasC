@@ -38,6 +38,7 @@ namespace PasC.Modules
 			{
 				Console.WriteLine("\n[SYNTACTIC ERROR]: Many syntactic errors, aborting execution.");
 
+                Console.WriteLine("\nPress ENTER to continue...");
 				Console.ReadKey();
 
 				Environment.Exit(1);
@@ -119,7 +120,7 @@ namespace PasC.Modules
 		private static void Decl_List()
 		{
 			// ε -> "{"
-			if (Eat(Tag.SMB_OBC))
+			if (GetTag() == Tag.SMB_OBC)
 			{
 				return;
 			}
@@ -174,7 +175,7 @@ namespace PasC.Modules
 		private static void Id_List2()
 		{
 			// ε -> ";"
-			if (Eat(Tag.SMB_SEM))
+			if (GetTag() == Tag.SMB_SEM)
 			{
 				return;
 			}
@@ -196,7 +197,7 @@ namespace PasC.Modules
 		private static void Stmt_List()
 		{
 			// ε -> "}"
-			if (Eat(Tag.SMB_CBC))
+			if (GetTag() == Tag.SMB_CBC)
 			{
 				return;
 			}
@@ -308,7 +309,7 @@ namespace PasC.Modules
 		private static void If_Stmt2()
 		{
 			// ε -> ";"
-			if (Eat(Tag.SMB_SEM))
+			if (GetTag() == Tag.SMB_SEM)
 			{
 				return;
 			}
@@ -441,7 +442,7 @@ namespace PasC.Modules
 		private static void Expression2()
 		{
 			// ε -> ")"
-			if (Eat(Tag.SMB_CPA))
+			if (GetTag() == Tag.SMB_CPA)
 			{
 				return;
 			}
@@ -469,7 +470,7 @@ namespace PasC.Modules
 		private static void Simple_Expr2()
 		{
 			// ε -> ";"
-			if (Eat(Tag.SMB_SEM))
+			if (GetTag() == Tag.SMB_SEM)
 			{
 				return;
 			}
@@ -499,7 +500,7 @@ namespace PasC.Modules
 		private static void Term2()
 		{
 			// ε -> ";"
-			if (Eat(Tag.SMB_SEM))
+			if (GetTag() == Tag.SMB_SEM)
 			{
 				return;
 			}

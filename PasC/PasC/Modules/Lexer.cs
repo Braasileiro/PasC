@@ -59,6 +59,8 @@ namespace PasC.Modules
 					MultilineCommentErrorCheck();
 
 					Global.SOURCE.Close();
+
+                    Environment.Exit(0);
 				}
 			}
 			catch (IOException e)
