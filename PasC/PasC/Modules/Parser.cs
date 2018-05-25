@@ -32,13 +32,14 @@ namespace PasC.Modules
 		{
 			ERROR_COUNT++;
 
-			Console.WriteLine("\n[SYNTACTIC ERROR]: Expected {0} but received \"{1}\".", lexeme, TOKEN.Lexeme);
+			Console.WriteLine("\n[SYNTACTIC ERROR]: Expected {0} but received \"{1}\" on line {2} and column {3}.", lexeme, TOKEN.Lexeme, TOKEN.Row, TOKEN.Column);
 
 			if (ERROR_COUNT == 5)
 			{
 				Console.WriteLine("\n[SYNTACTIC ERROR]: Many syntactic errors, aborting execution.");
 
                 Console.WriteLine("\nPress ENTER to continue...");
+
 				Console.ReadKey();
 
 				Environment.Exit(1);
