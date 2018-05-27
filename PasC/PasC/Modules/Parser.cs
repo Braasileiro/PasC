@@ -221,7 +221,15 @@ namespace PasC.Modules
                     return;
                 }
 
-                Stmt_List();
+                if(GetTag() == Tag.ID || GetTag() == Tag.KW_IF || GetTag() == Tag.KW_WHILE ||
+                   GetTag() == Tag.KW_READ || GetTag() == Tag.KW_WRITE)
+                {
+                    Stmt_List();
+                }
+                else
+                {
+                    return;
+                }
             }
         }
 
@@ -506,11 +514,19 @@ namespace PasC.Modules
             // addop term simple-expr'
             else
             {
-                AddOp();
+                if (GetTag() == Tag.OP_AD || GetTag() == Tag.OP_MIN || GetTag() == Tag.KW_OR)
+                {
+                    AddOp();
 
-                Term();
+                    Term();
 
-                Simple_Expr2();
+                    Simple_Expr2();
+                }
+                else
+                {
+                    SyntacticError("\"+\", \"-\", \"OR\"");
+                    return;
+                }
             }
         }
 
@@ -527,8 +543,8 @@ namespace PasC.Modules
         // term' -> mulop factor-a term' | ε
         private static void Term2()
         {
-            // ε -> ";"
-            if (GetTag() == Tag.SMB_SEM)
+            // ε -> "+" || "-" || OR || ";"
+            if (GetTag() == Tag.OP_AD || GetTag() == Tag.OP_MIN || GetTag() == Tag.KW_OR || GetTag() == Tag.SMB_SEM)
             {
                 return;
             }
@@ -536,11 +552,19 @@ namespace PasC.Modules
             // mulop factor-a term'
             else
             {
-                MulOp();
+                if (GetTag() == Tag.OP_MUL || GetTag() == Tag.OP_DIV || GetTag() == Tag.KW_AND)
+                {
+                    MulOp();
 
-                Factor_A();
+                    Factor_A();
 
-                Term2();
+                    Term2();
+                }
+                else
+                {
+                    SyntacticError("\"*\", \"/\", \"AND\"");
+                    return;
+                }
             }
         }
 
