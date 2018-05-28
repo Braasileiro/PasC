@@ -221,7 +221,7 @@ namespace PasC.Modules
                     return;
                 }
 
-                if(GetTag() == Tag.ID || GetTag() == Tag.KW_IF || GetTag() == Tag.KW_WHILE ||
+                if (GetTag() == Tag.ID || GetTag() == Tag.KW_IF || GetTag() == Tag.KW_WHILE ||
                    GetTag() == Tag.KW_READ || GetTag() == Tag.KW_WRITE)
                 {
                     Stmt_List();
@@ -524,7 +524,7 @@ namespace PasC.Modules
                 }
                 else
                 {
-                    SyntacticError("\"+\", \"-\", \"OR\"");
+                    SyntacticError("\"+\", \"-\", \"or\"");
                     return;
                 }
             }
@@ -562,7 +562,7 @@ namespace PasC.Modules
                 }
                 else
                 {
-                    SyntacticError("\"*\", \"/\", \"AND\"");
+                    SyntacticError("\"*\", \"/\", \"and\"");
                     return;
                 }
             }
@@ -589,7 +589,8 @@ namespace PasC.Modules
             }
             else
             {
-                SyntacticError("\"<ID>\", \"DIGIT\", \"LETTER\", \"not\"");
+                SyntacticError("\"<ID>\", \"<DIGIT>\", \"<LETTER>\", \"not\"");
+
                 return;
             }
         }
@@ -672,6 +673,7 @@ namespace PasC.Modules
             if (!Eat(Tag.CON_NUM) && !Eat(Tag.CON_CHAR))
             {
                 SyntacticError("\"<CON_NUM>\", \"<CON_CHAR>\"");
+
                 return;
             }
         }
