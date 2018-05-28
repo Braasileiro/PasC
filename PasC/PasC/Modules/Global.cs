@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PasC.Models;
+using System;
 using System.IO;
 using System.Linq;
 
@@ -49,6 +50,19 @@ namespace PasC.Modules
 				File.AppendAllText(SOURCE.Name, Environment.NewLine);
 			}
 			*/
+		}
+
+		public static void EndParsing()
+		{
+			SOURCE.Close();
+
+			Grammar.Show();
+
+			Console.WriteLine("\nPress ENTER to continue...");
+
+			Console.ReadKey();
+
+			Environment.Exit(0);
 		}
 	}
 }
