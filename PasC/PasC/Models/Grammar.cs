@@ -37,7 +37,7 @@ namespace PasC.Models
 
 		public static void Show()
 		{
-			Console.WriteLine();
+			Console.WriteLine("\nPasC::Symbols\n");
 
 			foreach (var currentSymbol in SYMBOL_TABLE)
 			{

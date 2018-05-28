@@ -19,6 +19,8 @@ namespace PasC.Modules
         // Parser Control
         public static void Set()
         {
+			Console.WriteLine("PasC::Parser\n");
+
             Advance();
 
             Prog();
@@ -38,12 +40,8 @@ namespace PasC.Modules
             {
                 Console.WriteLine("\n[SYNTACTIC ERROR]: Many syntactic errors, aborting execution.");
 
-                Console.WriteLine("\nPress ENTER to continue...");
-
-                Console.ReadKey();
-
-                Environment.Exit(1);
-            }
+				Global.EndParsing();
+			}
         }
 
 
@@ -59,7 +57,7 @@ namespace PasC.Modules
         {
             TOKEN = Lexer.NextToken();
 
-            Console.WriteLine("[DEBUG]" + TOKEN.ToString());
+            Console.WriteLine("[DEBUG] " + TOKEN.ToString());
         }
 
         private static bool Eat(Tag tag)
@@ -89,6 +87,7 @@ namespace PasC.Modules
                 if (!Eat(Tag.ID))
                 {
                     SyntacticError("\"<ID>\"");
+
                     return;
                 }
 
@@ -97,6 +96,7 @@ namespace PasC.Modules
             else
             {
                 SyntacticError("\"program\"");
+
                 return;
             }
         }
@@ -114,6 +114,7 @@ namespace PasC.Modules
                 if (!Eat(Tag.SMB_CBC))
                 {
                     SyntacticError("\"}}\"");
+
                     return;
                 }
             }
@@ -137,6 +138,7 @@ namespace PasC.Modules
                 if (!Eat(Tag.SMB_SEM))
                 {
                     SyntacticError("\";\"");
+
                     return;
                 }
 
@@ -160,6 +162,7 @@ namespace PasC.Modules
             if (!Eat(Tag.KW_NUM) && !Eat(Tag.KW_CHAR))
             {
                 SyntacticError("\"num\", \"char\"");
+
                 return;
             }
         }
@@ -171,6 +174,7 @@ namespace PasC.Modules
             if (!Eat(Tag.ID))
             {
                 SyntacticError("\"<ID>\"");
+
                 return;
             }
 
@@ -193,6 +197,7 @@ namespace PasC.Modules
                 if (!Eat(Tag.SMB_COM))
                 {
                     SyntacticError("\",\"");
+
                     return;
                 }
 
@@ -218,11 +223,11 @@ namespace PasC.Modules
                 if (!Eat(Tag.SMB_SEM))
                 {
                     SyntacticError("\";\"");
+
                     return;
                 }
 
-                if (GetTag() == Tag.ID || GetTag() == Tag.KW_IF || GetTag() == Tag.KW_WHILE ||
-                   GetTag() == Tag.KW_READ || GetTag() == Tag.KW_WRITE)
+                if (GetTag() == Tag.ID || GetTag() == Tag.KW_IF || GetTag() == Tag.KW_WHILE || GetTag() == Tag.KW_READ || GetTag() == Tag.KW_WRITE)
                 {
                     Stmt_List();
                 }
@@ -275,12 +280,14 @@ namespace PasC.Modules
             if (!Eat(Tag.ID))
             {
                 SyntacticError("\"<ID>\"");
+
                 return;
             }
 
             if (!Eat(Tag.OP_ASS))
             {
                 SyntacticError("\"=\"");
+
                 return;
             }
 
@@ -294,12 +301,14 @@ namespace PasC.Modules
             if (!Eat(Tag.KW_IF))
             {
                 SyntacticError("\"if\"");
+
                 return;
             }
 
             if (!Eat(Tag.SMB_OPA))
             {
                 SyntacticError("\"(\"");
+
                 return;
             }
 
@@ -308,12 +317,14 @@ namespace PasC.Modules
             if (!Eat(Tag.SMB_CPA))
             {
                 SyntacticError("\")\"");
+
                 return;
             }
 
             if (!Eat(Tag.SMB_OBC))
             {
                 SyntacticError("\"{\"");
+
                 return;
             }
 
@@ -322,6 +333,7 @@ namespace PasC.Modules
             if (!Eat(Tag.SMB_CBC))
             {
                 SyntacticError("\"}\"");
+
                 return;
             }
 
@@ -344,12 +356,14 @@ namespace PasC.Modules
                 if (!Eat(Tag.KW_ELSE))
                 {
                     SyntacticError("\"else\"");
+
                     return;
                 }
 
                 if (!Eat(Tag.SMB_OBC))
                 {
                     SyntacticError("\"{\"");
+
                     return;
                 }
 
@@ -358,6 +372,7 @@ namespace PasC.Modules
                 if (!Eat(Tag.SMB_CBC))
                 {
                     SyntacticError("\"}\"");
+
                     return;
                 }
             }
@@ -379,6 +394,7 @@ namespace PasC.Modules
             if (!Eat(Tag.SMB_OBC))
             {
                 SyntacticError("\"{\"");
+
                 return;
             }
 
@@ -387,6 +403,7 @@ namespace PasC.Modules
             if (!Eat(Tag.SMB_CBC))
             {
                 SyntacticError("\"}\"");
+
                 return;
             }
         }
@@ -398,12 +415,14 @@ namespace PasC.Modules
             if (!Eat(Tag.KW_WHILE))
             {
                 SyntacticError("\"while\"");
+
                 return;
             }
 
             if (!Eat(Tag.SMB_OPA))
             {
                 SyntacticError("\"(\"");
+
                 return;
             }
 
@@ -412,6 +431,7 @@ namespace PasC.Modules
             if (!Eat(Tag.SMB_CPA))
             {
                 SyntacticError("\")\"");
+
                 return;
             }
         }
@@ -423,12 +443,14 @@ namespace PasC.Modules
             if (!Eat(Tag.KW_READ))
             {
                 SyntacticError("\"read\"");
+
                 return;
             }
 
             if (!Eat(Tag.ID))
             {
                 SyntacticError("\"<ID>\"");
+
                 return;
             }
         }
@@ -440,6 +462,7 @@ namespace PasC.Modules
             if (!Eat(Tag.KW_WRITE))
             {
                 SyntacticError("\"write\"");
+
                 return;
             }
 
@@ -460,6 +483,7 @@ namespace PasC.Modules
             else if (!Eat(Tag.LIT))
             {
                 SyntacticError("\"<LITERAL>\"");
+
                 return;
             }
         }
@@ -525,6 +549,7 @@ namespace PasC.Modules
                 else
                 {
                     SyntacticError("\"+\", \"-\", \"or\"");
+
                     return;
                 }
             }
@@ -563,6 +588,7 @@ namespace PasC.Modules
                 else
                 {
                     SyntacticError("\"*\", \"/\", \"and\"");
+
                     return;
                 }
             }
@@ -623,12 +649,14 @@ namespace PasC.Modules
                 if (!Eat(Tag.SMB_CPA))
                 {
                     SyntacticError("\")\"");
+
                     return;
                 }
             }
             else
             {
                 SyntacticError("\"(\"");
+
                 return;
             }
         }
@@ -640,6 +668,7 @@ namespace PasC.Modules
             if (!Eat(Tag.OP_EQ) && !Eat(Tag.OP_GT) && !Eat(Tag.OP_GE) && !Eat(Tag.OP_LT) && !Eat(Tag.OP_LE) && !Eat(Tag.OP_NE))
             {
                 SyntacticError("\"==\", \">\", \">=\", \"<\", \"<=\", \"!=\"");
+
                 return;
             }
         }
@@ -651,6 +680,7 @@ namespace PasC.Modules
             if (!Eat(Tag.OP_AD) && !Eat(Tag.OP_MIN) && !Eat(Tag.KW_OR))
             {
                 SyntacticError("\"+\", \"-\", \"or\"");
+
                 return;
             }
         }
@@ -662,6 +692,7 @@ namespace PasC.Modules
             if (!Eat(Tag.OP_MUL) && !Eat(Tag.OP_DIV) && !Eat(Tag.KW_AND))
             {
                 SyntacticError("\"*\", \"/\", \"and\"");
+
                 return;
             }
         }

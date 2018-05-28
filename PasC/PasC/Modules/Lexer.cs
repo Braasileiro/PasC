@@ -60,9 +60,7 @@ namespace PasC.Modules
 
 					AddToken(Tag.EOF);
 
-					Global.SOURCE.Close();
-
-                    Environment.Exit(0);
+					Global.EndParsing();
 				}
 			}
 			catch (IOException e)
