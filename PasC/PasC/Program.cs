@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-
 using PasC.Modules;
 using PasC.Modules.Internal;
 
@@ -55,8 +54,6 @@ namespace PasC
 
 			// Parser
 			Parser.Set();
-
-			Console.ReadKey();
 		}
 
 		private static void ConsoleHeader()
