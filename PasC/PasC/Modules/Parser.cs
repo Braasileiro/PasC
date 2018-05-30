@@ -529,8 +529,8 @@ namespace PasC.Modules
         // simple-expr' -> addop term simple-expr' | ε
         private static void Simple_Expr2()
         {
-            // ε -> ";"
-            if (GetTag() == Tag.SMB_SEM)
+            // ε -> ";" || "==" || ">" || ">=" || "<" || "<=" || "!=" || ")"
+            if (GetTag() == Tag.SMB_SEM || GetTag() == Tag.OP_EQ || GetTag() == Tag.OP_GT || GetTag() == Tag.OP_GE || GetTag() == Tag.OP_LT || GetTag() == Tag.OP_LE || GetTag() == Tag.OP_NE || GetTag() == Tag.SMB_CPA)
             {
                 return;
             }
@@ -568,8 +568,9 @@ namespace PasC.Modules
         // term' -> mulop factor-a term' | ε
         private static void Term2()
         {
-            // ε -> "+" || "-" || OR || ";"
-            if (GetTag() == Tag.OP_AD || GetTag() == Tag.OP_MIN || GetTag() == Tag.KW_OR || GetTag() == Tag.SMB_SEM)
+            // ε -> "+" || "-" || OR || ";" || "==" || ">" || ">=" || "<" || "<=" || "!=" || ")"
+            if (GetTag() == Tag.OP_AD || GetTag() == Tag.OP_MIN || GetTag() == Tag.KW_OR || GetTag() == Tag.SMB_SEM ||
+                GetTag() == Tag.OP_EQ || GetTag() == Tag.OP_GT || GetTag() == Tag.OP_GE || GetTag() == Tag.OP_LT || GetTag() == Tag.OP_LE || GetTag() == Tag.OP_NE || GetTag() == Tag.SMB_CPA)
             {
                 return;
             }
