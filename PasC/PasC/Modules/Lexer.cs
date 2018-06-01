@@ -84,7 +84,7 @@ namespace PasC.Modules
 		{
 			if (STATE.Equals(27) || STATE.Equals(28))
 			{
-				Console.WriteLine("\n[LEXICAL ERROR]: Multiline comment not closed on line {0}.", ROW - 1);
+				Console.WriteLine("\n[LEXICAL ERROR]: Multiline comment not closed on line {0}.\n", ROW - 1);
 			}
 		}
 
