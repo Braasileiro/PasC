@@ -14,8 +14,8 @@ namespace PasC.Modules
 		private static StringBuilder LEXEME;
 
 		// File Pointers
-		private static int ROW = 1;
-		private static int COLUMN = 1;
+		public static int ROW = 1;
+		public static int COLUMN = 1;
 		private static int LAST_CHAR = 0;
 		private static readonly int EOF = -1;
 
