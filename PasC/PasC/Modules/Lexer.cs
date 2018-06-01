@@ -50,14 +50,7 @@ namespace PasC.Modules
 
 		private static Token AddToken(Tag tag)
 		{
-			var lexeme = GetLexeme();
-
-			if (tag == Tag.EOF)
-			{
-				lexeme = "<EOF>";
-			}
-
-			Token TOKEN = new Token(tag, lexeme, ROW, COLUMN);
+			Token TOKEN = new Token(tag, GetLexeme(), ROW, COLUMN);
 
 			Grammar.Add(TOKEN, new Identifier());
 
@@ -136,7 +129,11 @@ namespace PasC.Modules
 					{
 						MultilineCommentErrorCheck();
 
-						return AddToken(Tag.EOF);
+						Token _EOF_ = new Token(Tag.EOF, "<EOF>", ROW, COLUMN);
+
+						Grammar.Add(_EOF_, new Identifier());
+
+						return _EOF_;
 					}
 				}
 				catch (IOException e)
