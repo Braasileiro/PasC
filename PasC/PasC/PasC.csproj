@@ -56,7 +56,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Documentation\Automata\PasC_Automata.jff" />
-    <None Include="Documentation\PredictiveTable\TP.xlsx" />
+    <None Include="Documentation\Grammar\TP.xlsx" />
     <None Include="Documentation\Reports\Report.docx" />
     <None Include="Documentation\Reports\Report_Lexer_2018-03-31.pdf" />
     <None Include="pasc_test.pc" />
