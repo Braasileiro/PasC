@@ -224,7 +224,7 @@ namespace PasC.Modules
                 {
                     SyntacticError("\";\"");
 
-                    return;
+                    //return;
                 }
 
                 if (GetTag() == Tag.ID || GetTag() == Tag.KW_IF || GetTag() == Tag.KW_WHILE || GetTag() == Tag.KW_READ || GetTag() == Tag.KW_WRITE)
