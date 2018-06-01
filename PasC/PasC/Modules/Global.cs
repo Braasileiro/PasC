@@ -35,21 +35,18 @@ namespace PasC.Modules
 				} break;
 			}
 
-
-			// Source File
-			SOURCE = new FileStream(sourceFile, FileMode.Open, FileAccess.ReadWrite);
-
 			/* 
 			 * Adiciona uma nova linha no arquivo como forma de segurança
 			 * caso a última linha do arquivo não seja uma linha em branco.
 			 * Isso evita o último token/caracter do arquivo de não ser reconhecido.
 			*/
-			/*
-			if (!String.IsNullOrWhiteSpace(File.ReadAllLines(SOURCE.Name).Last()))
+			if (!String.IsNullOrWhiteSpace(File.ReadAllLines(sourceFile).Last()))
 			{
-				File.AppendAllText(SOURCE.Name, Environment.NewLine);
+				File.AppendAllText(sourceFile, Environment.NewLine);
 			}
-			*/
+
+			// Source File
+			SOURCE = new FileStream(sourceFile, FileMode.Open, FileAccess.ReadWrite);
 		}
 
 		public static void EndParsing()
