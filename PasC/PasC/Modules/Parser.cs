@@ -24,7 +24,9 @@ namespace PasC.Modules
             Advance();
 
             Prog();
-        }
+
+			Global.EndParsing();
+		}
 
 
 
@@ -92,14 +94,14 @@ namespace PasC.Modules
                 }
 
                 Body();
-            }
+			}
             else
             {
                 SyntacticError("\"program\"");
 
                 return;
             }
-        }
+		}
 
 
         //body -> decl-list "{" stmt-list "}"
@@ -113,7 +115,7 @@ namespace PasC.Modules
 
                 if (!Eat(Tag.SMB_CBC))
                 {
-                    SyntacticError("\"}}\"");
+                    SyntacticError("\"}\"");
 
                     return;
                 }
