@@ -59,6 +59,7 @@
     <None Include="Documentation\Grammar\TP.xlsx" />
     <None Include="Documentation\Reports\Report.docx" />
     <None Include="Documentation\Reports\Report_Lexer_2018-03-31.pdf" />
+    <None Include="Documentation\Reports\Report_Parser_2018-06-01.pdf" />
     <None Include="pasc_test.pc" />
   </ItemGroup>
   <ItemGroup>
