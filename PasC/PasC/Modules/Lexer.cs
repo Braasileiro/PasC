@@ -27,50 +27,6 @@ namespace PasC.Modules
 
 
 		// Lexer Control
-		private static void Read()
-		{
-			CURRENT_CHAR = '\u0000';
-
-			try
-			{
-				LAST_CHAR = Global.SOURCE.ReadByte();
-
-				if (LAST_CHAR != EOF)
-				{
-					CURRENT_CHAR = (char)LAST_CHAR;
-
-					if (IsNewLine())
-					{
-						ROW++;
-						COLUMN = 1;
-					}
-
-					else if (CURRENT_CHAR == '\t')
-					{
-						COLUMN += 3;
-					}
-					else if (!IsNewLine())
-					{
-						COLUMN++;
-					}
-				}
-				else
-				{
-					MultilineCommentErrorCheck();
-
-					AddToken(Tag.EOF);
-
-					Global.EndParsing();
-				}
-			}
-			catch (IOException e)
-			{
-				Console.WriteLine("[Error]: Failed to read the character '{0}'\n{1}", CURRENT_CHAR, e);
-
-				Environment.Exit(1);
-			}
-		}
-
 		private static void Restart()
 		{
 			STATE = 0;
@@ -94,7 +50,14 @@ namespace PasC.Modules
 
 		private static Token AddToken(Tag tag)
 		{
-			Token TOKEN = new Token(tag, GetLexeme(), ROW, COLUMN);
+			var lexeme = GetLexeme();
+
+			if (tag == Tag.EOF)
+			{
+				lexeme = "<EOF>";
+			}
+
+			Token TOKEN = new Token(tag, lexeme, ROW, COLUMN);
 
 			Grammar.Add(TOKEN, new Identifier());
 
@@ -144,7 +107,44 @@ namespace PasC.Modules
 
 			while (true)
 			{
-				Read();
+				CURRENT_CHAR = '\u0000';
+
+				try
+				{
+					LAST_CHAR = Global.SOURCE.ReadByte();
+
+					if (LAST_CHAR != EOF)
+					{
+						CURRENT_CHAR = (char)LAST_CHAR;
+
+						if (IsNewLine())
+						{
+							ROW++;
+							COLUMN = 1;
+						}
+
+						else if (CURRENT_CHAR == '\t')
+						{
+							COLUMN += 3;
+						}
+						else if (!IsNewLine())
+						{
+							COLUMN++;
+						}
+					}
+					else
+					{
+						MultilineCommentErrorCheck();
+
+						return AddToken(Tag.EOF);
+					}
+				}
+				catch (IOException e)
+				{
+					Console.WriteLine("[Error]: Failed to read the character '{0}'\n{1}", CURRENT_CHAR, e);
+
+					Environment.Exit(1);
+				}
 
 				switch (STATE)
 				{
