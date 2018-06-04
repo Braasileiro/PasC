@@ -1,0 +1,79 @@
+SOURCE
+
+program Lexer
+num test1, test2, test3;
+{
+	test1 = 1;
+	test2 = 2;
+	test3 = test1 * test2;
+}
+
+
+
+
+OUTPUT
+
+pasc (Framework 4.7) 2018.1.2 ALPHA
+Copyright (C) 2018 Lucas Cota, Carlos Alberto.
+
+PasC::Parser
+
+[DEBUG] <KW_PROGRAM,"program">
+[DEBUG] <ID,"Lexer">
+[DEBUG] <KW_NUM,"num">
+[DEBUG] <ID,"test1">
+[DEBUG] <SMB_COM,",">
+[DEBUG] <ID,"test2">
+[DEBUG] <SMB_COM,",">
+[DEBUG] <ID,"test3">
+[DEBUG] <SMB_SEM,";">
+[DEBUG] <SMB_OBC,"{">
+[DEBUG] <ID,"test1">
+[DEBUG] <OP_ASS,"=">
+[DEBUG] <CON_NUM,"1">
+[DEBUG] <SMB_SEM,";">
+[DEBUG] <ID,"test2">
+[DEBUG] <OP_ASS,"=">
+[DEBUG] <CON_NUM,"2">
+[DEBUG] <SMB_SEM,";">
+[DEBUG] <ID,"test3">
+[DEBUG] <OP_ASS,"=">
+[DEBUG] <ID,"test1">
+[DEBUG] <OP_MUL,"*">
+[DEBUG] <ID,"test2">
+[DEBUG] <SMB_SEM,";">
+[DEBUG] <SMB_CBC,"}">
+[DEBUG] <EOF,"<EOF>">
+
+PasC::Symbols
+
+Symbol: [<KW_PROGRAM,"program">]
+Symbol: [<KW_IF,"if">]
+Symbol: [<KW_ELSE,"else">]
+Symbol: [<KW_WHILE,"while">]
+Symbol: [<KW_WRITE,"write">]
+Symbol: [<KW_READ,"read">]
+Symbol: [<KW_NUM,"num">]
+Symbol: [<KW_CHAR,"char">]
+Symbol: [<KW_NOT,"not">]
+Symbol: [<KW_OR,"or">]
+Symbol: [<KW_AND,"and">]
+Symbol: [<ID,"Lexer">]
+Symbol: [<ID,"test1">]
+Symbol: [<SMB_COM,",">]
+Symbol: [<ID,"test2">]
+Symbol: [<SMB_COM,",">]
+Symbol: [<ID,"test3">]
+Symbol: [<SMB_SEM,";">]
+Symbol: [<SMB_OBC,"{">]
+Symbol: [<OP_ASS,"=">]
+Symbol: [<CON_NUM,"1">]
+Symbol: [<SMB_SEM,";">]
+Symbol: [<OP_ASS,"=">]
+Symbol: [<CON_NUM,"2">]
+Symbol: [<SMB_SEM,";">]
+Symbol: [<OP_ASS,"=">]
+Symbol: [<OP_MUL,"*">]
+Symbol: [<SMB_SEM,";">]
+Symbol: [<SMB_CBC,"}">]
+Symbol: [<EOF,"<EOF>">]
