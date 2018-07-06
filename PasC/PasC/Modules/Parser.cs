@@ -46,6 +46,14 @@ namespace PasC.Modules
 			}
         }
 
+        // Erro semantico.
+        public void SemanticError(String message, Token token)
+        {
+
+            Console.WriteLine("\n[SEMANTIC ERROR] on line " + TOKEN.Row + " and column " + TOKEN.Column + ": ");
+            Console.WriteLine(message + "\n");
+        }
+
 
 
 

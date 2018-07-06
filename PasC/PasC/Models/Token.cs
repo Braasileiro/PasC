@@ -8,6 +8,7 @@ namespace PasC.Models
 	{
 		public Tag Type { get; set; }
 		public String Lexeme { get; set; }
+        public int Tipo { get; set; }
 
 		public Token(Tag Type, String Lexeme, int Row, int Column)
 		{
@@ -15,6 +16,7 @@ namespace PasC.Models
 			this.Type = Type;
 			this.Column = Column;
 			this.Lexeme = Lexeme;
+            Tipo = No.TYPE_EMPTY;
 		}
 
 		private int row; public int Row
@@ -62,7 +64,7 @@ namespace PasC.Models
 
 		public override string ToString()
 		{
-			return String.Format("<{0},\"{1}\">", Type, Lexeme);
+			return String.Format("<{0},\"{1}\">, Type: {2}", Type, Lexeme, Tipo);
 		}
-	}
+    }
 }
