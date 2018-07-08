@@ -54,11 +54,6 @@ namespace PasC.Models
 			SYMBOL_TABLE.Add(key, value);
 		}
 
-		public static Identifier GetID(String key)
-		{
-			return SYMBOL_TABLE[key];
-		}
-
 		public static Token GetToken(String lexeme)
 		{
 			foreach (Token currentToken in SYMBOL_TABLE.Keys)
