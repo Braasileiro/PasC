@@ -136,19 +136,6 @@ namespace PasC.Modules
 					return;
                 }
             }
-
-			if (GetLexerToken() != null)
-			{
-				TOKEN.NoType = No.TYPE_ERRO;
-
-				SemanticError("Declaração duplicada da variável " + TOKEN);
-			}
-			else
-			{
-				TOKEN.NoType = No.TYPE_EMPTY;
-
-				AddSemanticToken(TOKEN.Lexeme);
-			}
         }
 
 
