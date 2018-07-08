@@ -47,11 +47,9 @@ namespace PasC.Modules
         }
 
         // Erro semantico.
-        public void SemanticError(String message, Token token)
+        public static void SemanticError(String message)
         {
-
-            Console.WriteLine("\n[SEMANTIC ERROR] on line " + TOKEN.Row + " and column " + TOKEN.Column + ": ");
-            Console.WriteLine(message + "\n");
+			Console.WriteLine("\n[SEMANTIC ERROR] on line {0} and column {1}: {2}.\n", TOKEN.Row, TOKEN.Column, message);
         }
 
 
@@ -62,6 +60,16 @@ namespace PasC.Modules
         {
             return TOKEN.GetTag();
         }
+
+		private static Token GetLexerToken()
+		{
+			return Grammar.GetToken(TOKEN.Lexeme);
+		}
+
+		private static void AddSemanticToken(string lexeme)
+		{
+			Grammar.Add(TOKEN, lexeme);
+		}
 
         private static void Advance()
         {
@@ -125,9 +133,22 @@ namespace PasC.Modules
                 {
                     SyntacticError("\"}\"");
 
-                    return;
+					return;
                 }
             }
+
+			if (GetLexerToken() != null)
+			{
+				TOKEN.NoType = No.TYPE_ERRO;
+
+				SemanticError("Declaração duplicada da variável " + TOKEN);
+			}
+			else
+			{
+				TOKEN.NoType = No.TYPE_EMPTY;
+
+				AddSemanticToken(TOKEN.Lexeme);
+			}
         }
 
 
