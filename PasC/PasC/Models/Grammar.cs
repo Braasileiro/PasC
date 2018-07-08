@@ -18,19 +18,19 @@ namespace PasC.Models
 
 
 		// Symbol Table
-		private static Dictionary<Token, Identifier> SYMBOL_TABLE = new Dictionary<Token, Identifier>()
+		private static Dictionary<Token, String> SYMBOL_TABLE = new Dictionary<Token, String>()
 		{
-			{ new Token(Tag.KW_PROGRAM, "program", 0, 0), new Identifier() },
-			{ new Token(Tag.KW_IF,      "if",      0, 0), new Identifier() },
-			{ new Token(Tag.KW_ELSE,    "else",    0, 0), new Identifier() },
-			{ new Token(Tag.KW_WHILE,   "while",   0, 0), new Identifier() },
-			{ new Token(Tag.KW_WRITE,   "write",   0, 0), new Identifier() },
-			{ new Token(Tag.KW_READ,    "read",    0, 0), new Identifier() },
-			{ new Token(Tag.KW_NUM,     "num",     0, 0), new Identifier() },
-			{ new Token(Tag.KW_CHAR,    "char",    0, 0), new Identifier() },
-			{ new Token(Tag.KW_NOT,     "not",     0, 0), new Identifier() },
-			{ new Token(Tag.KW_OR,      "or",      0, 0), new Identifier() },
-			{ new Token(Tag.KW_AND,     "and",     0, 0), new Identifier() }
+			{ new Token(Tag.KW_PROGRAM, "program", 0, 0), "program" },
+			{ new Token(Tag.KW_IF,      "if",      0, 0), "if" },
+			{ new Token(Tag.KW_ELSE,    "else",    0, 0), "else" },
+			{ new Token(Tag.KW_WHILE,   "while",   0, 0), "while" },
+			{ new Token(Tag.KW_WRITE,   "write",   0, 0), "write" },
+			{ new Token(Tag.KW_READ,    "read",    0, 0), "read" },
+			{ new Token(Tag.KW_NUM,     "num",     0, 0), "num" },
+			{ new Token(Tag.KW_CHAR,    "char",    0, 0), "char" },
+			{ new Token(Tag.KW_NOT,     "not",     0, 0), "not" },
+			{ new Token(Tag.KW_OR,      "or",      0, 0), "or" },
+			{ new Token(Tag.KW_AND,     "and",     0, 0), "and" }
 
 			// Dynamic Runtime Symbols...
 		};
@@ -49,12 +49,12 @@ namespace PasC.Models
 
 
 		// Getters and Setters
-		public static void Add(Token key, Identifier value)
+		public static void Add(Token key, String value)
 		{
 			SYMBOL_TABLE.Add(key, value);
 		}
 
-		public static Identifier GetID(Token key)
+		public static Identifier GetID(String key)
 		{
 			return SYMBOL_TABLE[key];
 		}

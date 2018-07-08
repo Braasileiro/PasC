@@ -7,8 +7,8 @@ namespace PasC.Models
 	class Token
 	{
 		public Tag Type { get; set; }
+		public int NoType { get; set; }
 		public String Lexeme { get; set; }
-        public int Tipo { get; set; }
 
 		public Token(Tag Type, String Lexeme, int Row, int Column)
 		{
@@ -16,7 +16,7 @@ namespace PasC.Models
 			this.Type = Type;
 			this.Column = Column;
 			this.Lexeme = Lexeme;
-            Tipo = No.TYPE_EMPTY;
+            this.NoType = No.TYPE_EMPTY;
 		}
 
 		private int row; public int Row

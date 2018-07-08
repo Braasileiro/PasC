@@ -44,7 +44,7 @@ namespace PasC.Modules.Internal
 
 				if (Grammar.GetToken(GetLexeme()) == null && TOKEN != null)
 				{
-					Grammar.Add(TOKEN, new Identifier());
+					Grammar.Add(TOKEN, TOKEN.Lexeme);
 				}
 
 			} while (!TOKEN.Lexeme.Equals(Tag.EOF) && TOKEN != null);
@@ -83,8 +83,12 @@ namespace PasC.Modules.Internal
 				{
 					MultilineCommentErrorCheck();
 
-					Grammar.Add(new Token(Tag.EOF, "$", ROW, COLUMN), new Identifier());
+					Token _EOF_ = new Token(Tag.EOF, "<EOF>", ROW, COLUMN);
+
+					Grammar.Add(_EOF_, _EOF_.Lexeme);
+
 					Grammar.Show();
+
 					Environment.Exit(0);
 				}
 			}

@@ -52,7 +52,7 @@ namespace PasC.Modules
 		{
 			Token TOKEN = new Token(tag, GetLexeme(), ROW, COLUMN);
 
-			Grammar.Add(TOKEN, new Identifier());
+			Grammar.Add(TOKEN, TOKEN.Lexeme);
 
 			return TOKEN;
 		}
@@ -131,7 +131,7 @@ namespace PasC.Modules
 
 						Token _EOF_ = new Token(Tag.EOF, "<EOF>", ROW, COLUMN);
 
-						Grammar.Add(_EOF_, new Identifier());
+						Grammar.Add(_EOF_, _EOF_.Lexeme);
 
 						return _EOF_;
 					}
