@@ -1,62 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace PasC.Models
 {
-    class No
-    {
-        private Token father { get; set; }
-        private List<No> childList { get; }
-        private static int space = 0;
+	class No
+	{
+		private static int SPACE = 0;
+		public int TYPE = TYPE_EMPTY;
+		private List<No> Childs { get; }
+		private Token Father { get; set; }
 
-        // Constantes para tipos
-        public static int TYPE_EMPTY = 111;
-        public static int TYPE_BOOL = 100;
-        public static int TYPE_NUM = 101;
-        public static int TYPE_LITERAL = 102;
-        public static int TYPE_CHAR = 103;
-        public static int TYPE_ERRO = 104;
+		// Constantes para tipos
+		public static int TYPE_BOOL = 100;
+		public static int TYPE_NUM = 101;
+		public static int TYPE_CHAR = 103;
+		public static int TYPE_ERRO = 104;
+		public static int TYPE_EMPTY = 111;
+		public static int TYPE_LITERAL = 102;
 
-        public int type = TYPE_EMPTY;
 
-        public No(Token token)
-        {
-            this.father = token;
-            this.childList = new List<No>();
-        }
-        
-        public void AddAll(List<No> childList)
-        {
-            this.childList.Union(childList);
-        }
+		public No(Token token)
+		{
+			this.Father = token;
+			this.Childs = new List<No>();
+		}
 
-        public void AddChild(No child)
-        {
-            this.childList.Add(child);
-        }
+		public void AddAll(List<No> childList)
+		{
+			this.Childs.Union(childList);
+		}
 
-        public void PrintContent()
-        {
-            if (this.father != null)
-            {
-                for (int i = 0; i < space; i++)
-                {
-                    Console.WriteLine(".   ");
-                }
-                Console.WriteLine(this.father.ToString() + " - Tipo: " + this.type + "\n");
-                space++;
-            }
-            foreach (No child in childList)
-            {
-                child.PrintContent();
-            }
-            if (this.father != null)
-            {
-                space--;
-            }
-        }
-    }
+		public void AddChild(No child)
+		{
+			this.Childs.Add(child);
+		}
+
+		public void PrintContent()
+		{
+			if (Father != null)
+			{
+				for (int i = 0; i < SPACE; i++)
+				{
+					Console.WriteLine(".   ");
+				}
+
+				Console.WriteLine(Father.ToString() + " - Tipo: " + TYPE + "\n");
+
+				SPACE++;
+			}
+
+			foreach (No child in Childs)
+			{
+				child.PrintContent();
+			}
+
+			if (Father != null)
+			{
+				SPACE--;
+			}
+		}
+	}
 }
