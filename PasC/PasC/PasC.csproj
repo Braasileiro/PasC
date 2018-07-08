@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Grammar.cs" />
-    <Compile Include="Models\Identifier.cs" />
     <Compile Include="Models\No.cs" />
     <Compile Include="Modules\Internal\_Lexer.cs" />
     <Compile Include="Modules\Parser.cs" />
