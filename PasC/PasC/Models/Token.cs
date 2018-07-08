@@ -64,7 +64,7 @@ namespace PasC.Models
 
 		public override string ToString()
 		{
-			return String.Format("<{0},\"{1}\">, Type: {2}", Type, Lexeme, Tipo);
+			return String.Format("<{0},\"{1}\">, Type: {2}", Type, Lexeme, NoType);
 		}
     }
 }
