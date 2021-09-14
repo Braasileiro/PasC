@@ -5,17 +5,17 @@ using System.Text.RegularExpressions;
 
 using PasC.Models;
 
-namespace PasC.Modules
+namespace PasC.Modules.Internal
 {
-	class Lexer
+	class _Lexer
 	{
 		// Lexeme
 		private static char CURRENT_CHAR;
 		private static StringBuilder LEXEME;
 
 		// File Pointers
-		public static int ROW = 1;
-		public static int COLUMN = 1;
+		private static int ROW = 1;
+		private static int COLUMN = 1;
 		private static int LAST_CHAR = 0;
 		private static readonly int EOF = -1;
 
@@ -27,6 +27,78 @@ namespace PasC.Modules
 
 
 		// Lexer Control
+		public static void Set()
+		{
+			Token TOKEN;
+			LEXEME = new StringBuilder();
+
+			do
+			{
+				LEXEME.Clear();
+				TOKEN = NextToken();
+
+				if (TOKEN != null)
+				{
+					Console.WriteLine("Token: {0}\t Line: {1}\t Column: {2}", TOKEN.ToString(), ROW, COLUMN);
+				}
+
+				if (Grammar.GetToken(GetLexeme()) == null && TOKEN != null)
+				{
+					Grammar.Add(TOKEN, TOKEN.Lexeme);
+				}
+
+			} while (!TOKEN.Lexeme.Equals(Tag.EOF) && TOKEN != null);
+
+			Global.SOURCE.Close();
+		}
+
+		private static void Read()
+		{
+			CURRENT_CHAR = '\u0000';
+
+			try
+			{
+				LAST_CHAR = Global.SOURCE.ReadByte();
+
+				if (LAST_CHAR != EOF)
+				{
+					CURRENT_CHAR = (char)LAST_CHAR;
+
+					if (IsNewLine())
+					{
+						ROW++;
+						COLUMN = 1;
+					}
+
+					else if (CURRENT_CHAR == '\t')
+					{
+						COLUMN += 3;
+					}
+					else if (!IsNewLine())
+					{
+						COLUMN++;
+					}
+				}
+				else
+				{
+					MultilineCommentErrorCheck();
+
+					Token _EOF_ = new Token(Tag.EOF, "<EOF>", ROW, COLUMN);
+
+					Grammar.Add(_EOF_, _EOF_.Lexeme);
+
+					Grammar.Show();
+
+					Environment.Exit(0);
+				}
+			}
+			catch (IOException e)
+			{
+				Console.WriteLine("[Error]: Failed to read the character '{0}'\n{1}", CURRENT_CHAR, e);
+				Environment.Exit(1);
+			}
+		}
+
 		private static void Restart()
 		{
 			STATE = 0;
@@ -36,25 +108,14 @@ namespace PasC.Modules
 				if (LAST_CHAR != EOF)
 				{
 					Global.SOURCE.Seek(Global.SOURCE.Position - 1, SeekOrigin.Begin);
-
 					COLUMN--;
 				}
 			}
 			catch (IOException e)
 			{
 				Console.WriteLine("[Error]: Failed to read the source file.\n{0}", e);
-
 				Environment.Exit(2);
 			}
-		}
-
-		private static Token AddToken(Tag tag)
-		{
-			Token TOKEN = new Token(tag, GetLexeme(), ROW, COLUMN);
-
-			Grammar.Add(TOKEN, TOKEN.Lexeme);
-
-			return TOKEN;
 		}
 
 
@@ -84,7 +145,7 @@ namespace PasC.Modules
 		{
 			if (STATE.Equals(27) || STATE.Equals(28))
 			{
-				Console.WriteLine("\n[LEXICAL ERROR]: Multiline comment not closed on line {0}.\n", ROW - 1);
+				Console.WriteLine("\n[LEXICAL ERROR]: Multiline comment not closed on line {0}.", ROW - 1);
 			}
 		}
 
@@ -92,56 +153,13 @@ namespace PasC.Modules
 
 
 		// PasC:Automata
-		public static Token NextToken()
+		private static Token NextToken()
 		{
 			STATE = 0;
 
-			LEXEME = new StringBuilder();
-
 			while (true)
 			{
-				CURRENT_CHAR = '\u0000';
-
-				try
-				{
-					LAST_CHAR = Global.SOURCE.ReadByte();
-
-					if (LAST_CHAR != EOF)
-					{
-						CURRENT_CHAR = (char)LAST_CHAR;
-
-						if (IsNewLine())
-						{
-							ROW++;
-							COLUMN = 1;
-						}
-
-						else if (CURRENT_CHAR == '\t')
-						{
-							COLUMN += 3;
-						}
-						else if (!IsNewLine())
-						{
-							COLUMN++;
-						}
-					}
-					else
-					{
-						MultilineCommentErrorCheck();
-
-						Token _EOF_ = new Token(Tag.EOF, "<EOF>", ROW, COLUMN);
-
-						Grammar.Add(_EOF_, _EOF_.Lexeme);
-
-						return _EOF_;
-					}
-				}
-				catch (IOException e)
-				{
-					Console.WriteLine("[Error]: Failed to read the character '{0}'\n{1}", CURRENT_CHAR, e);
-
-					Environment.Exit(1);
-				}
+				Read();
 
 				switch (STATE)
 				{
@@ -219,7 +237,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							return AddToken(Tag.OP_MUL);
+							return new Token(Tag.OP_MUL, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (32)
@@ -227,7 +245,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							return AddToken(Tag.OP_AD);
+							return new Token(Tag.OP_AD, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (33)
@@ -235,7 +253,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							return AddToken(Tag.OP_MIN);
+							return new Token(Tag.OP_MIN, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (34)
@@ -243,7 +261,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							return AddToken(Tag.SMB_OBC);
+							return new Token(Tag.SMB_OBC, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (35)
@@ -251,7 +269,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							return AddToken(Tag.SMB_CBC);
+							return new Token(Tag.SMB_CBC, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (36)
@@ -259,7 +277,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							return AddToken(Tag.SMB_OPA);
+							return new Token(Tag.SMB_OPA, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (37)
@@ -267,7 +285,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							return AddToken(Tag.SMB_CPA);
+							return new Token(Tag.SMB_CPA, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (38)
@@ -275,7 +293,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							return AddToken(Tag.SMB_COM);
+							return new Token(Tag.SMB_COM, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (39)
@@ -283,7 +301,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							return AddToken(Tag.SMB_SEM);
+							return new Token(Tag.SMB_SEM, GetLexeme(), ROW, COLUMN);
 						}
 
 						// NONE
@@ -315,7 +333,7 @@ namespace PasC.Modules
 						{
 							Restart();
 
-							return AddToken(Tag.CON_NUM);
+							return new Token(Tag.CON_NUM, GetLexeme(), ROW, COLUMN);
 						}
 					}
 					break;
@@ -353,7 +371,7 @@ namespace PasC.Modules
 						{
 							Restart();
 
-							return AddToken(Tag.CON_NUM);
+							return new Token(Tag.CON_NUM, GetLexeme(), ROW, COLUMN);
 						}
 					}
 					break;
@@ -385,7 +403,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							return AddToken(Tag.CON_CHAR);
+							return new Token(Tag.CON_CHAR, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> [Error]
@@ -427,7 +445,7 @@ namespace PasC.Modules
 
 							QUOTES_ERROR = false;
 
-							return AddToken(Tag.LIT);
+							return new Token(Tag.LIT, GetLexeme(), ROW, COLUMN);
 						}
 
 						else if (IsNewLine() && !QUOTES_ERROR)
@@ -474,7 +492,7 @@ namespace PasC.Modules
 						{
 							Restart();
 
-							return AddToken(Tag.ID);
+							return new Token(Tag.ID, GetLexeme(), ROW, COLUMN);
 						}
 					}
 					break;
@@ -488,7 +506,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							return AddToken(Tag.OP_EQ);
+							return new Token(Tag.OP_EQ, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (16) [Other]
@@ -496,7 +514,7 @@ namespace PasC.Modules
 						{
 							Restart();
 
-							return AddToken(Tag.OP_ASS);
+							return new Token(Tag.OP_ASS, GetLexeme(), ROW, COLUMN);
 						}
 					}
 
@@ -509,7 +527,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							return AddToken(Tag.OP_GE);
+							return new Token(Tag.OP_GE, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (19) [Other]
@@ -517,7 +535,7 @@ namespace PasC.Modules
 						{
 							Restart();
 
-							return AddToken(Tag.OP_GT);
+							return new Token(Tag.OP_GT, GetLexeme(), ROW, COLUMN);
 						}
 					}
 					
@@ -530,7 +548,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							return AddToken(Tag.OP_LE);
+							return new Token(Tag.OP_LE, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> (22) [Other]
@@ -538,7 +556,7 @@ namespace PasC.Modules
 						{
 							Restart();
 
-							return AddToken(Tag.OP_LT);
+							return new Token(Tag.OP_LT, GetLexeme(), ROW, COLUMN);
 						}
 					}
 					
@@ -551,7 +569,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							return AddToken(Tag.OP_NE);
+							return new Token(Tag.OP_NE, GetLexeme(), ROW, COLUMN);
 						}
 
 						// -> 0 [Error]
@@ -585,7 +603,7 @@ namespace PasC.Modules
 						{
 							Restart();
 
-							return AddToken(Tag.OP_DIV);
+							return new Token(Tag.OP_DIV, GetLexeme(), ROW, COLUMN);
 						}
 					}
 					break;
@@ -605,7 +623,7 @@ namespace PasC.Modules
 						{
 							SetState(0, false);
 
-							// return AddToken(Tag.COM_ONL);
+							return new Token(Tag.COM_ONL, GetLexeme(), ROW, COLUMN);
 						}
 					}
 					break;
@@ -637,7 +655,7 @@ namespace PasC.Modules
 						{
 							SetState(0, true);
 
-							// return AddToken(Tag.COM_CML);
+							return new Token(Tag.COM_CML, GetLexeme(), ROW, COLUMN);
 						}
 
 						// ->> 28

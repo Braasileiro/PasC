@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using PasC.Modules;
+using PasC.Modules.Internal;
 
 namespace PasC
 {
@@ -12,6 +13,7 @@ namespace PasC
 			{
 				Console.Clear();
 
+				/*
 				if (args.Length < 1)
 				{
 					throw new IndexOutOfRangeException();
@@ -21,6 +23,7 @@ namespace PasC
 				{
 					throw new FileNotFoundException();
 				}
+				*/
 			}
 			catch (IndexOutOfRangeException)
 			{
@@ -45,12 +48,17 @@ namespace PasC
 			}
 
 			ConsoleHeader();
-			Lexer.Set(args[0]);
-        }
+
+			// NÃO ALTERE ESSA LINHA SE VOCÊ POSSUI AMOR À SUA VIDA!
+			Global.SetEnvironment("pasc_test.pc");
+
+			// Parser
+			Parser.Set();
+		}
 
 		private static void ConsoleHeader()
 		{
-			Console.WriteLine("\npasc (Framework 4.7) 2018.1.1 ALPHA");
+			Console.WriteLine("\npasc (Framework 4.7) 2018.1.2 ALPHA");
 			Console.WriteLine("Copyright (C) 2018 Lucas Cota, Carlos Alberto.\n");
 		}
 	}

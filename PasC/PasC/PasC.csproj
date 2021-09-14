@@ -43,9 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Grammar.cs" />
-    <Compile Include="Models\Identifier.cs" />
+    <Compile Include="Models\No.cs" />
+    <Compile Include="Modules\Internal\_Lexer.cs" />
+    <Compile Include="Modules\Parser.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\Tag.cs" />
+    <Compile Include="Modules\Global.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\Lexer.cs" />
@@ -53,8 +56,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Documentation\Automata\PasC_Automata.jff" />
+    <None Include="Documentation\Grammar\TP.xlsx" />
     <None Include="Documentation\Reports\Report.docx" />
     <None Include="Documentation\Reports\Report_Lexer_2018-03-31.pdf" />
+    <None Include="Documentation\Reports\Report_Parser_2018-06-01.pdf" />
     <None Include="pasc_test.pc" />
   </ItemGroup>
   <ItemGroup>
